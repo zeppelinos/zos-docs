@@ -19,17 +19,29 @@ function main(argv) {
   const version = tag.slice(1)
   const tempDir = tmp.dirSync().name
   try {
-    const repoDir = path.resolve(tempDir, 'zos-lib')
-    const contractsDir = path.resolve(repoDir, 'contracts')
     const parentDir = path.resolve('..')
     const outputDir = path.resolve('docs')
     const websiteDir = path.resolve(outputDir, 'website')
     const apiDir = path.resolve(websiteDir, 'build', 'api')
+    
+    //kernel
+    const kernelRepoDir = path.resolve(tempDir, 'kernel')
+    const kernelContractsDir = path.resolve(kernelRepoDir, 'contracts')
+    shell.cd(tempDir)
+    handleErrorCode(shell.exec('git clone https://github.com/zeppelinos/kernel.git'))
+    shell.cd('kernel')
+    //handleErrorCode(shell.exec(`git checkout -b ${tag} ${tag}`))
+    handleErrorCode(shell.exec(`npx solidity-docgen ${kernelRepoDir} ${kernelContractsDir} ${outputDir}`))
+    
+    //zos-lib
+    const libRepoDir = path.resolve(tempDir, 'zos-lib')
+    const libContractsDir = path.resolve(kernelRepoDir, 'contracts')
     shell.cd(tempDir)
     handleErrorCode(shell.exec('git clone https://github.com/zeppelinos/zos-lib.git'))
     shell.cd('zos-lib')
-    handleErrorCode(shell.exec(`git checkout -b ${tag} ${tag}`))
-    handleErrorCode(shell.exec(`npx solidity-docgen ${repoDir} ${contractsDir} ${outputDir} --exclude mocks`))
+    //handleErrorCode(shell.exec(`git checkout -b ${tag} ${tag}`))
+    handleErrorCode(shell.exec(`npx solidity-docgen ${libRepoDir} ${libContractsDir} ${outputDir}`))
+    
     shell.cd(websiteDir)
     handleErrorCode(shell.exec(`yarn install`))
     handleErrorCode(shell.exec(`npm run version ${version}`))

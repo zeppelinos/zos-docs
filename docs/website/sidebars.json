@@ -4,7 +4,10 @@
       "start"
     ]
   },
-  "docs-api": {
+  "lib-api": {
+    "START": [
+      "libapi"
+    ],
     "LIFECYCLE": [
       "lifecycle_Migrations"
     ],
@@ -22,6 +25,11 @@
     "UNCATEGORIZED": [
       "Factory",
       "Registry"
+    ]
+  },
+  "kernel-api":{
+    "START": [
+      "kernelapi"
     ]
   }
 }

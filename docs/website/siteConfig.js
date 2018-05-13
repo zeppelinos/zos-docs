@@ -22,8 +22,12 @@ const siteConfig = {
       label: 'Docs',
     },
     {
-      doc: 'upgradeability_Proxy',
-      label: 'API',
+      doc: 'kernelapi',
+      label: 'Kernel API',
+    },
+    {
+      doc: 'libapi',
+      label: 'Lib API',
     },
     {
       href: 'https://github.com/zeppelinos',

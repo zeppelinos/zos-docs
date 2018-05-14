@@ -43,26 +43,25 @@ function main(argv) {
     handleErrorCode(shell.exec(`git checkout -b v1.8.0 v1.8.0`))
     shell.cd('..')
 
-    
+
     //zos-lib
     const libRepoDir = path.resolve('.', 'zos-lib')
     const libContractsDir = path.resolve(libRepoDir, 'contracts')
-    handleErrorCode(shell.exec('git clone https://github.com/zeppelinos/zos-lib.git'))
+    //handleErrorCode(shell.exec('git clone https://github.com/zeppelinos/zos-lib.git'))
     shell.cd('zos-lib')
-    handleErrorCode(shell.exec(`git checkout -b ${tag} ${tag}`))
+    //handleErrorCode(shell.exec(`git checkout -b ${tag} ${tag}`))
     shell.cd('..')
     // handleErrorCode(shell.exec(`npx solidity-docgen ${libRepoDir} ${libContractsDir} ${outputDir}`))
-    handleErrorCode(shell.exec(`SOLC_ARGS=\'zeppelin-solidity=${libImportsDir}\' npx solidity-docgen ${libRepoDir} ${libContractsDir} ${outputDir}`))
+    //handleErrorCode(shell.exec(`SOLC_ARGS=\'zeppelin-solidity=${libImportsDir}\' npx solidity-docgen ${libRepoDir} ${libContractsDir} ${outputDir}`))
     
 
     //zos-cli
-    // const cliRepoDir = path.resolve(tempDir, 'zos-cli')
-    // const cliContractsDir = path.resolve(cliRepoDir, 'contracts')
+    const cliRepoDir = path.resolve('.', 'zos-cli')
+    const cliContractsDir = path.resolve(cliRepoDir, 'contracts')
     // const cliImportsDir = path.resolve(libRepoDir, 'node_modules/zeppelin-solidity')
-    // shell.cd(tempDir)
     // handleErrorCode(shell.exec('git clone https://github.com/zeppelinos/zos-cli.git'))
     // shell.cd('zos-cli')
-    // handleErrorCode(shell.exec(`git checkout -b ${tag} ${tag}`))
+    // // handleErrorCode(shell.exec(`git checkout -b ${tag} ${tag}`))
     // handleErrorCode(shell.exec(`npx solidity-docgen ${cliRepoDir} ${cliContractsDir} ${outputDir}`))
     
     shell.cd(websiteDir)

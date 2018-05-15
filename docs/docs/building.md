@@ -6,7 +6,6 @@ sidebar_label: Building Apps
 
 # Building a smart contract with ZeppelinOS
 
-ZeppelinOS is a platform to develop, manage and operate smart contract applications in Ethereum. ZeppelinOS makes it possible to link contracts to standard libraries already deployed on the blockchain, and to fix and improve contracts over time.
 
 The command line tool `zos` simplifies all these tasks with a few simple commands.
 
@@ -63,7 +62,7 @@ Next, let's write the contract to control the lightbulb in `contracts/Basil.sol`
 
 The contract is super simple. If somebody wants to set the light color, they have to make a donation that then goes to cover any plant necessities. If the donation is higher than the previous one, it is accepted, the light color changes and an event is emitted.
 
-We set the initial donation amount to 10 wei, and here you will find the only difference to take into account when writting a contract for ZeppelinOS. Before ZeppelinOS, we would have set the initial value using a `constructor` function. In Ethereum, constructors are handled in a very different way compared to normal functions: they are executed during the deployment of the contract to initialize the state variables, and the code of the constructor is never deployed to the blockchain. In ZeppelinOS we rely on proxy contracts that will forward function calls to the contracts with the implementation. A proxy has no access to the constructor to initialize state variables, so instead we use an `initialize` function with the `isInitializer` modifier provided by the `Migratable` contract of `zos-lib`. The modifier receives the name of the contract and a migrationId that we start in 0.
+We set the initial donation amount to 10 wei, and here you will find the only difference to take into account when writting a contract for ZeppelinOS. Before ZeppelinOS, we would have set the initial value using a `constructor` function. In Ethereum, constructors are handled in a very different way compared to normal functions: they are executed during the deployment of the contract to initialize the state variables, and the code of the constructor is never deployed to the blockchain. In ZeppelinOS we rely on proxy contracts that will forward function calls to the contracts with the implementation. A proxy has no access to the constructor to initialize state variables, so instead we use an `initialize` function with the `isInitializer` modifier provided by the `Migratable` contract of `zos-lib`, which comes from the inheritance chain of `Ownable`. The modifier receives the name of the contract and a `migrationId` that we start in 0.
 
 We need to install the `openzeppelin-zos` dependency and to compile the contract:
 
@@ -79,9 +78,15 @@ Now, to get the niceties that ZeppelinOS provides, let's install the `zos` comma
     npm install --global zos
     zos init basil 1.0.0
 
+This will create a `package.zos.json` file where ZeppelinOS will keep track of
+the contracts of your application.
+
 Next, let's add the implementation of our Basil contract:
 
     zos add Basil
+
+To have your `package.zos.json` file always up-to-date, run `zos add` for every
+new contract you add to your project.
 
 To link our Basil contract to the OpenZeppelin standard library, we need an Ethereum network where the standard library has already been deployed. But first we want to test this in a local development network, so let's prepare truffle writing this in `truffle.js`:
 
@@ -109,6 +114,10 @@ OK, so we finish this step by linking the standard library and pushing our appli
     zos push --network development --deploy-stdlib
 
 We pass that `--deploy-stdlib` flag because we are using a development network that started clean. When you deploy your application to a real network where the `openzeppelin-zos` standard library has already been deployed, you won't need this flag.
+
+The first time you run this command for a specific network, a new
+`package.zos.<network>.json` will be created. This file will reflect the status
+of your project in that network.
 
 TODO: test this and comment about the resulting logs. On the published zos, the set-stdlib command fails, wait for a new release.
 

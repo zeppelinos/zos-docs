@@ -200,4 +200,3 @@ The new versions of our application's contracts were deployed to the network. Ho
 ## Deploying to a real network
 
 TODO
->>>>>>> WIP: add the building guide

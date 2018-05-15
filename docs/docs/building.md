@@ -123,7 +123,7 @@ of your project in that network.
 
 The rules for our basil lights will now be set in stone, enforced by the immutability of the Ethereum blockchain. This sounded great... until we found an embarrassing bug: we are never updating `highestDonation`! The donations would not grow as we expect because the stakes will never be higher than 10 wei. Luckily we caught this before going to mainnet, but are we sure that our contract is bullet proof and something like this will never happen again? The same feature that makes Ethereum secure is now making us feel insecure about our programming abilities and scared of finding a security vulnerability too late.
 
-Fear not, ZeppelinOS allows us to keep the transparency and immutability of a deployed version of a contract, and also to opt-in for a contract in which the owner can upgrade the implementation. This is done through a proxy that forwards the calls to the latest implementation of the contract. To create a proxy for Basil, run:
+Fear not, ZeppelinOS allows us to keep the transparency and immutability of a deployed version of a contract, but also to opt for a contract in which the owner can upgrade the implementation. This is done through a proxy that forwards the calls to the latest implementation of the contract. To create a proxy for Basil, run:
 
     zos create Basil --network development --init --args $OWNER
 

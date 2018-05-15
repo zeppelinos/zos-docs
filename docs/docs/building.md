@@ -16,7 +16,7 @@ Let's set up an Ethereum project to go through the features of ZeppelinOS that w
 
 Here at the Zeppelin headquarters we have a basil plant. She is a good mascot, always green, always faithful. For reasons unknown, we found that she enjoys a lot being under a light that changes color; so of course we got her the best multicolor LED bulb we could find.
 
-![The Basil](![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1") "The basil")
+![The Basil](https://pbs.twimg.com/media/DdL2qciX4AEMeoR.jpg "The basil")
 
 However, after a few days we started having conflicts. Who gets the honor to set the light color for our friendly plant? What if they choose their favorite color instead of the one that's best for the plant? For how long do they get to keep their chosen color? We also found that somebody kept resetting the color back to an ugly lime green every morning. We are ok with anarchy, but we want transparency, so we have just decided to control the light bulb through a contract on the Ethereum blockchain.
 

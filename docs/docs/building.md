@@ -119,8 +119,6 @@ The first time you run this command for a specific network, a new
 `package.zos.<network>.json` will be created. This file will reflect the status
 of your project in that network.
 
-TODO: test this and comment about the resulting logs. On the published zos, the set-stdlib command fails, wait for a new release.
-
 ## Upgrading a contract
 
 The rules for our basil lights will now be set in stone, enforced by the immutability of the Ethereum blockchain. This sounded great... until we found an embarrassing bug: we are never updating `highestDonation`! The donations would not grow as we expect because the stakes will never be higher than 10 wei. Luckily we caught this before going to mainnet, but are we sure that our contract is bullet proof and something like this will never happen again? The same feature that makes Ethereum secure is now making us feel insecure about our programming abilities and scared of finding a security vulnerability too late.
@@ -146,8 +144,6 @@ Let's fix our bug. Edit `contracts/Basil.sol` to add the missing line to the `do
 And to finish our fix, we compile the patched contract, sync with ZeppelinOS and upgrade the proxy:
 
     zos upgrade Basil <proxy_address_1> --network development
-
-TODO: where does the proxy address comes from?
 
 ## Upgrading the Migratable initialize
 
@@ -185,9 +181,9 @@ We could modify `contracts/Basil.sol` as before. But now let's try something dif
     }
 
 A few things to note:
- * This new version extends from the previous one. This is a very handy pattern, because the proxy used in ZeppelinOS requires new versions to preserve the state variables. TODO why? link to the FAQ maybe?
- * We increased the second argument of `isInitializer`. This is the `migrationId`, and is used to keep track of what initializations we need to execute. The `initialize` with `migrationId` 0 was executed when we first deployed Basil, so we set this id to 1. TODO Link to the FAQ what's migrationID.
- * We can add new state variables and new functions. The only thing that we can't do on a contract upgrade is to remove state variables. TODO Lint to the FAQ about preserving structure.
+ * This new version extends from the previous one. This is a very handy pattern, because the proxy used in ZeppelinOS requires new versions to preserve the state variables.
+ * We increased the second argument of `isInitializer`. This is the `migrationId`, and is used to keep track of what initializations we need to execute. The `initialize` with `migrationId` 0 was executed when we first deployed Basil, so we set this id to 1.
+ * We can add new state variables and new functions. The only thing that we can't do on a contract upgrade is to remove state variables.
 
 Let's add this version to our ZeppelinOS application and push to the network again:
 
@@ -205,7 +201,3 @@ We need to pass a token to the new `initialize` of our new version of Basil. Bec
 The new versions of our application's contracts were deployed to the network. However, the previously deployed proxies are still running with the old implementations. To finish the upgrade, run:
 
     zos upgrade Basil --network development
-
-## Deploying to a real network
-
-TODO

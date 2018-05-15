@@ -1,107 +1,169 @@
-<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Building an upgradeable application · zeppelin_os</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Building an upgradeable application · zeppelin_os"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.zeppelinos.org/index.html"/><meta property="og:description" content="This guide will introduce you to the development of apps in the context of ZeppelinOS."/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700,400italic,700italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.svg"/><h2 class="headerTitle">zeppelin_os</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="https://zeppelinos.org" target="_self">Home</a></li><li><a href="/docs/start.html" target="_self">Docs</a></li><li><a href="/docs/clistart.html" target="_self">CLI</a></li><li><a href="/docs/libstart.html" target="_self">Library</a></li><li><a href="https://blog.zeppelinos.org" target="_self">Blog</a></li><li><a href="https://github.com/zeppelinos" target="_self">Github</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>GUIDES</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>OVERVIEW</h3><ul><li class="navListItem"><a class="navItem" href="/docs/start.html">ZeppelinOS</a></li></ul></div><div class="navGroup navGroupActive"><h3>GUIDES</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/building.html">Building Apps</a></li><li class="navListItem"><a class="navItem" href="/docs/testing.html">Testing</a></li><li class="navListItem"><a class="navItem" href="/docs/developing.html">Developing Stdlibs</a></li></ul></div><div class="navGroup navGroupActive"><h3>DEMOS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/basil.html">Basil</a></li><li class="navListItem"><a class="navItem" href="/docs/crafting.html">Crafting</a></li></ul></div><div class="navGroup navGroupActive"><h3>REFERENCE</h3><ul><li class="navListItem"><a class="navItem" href="/docs/clifront.html">CLI</a></li><li class="navListItem"><a class="navItem" href="/docs/libfront.html">Library</a></li><li class="navListItem"><a class="navItem" href="/docs/whitepaper.html">Whitepaper</a></li></ul></div></div></section></div><script>
+<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Building an upgradeable application · zeppelin_os</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Building an upgradeable application · zeppelin_os"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.zeppelinos.org/index.html"/><meta property="og:description" content="# Building a smart contract with ZeppelinOS"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700,400italic,700italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.svg"/><h2 class="headerTitle">zeppelin_os</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="https://zeppelinos.org" target="_self">Home</a></li><li><a href="/docs/start.html" target="_self">Docs</a></li><li><a href="/docs/clistart.html" target="_self">CLI</a></li><li><a href="/docs/libstart.html" target="_self">Library</a></li><li><a href="https://blog.zeppelinos.org" target="_self">Blog</a></li><li><a href="https://github.com/zeppelinos" target="_self">Github</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>GUIDES</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>OVERVIEW</h3><ul><li class="navListItem"><a class="navItem" href="/docs/start.html">ZeppelinOS</a></li></ul></div><div class="navGroup navGroupActive"><h3>GUIDES</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/building.html">Building Apps</a></li><li class="navListItem"><a class="navItem" href="/docs/testing.html">Testing</a></li><li class="navListItem"><a class="navItem" href="/docs/developing.html">Developing Stdlibs</a></li></ul></div><div class="navGroup navGroupActive"><h3>DEMOS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/basil.html">Basil</a></li><li class="navListItem"><a class="navItem" href="/docs/crafting.html">Crafting</a></li></ul></div><div class="navGroup navGroupActive"><h3>REFERENCE</h3><ul><li class="navListItem"><a class="navItem" href="/docs/clifront.html">CLI</a></li><li class="navListItem"><a class="navItem" href="/docs/libfront.html">Library</a></li><li class="navListItem"><a class="navItem" href="/docs/whitepaper.html">Whitepaper</a></li></ul></div></div></section></div><script>
           var toggler = document.getElementById('navToggler');
           var nav = document.getElementById('docsNav');
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Building an upgradeable application</h1></header><article><div><span><p>This guide will introduce you to the development of apps in the context of ZeppelinOS.</p>
-<h2><a class="anchor" aria-hidden="true" name="write-your-smart-contracts"></a><a href="#write-your-smart-contracts" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Write your smart contracts</h2>
-<p>Write your contracts as you would usually do, but replacing constructors with <code>initialize</code> functions. You can do this more easily by using the <code>Initializable</code> helper contract in <a href="https://github.com/zeppelinos/zos-lib"><code>zos-lib</code></a>.</p>
-<pre><code class="hljs css sh">npm install zos-lib
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Building an upgradeable application</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" name="building-a-smart-contract-with-zeppelinos"></a><a href="#building-a-smart-contract-with-zeppelinos" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Building a smart contract with ZeppelinOS</h1>
+<p>The command line tool <code>zos</code> simplifies all these tasks with a few simple commands.</p>
+<p>Let's set up an Ethereum project to go through the features of ZeppelinOS that will make our project safer and easier to maintain.</p>
+<h2><a class="anchor" aria-hidden="true" name="the-sample-contract-with-initialize"></a><a href="#the-sample-contract-with-initialize" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The sample contract, with initialize</h2>
+<p>Here at the Zeppelin headquarters we have a basil plant. She is a good mascot, always green, always faithful. For reasons unknown, we found that she enjoys a lot being under a light that changes color; so of course we got her the best multicolor LED bulb we could find.</p>
+<p><img src="https://pbs.twimg.com/media/DdL2qciX4AEMeoR.jpg" alt="The Basil" title="The basil"></p>
+<p>However, after a few days we started having conflicts. Who gets the honor to set the light color for our friendly plant? What if they choose their favorite color instead of the one that's best for the plant? For how long do they get to keep their chosen color? We also found that somebody kept resetting the color back to an ugly lime green every morning. We are ok with anarchy, but we want transparency, so we have just decided to control the light bulb through a contract on the Ethereum blockchain.</p>
+<p>First we will need to <a href="https://nodejs.org/en/download/package-manager/">install Node.js following the instructions from their website</a>. Then, let's set up a directory for our project and bootstrap it with the Truffle development environment:</p>
+<pre><code class="hljs">mkdir basil
+cd basil
+npm install --global truffle
+truffle init
+npm init --yes
 </code></pre>
+<p>Next, let's write the contract to control the light bulb in <code>contracts/Basil.sol</code>:</p>
+<pre><code class="hljs">pragma solidity ^0.4.23;
+
+import &quot;openzeppelin-zos/contracts/ownership/Ownable.sol&quot;;
+
+
+contract Basil is Ownable {
+  // Color in RGB.
+  uint256 public red;
+  uint256 public green;
+  uint256 public blue;
+
+  uint256 public highestDonation;
+
+  event NewDonation(address indexed donor, uint256 value, uint256 red, uint256 green, uint256 blue);
+
+  function initialize() public isInitializer(&quot;Basil&quot;, &quot;0&quot;) {
+    highestDonation = 10;
+  }
+
+  function donate(uint256 _red, uint256 _green, uint256 _blue) public payable {
+    require(_red &lt; 256);
+    require(_green &lt; 256);
+    require(_blue &lt; 256);
+    require(msg.value &gt; highestDonation);
+    red = _red;
+    green = _green;
+    blue = _blue;
+    emit NewDonation(msg.sender, msg.value, red, green, blue);
+  }
+}
+</code></pre>
+<p>The contract is super simple. If somebody wants to set the light color, they have to make a donation that then goes to cover any plant necessities. If the donation is higher than the previous one, it is accepted, the light color changes and an event is emitted.</p>
+<p>We set the initial donation amount to 10 wei, and here you will find the only difference to take into account when writing a contract for ZeppelinOS. Before ZeppelinOS, we would have set the initial value using a <code>constructor</code> function. In Ethereum, constructors are handled in a very different way compared to normal functions: they are executed during the deployment of the contract to initialize the state variables, and the code of the constructor is never deployed to the blockchain. In ZeppelinOS we rely on proxy contracts that will forward function calls to the contracts with the implementation. A proxy has no access to the constructor to initialize state variables, so instead we use an <code>initialize</code> function with the <code>isInitializer</code> modifier provided by the <code>Migratable</code> contract of <code>zos-lib</code>, which comes from the inheritance chain of <code>Ownable</code>. The modifier receives the name of the contract and a <code>migrationId</code> that starts in 0.</p>
+<p>We need to install the <code>openzeppelin-zos</code> dependency and to compile the contract:</p>
+<pre><code class="hljs">npm install --save-dev zos-lib openzeppelin-zos
+truffle compile
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="using-zeppelinos-to-link-to-the-openzeppelin-standard-library"></a><a href="#using-zeppelinos-to-link-to-the-openzeppelin-standard-library" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using ZeppelinOS to link to the OpenZeppelin standard library</h2>
+<p>From the last step, you might have noticed that we are reusing a contract that is part of the <a href="https://openzeppelin.org">OpenZeppelin</a> framework. The traditional way to develop in Ethereum is to deploy both contracts, Basil and Ownable to the blockchain; but because we now have ZeppelinOS available, we can do more than reuse the source code of the Ownable contract. We will reuse the contract that the Zeppelin team has already deployed to the blockchain, and then we will just need to deploy our Basil contract. This will obviously make our deployments cheaper; but also safer because the OpenZeppelin community will take care of keeping the Ownable contract up-to-date and fix any vulnerabilities it might have. But more on that later.</p>
+<p>Now, to get the niceties that ZeppelinOS provides, let's install the <code>zos</code> command line interface and initialize our application with the version 1.0.0:</p>
+<pre><code class="hljs">npm install --global zos
+zos init basil 1.0.0
+</code></pre>
+<p>This will create a <code>package.zos.json</code> file where ZeppelinOS will keep track of
+the contracts of your application.</p>
+<p>Next, let's add the implementation of our Basil contract:</p>
+<pre><code class="hljs">zos add Basil
+</code></pre>
+<p>To have your <code>package.zos.json</code> file always up-to-date, run <code>zos add</code> for every
+new contract you add to your project.</p>
+<p>To link our Basil contract to the OpenZeppelin standard library, we need an Ethereum network where the standard library has already been deployed. But first we want to test this in a local development network, so let's prepare truffle writing this in <code>truffle.js</code>:</p>
+<pre><code class="hljs">module.exports = {
+  networks: {
+    development: {
+      host: &quot;localhost&quot;,
+      port: 9545,
+      network_id: &quot;*&quot;
+    }
+  }
+};
+</code></pre>
+<p>Then, in a separate terminal, run:</p>
+<pre><code class="hljs">truffle develop
+</code></pre>
+<p>Truffle develop will print 10 accounts. Copy the address of the first one, and then back into the initial terminal, export it as the <code>OWNER</code> because it will be useful for us later:</p>
+<pre><code class="hljs">export OWNER=&lt;address&gt;
+</code></pre>
+<p>OK, so we finish this step by linking the standard library and pushing our application to the network:</p>
+<pre><code class="hljs">zos link openzeppelin-zos
+zos push --network development --deploy-stdlib
+</code></pre>
+<p>We pass that <code>--deploy-stdlib</code> flag because we are using a development network that started clean. When you deploy your application to a real network where the <code>openzeppelin-zos</code> standard library has already been deployed, you won't need this flag.</p>
+<p>The first time you run this command for a specific network, a new
+<code>package.zos.&lt;network&gt;.json</code> will be created. This file will reflect the status
+of your project in that network.</p>
+<h2><a class="anchor" aria-hidden="true" name="upgrading-a-contract"></a><a href="#upgrading-a-contract" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upgrading a contract</h2>
+<p>The rules for our basil lights will now be set in stone, enforced by the immutability of the Ethereum blockchain. This sounded great... until we found an embarrassing bug: we are never updating <code>highestDonation</code>! The donations would not grow as we expect because the stakes will never be higher than 10 wei. Luckily we caught this before going to mainnet, but are we sure that our contract is bullet proof and something like this will never happen again? The same feature that makes Ethereum secure is now making us feel insecure about our programming abilities and scared of finding a security vulnerability too late.</p>
+<p>Fear not, ZeppelinOS allows us to keep the transparency and immutability of a deployed version of a contract, but also to opt for a contract in which the owner can upgrade the implementation. This is done through a proxy that forwards the calls to the latest implementation of the contract. To create a proxy for Basil, run:</p>
+<pre><code class="hljs">zos create Basil --network development --init --args $OWNER
+</code></pre>
+<p>Let's fix our bug. Edit <code>contracts/Basil.sol</code> to add the missing line to the <code>donate</code> function:</p>
+<pre><code class="hljs">function donate(uint256 _red, uint256 _green, uint256 _blue) public payable {
+  require(_red &lt; 256);
+  require(_green &lt; 256);
+  require(_blue &lt; 256);
+  require(msg.value &gt; highestDonation);
+  red = _red;
+  green = _green;
+  blue = _blue;
+  highestDonation = msg.value;
+  emit NewDonation(msg.sender, msg.value, red, green, blue);
+}
+</code></pre>
+<p>And to finish our fix, we compile the patched contract, sync with ZeppelinOS and upgrade the proxy:</p>
+<pre><code class="hljs">zos upgrade Basil &lt;proxy_address_1&gt; --network development
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="upgrading-the-migratable-initialize"></a><a href="#upgrading-the-migratable-initialize" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upgrading the Migratable initialize</h2>
+<p>Another common thing that happens when developing smart contracts for Ethereum is that new standards appear, all the new kids implement them in their contracts, and a very cool synergy between contracts starts to happen. The people who have immutable contracts already deployed will miss all the fun. This has just happened to us: it would be very nice to encourage donations to Basil by emitting a unique ERC721 token in exchange. Well, let's upgrade the contract with ZeppelinOS to do just that.</p>
+<p>We could modify <code>contracts/Basil.sol</code> as before. But now let's try something different. Let's make a new contract in <code>contracts/BasilERC721.sol</code>, that inherits from our initial version of Basil:</p>
+<pre><code class="hljs">pragma solidity ^0.4.23;
+
+import &quot;./Basil.sol&quot;;
+import &quot;openzeppelin-zos/contracts/token/ERC721/MintableERC721Token.sol&quot;;
+
+contract BasilERC721 is Basil {
+  using SafeMath for uint256;
+
+  // ERC721 non-fungible tokens to be emitted on donations.
+  MintableERC721Token public token;
+  uint256 public numEmittedTokens;
+
+  function initialize(MintableERC721Token _token) public isInitializer(&quot;Basil&quot;, &quot;1&quot;) {
+    require(_token != address(0));
+    require(token == address(0));
+    token = _token;
+  }
+
+  function donate(uint256 _red, uint256 _green, uint256 _blue) public payable {
+    super.donate(_red, _green, _blue);
+    emitUniqueToken(tx.origin);
+  }
+
+  function emitUniqueToken(address _tokenOwner) internal {
+    token.mint(_tokenOwner, numEmittedTokens);
+    numEmittedTokens = numEmittedTokens.add(1);
+  }
+}
+</code></pre>
+<p>A few things to note:</p>
 <ul>
-<li>For an upgradeable contract development full example, see <a href="https://github.com/zeppelinos/zos-lib/blob/master/examples/simple/contracts/MyContract_v0.sol">the examples folder in <code>zos-lib</code></a>.</li>
-<li>For an introductory smart contract development guide, see <a href="https://blog.zeppelin.solutions/a-gentle-introduction-to-ethereum-programming-part-1-783cc7796094">this blog post series</a>.</li>
+<li>This new version extends from the previous one. This is a very handy pattern, because the proxy used in ZeppelinOS requires new versions to preserve the state variables.</li>
+<li>We increased the second argument of <code>isInitializer</code>. This is the <code>migrationId</code>, and is used to keep track of what initializations we need to execute. The <code>initialize</code> with <code>migrationId</code> 0 was executed when we first deployed Basil, so we set this id to 1.</li>
+<li>We can add new state variables and new functions. The only thing that we can't do on a contract upgrade is to remove state variables.</li>
 </ul>
-<p>In this example, we'll use this simple contract:</p>
-<pre><code class="hljs css sol"><span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "zos-lib/contracts/migrations/Initializable.sol";</span>
-
-contract MyContract <span class="hljs-keyword">is</span> Initializable {
-  uint256 <span class="hljs-keyword">public</span> x;
-  
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span><span class="hljs-params">(uint256 _x)</span> <span class="hljs-title">isInitializer</span> <span class="hljs-title">public</span> </span>{
-    x = _x;
-  }
-}
+<p>Let's add this version to our ZeppelinOS application and push to the network again:</p>
+<pre><code class="hljs">zos add BasilERC721 Basil
+zos push --network development
 </code></pre>
-<p>Before you continue, use truffle to compile your contracts:</p>
-<pre><code class="hljs css sh">npx truffle compile
+<p>This will print the address of the deployed Basil contract. Let's export this value to use it later:</p>
+<pre><code class="hljs">export BASIL_ADDRESS=&lt;address&gt;
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="register-your-initial-contract-implementations"></a><a href="#register-your-initial-contract-implementations" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Register your initial contract implementations</h2>
-<p>The next step is to register all the contract implementations of the first <code>version</code> of your project. To do this please run:</p>
-<pre><code class="hljs">zos <span class="hljs-keyword">add</span><span class="bash"> &lt;contract_name_1&gt;
-</span>zos <span class="hljs-keyword">add</span><span class="bash"> &lt;contract_name_2&gt;
-</span>...
-zos <span class="hljs-keyword">add</span><span class="bash"> &lt;contract_name_n&gt;
-</span></code></pre>
-<p>Where <code>&lt;contract_name&gt;</code> is the name of your Solidity contract.</p>
-<p>In our example, run:</p>
-<pre><code class="hljs">zos <span class="hljs-keyword">add</span><span class="bash"> MyContract
-</span></code></pre>
-<p>To have your <code>package.zos.json</code> file always up-to-date, run <code>zos add</code> for every new contract you add to your project.</p>
-<h2><a class="anchor" aria-hidden="true" name="sync-your-project-with-the-blockchain-with-zos-push"></a><a href="#sync-your-project-with-the-blockchain-with-zos-push" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sync your project with the blockchain with <code>zos push</code></h2>
-<p>This command will deploy your upgradeable application to the blockchain:</p>
-<pre><code class="hljs">zos push <span class="hljs-comment">--network &lt;network&gt;</span>
+<p>We need to pass a token to the new <code>initialize</code> of our new version of Basil. Because we previously linked to the standard library that provides a MintableERC721Token implementation, let's just use that one:</p>
+<pre><code class="hljs">zos create-proxy MintableERC721Token --from $OWNER --init --args $BASIL_ADDRESS,BasilToken,BSL --network development
 </code></pre>
-<p>The first time you run this command for a specific network, a new <code>package.zos.&lt;network&gt;.json</code> will be created. This file will reflect the status of your project in that network.</p>
-<h2><a class="anchor" aria-hidden="true" name="create-upgradeability-proxies-for-each-of-your-contracts"></a><a href="#create-upgradeability-proxies-for-each-of-your-contracts" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create upgradeability proxies for each of your contracts</h2>
-<p>The next commands will deploy new proxies to make your contracts upgradeable:</p>
-<pre><code class="hljs">zos create <span class="hljs-tag">&lt;<span class="hljs-name">contract_name_1</span>&gt;</span> --network <span class="hljs-tag">&lt;<span class="hljs-name">network</span>&gt;</span>
-zos create <span class="hljs-tag">&lt;<span class="hljs-name">contract_name_2</span>&gt;</span> --network <span class="hljs-tag">&lt;<span class="hljs-name">network</span>&gt;</span>
-...
-zos create <span class="hljs-tag">&lt;<span class="hljs-name">contract_name_n</span>&gt;</span> --network <span class="hljs-tag">&lt;<span class="hljs-name">network</span>&gt;</span>
+<p>The new versions of our application's contracts were deployed to the network. However, the previously deployed proxies are still running with the old implementations. To finish the upgrade, run:</p>
+<pre><code class="hljs">zos upgrade Basil --network development
 </code></pre>
-<p>Optionally, you can use the <code>-i</code> flag to call an initialization/migration function after you create the proxy.</p>
-<p>In our simple example, we want to call the <code>initialize</code> function, with some value (e.g: 42) thus:</p>
-<pre><code class="hljs">zos create MyContract -<span class="hljs-selector-tag">i</span> initialize -<span class="hljs-selector-tag">p</span> <span class="hljs-number">42</span> --network development 
-</code></pre>
-<p>The proxy addresses, which you'll need to interact with your upgradeable contracts, will be stored in the <code>package.zos.&lt;network&gt;.json</code> file.</p>
-<p>Open the <code>package.zos.&lt;network&gt;.json</code> and use the addresses found there to interact with your deployed contracts. Congratulations! The first version of your upgradeable smart contract app is deployed in the blockchain!</p>
-<h2><a class="anchor" aria-hidden="true" name="using-a-standard-library"></a><a href="#using-a-standard-library" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a standard library</h2>
-<p>In addition to creating proxies for your own contracts, you can also re-use already deployed contracts from a ZeppelinOS standard library. To do so, run the following command, with the name of the npm package of the stdlib you want to use. For example:</p>
-<pre><code class="hljs css bash">zos link openzeppelin-zos
-</code></pre>
-<p>The next <code>push</code> operation will connect your application with the chosen standard library on the target network. However, if you're using development nodes (such as testrpc or ganache), the standard library is not already deployed, since you are running from an empty blockchain. To work around this, you can add a <code>--deploy-stdlib</code> flag to the <code>push</code> command:</p>
-<pre><code class="hljs css bash">zos push --deploy-stdlib --network &lt;network&gt;
-</code></pre>
-<p>This will deploy your entire application to the target network, along with the standard library you are using and all its contracts. This way, you can transparently work in development with the contracts provided by the stdlib.</p>
-<p>From there on, you can create proxies for any contract provided by the stdlib:</p>
-<pre><code class="hljs css bash">zos create DetailedMintableToken --network &lt;network&gt;
-</code></pre>
-<h2><a class="anchor" aria-hidden="true" name="update-your-smart-contract-code"></a><a href="#update-your-smart-contract-code" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update your smart contract code</h2>
-<p>Some time later you might want to change your smart contract code: fix a bug, add a new feature, etc.
-To do so, update your contracts, making sure you don't change their pre-existing storage structure. This is required
-by <strong>ZeppelinOS</strong> upgradeability mechanism. This means you can add new state variables, but you can't remove the ones you already have. In the example above, this could be the new version of <code>MyContract</code>:</p>
-<pre><code class="hljs css sol"><span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "zos-lib/contracts/migrations/Initializable.sol";</span>
-
-contract MyContract <span class="hljs-keyword">is</span> Initializable {
-  uint256 <span class="hljs-keyword">public</span> x;
-  
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span><span class="hljs-params">(uint256 _x)</span> <span class="hljs-title">isInitializer</span> <span class="hljs-title">public</span> </span>{
-    x = _x;
-  }
-  
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">y</span><span class="hljs-params">()</span> <span class="hljs-title">public</span> <span class="hljs-title">pure</span> <span class="hljs-title">returns</span> <span class="hljs-params">(uint256)</span> </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-number">1337</span>;
-  }
-}
-</code></pre>
-<p>Use truffle to compile the new version of your code:</p>
-<pre><code class="hljs css sh">npx truffle compile
-</code></pre>
-<p>We'll now use <code>zos</code> to register and deploy the new code for <code>MyContract</code> to the blockchain. Sync the new version of your project by running:</p>
-<pre><code class="hljs">zos push <span class="hljs-comment">--network &lt;network&gt;</span>
-</code></pre>
-<p>After running this command, the new versions of your project's contracts are deployed in the blockchain.
-However, the already deployed proxies are still running with the old implementations. You need to upgrade
-each of the proxies individually. To do so, you just need to run this for every contract:</p>
-<pre><code class="hljs">zos<span class="hljs-built_in"> upgrade </span>&lt;contract_name_1&gt; --network &lt;network&gt;
-zos<span class="hljs-built_in"> upgrade </span>&lt;contract_name_2&gt; --network &lt;network&gt;
-<span class="hljs-built_in">..</span>.
-zos<span class="hljs-built_in"> upgrade </span>&lt;contract_name_n&gt; --network &lt;network&gt;
-</code></pre>
-<p>In our simple example:</p>
-<pre><code class="hljs">zos<span class="hljs-built_in"> upgrade </span>MyContract --network development
-</code></pre>
-<p>Voilà! Your contract has now been upgraded. The address is the same as before, but the code has been changed to the latest version. Repeat the same steps for every code update you want to perform.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="start.html">← ZeppelinOS</a><a class="docs-next button" href="testing.html">Testing an upgradeable application →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="zeppelin_os" width="66" height="58"/></a><div><h5>Docs</h5><a href="https://docs.zeppelinos.org/docs/building.html">Guides</a><a href="https://docs.zeppelinos.org/docs/clifront.html">Reference</a></div><div><h5>More</h5><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">Github</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="zeppelin_os" width="170" height="45"/></a><section class="copyright">Copyright © 2017 zOS Global</section></footer></div></body></html>

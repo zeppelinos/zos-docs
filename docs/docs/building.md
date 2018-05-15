@@ -27,7 +27,7 @@ First we will need to [install Node.js following the instructions from their web
     truffle init
     npm init --yes
 
-Next, let's write the contract to control the lightbulb in `contracts/Basil.sol`:
+Next, let's write the contract to control the light bulb in `contracts/Basil.sol`:
 
     pragma solidity ^0.4.23;
 
@@ -62,7 +62,7 @@ Next, let's write the contract to control the lightbulb in `contracts/Basil.sol`
 
 The contract is super simple. If somebody wants to set the light color, they have to make a donation that then goes to cover any plant necessities. If the donation is higher than the previous one, it is accepted, the light color changes and an event is emitted.
 
-We set the initial donation amount to 10 wei, and here you will find the only difference to take into account when writting a contract for ZeppelinOS. Before ZeppelinOS, we would have set the initial value using a `constructor` function. In Ethereum, constructors are handled in a very different way compared to normal functions: they are executed during the deployment of the contract to initialize the state variables, and the code of the constructor is never deployed to the blockchain. In ZeppelinOS we rely on proxy contracts that will forward function calls to the contracts with the implementation. A proxy has no access to the constructor to initialize state variables, so instead we use an `initialize` function with the `isInitializer` modifier provided by the `Migratable` contract of `zos-lib`, which comes from the inheritance chain of `Ownable`. The modifier receives the name of the contract and a `migrationId` that we start in 0.
+We set the initial donation amount to 10 wei, and here you will find the only difference to take into account when writing a contract for ZeppelinOS. Before ZeppelinOS, we would have set the initial value using a `constructor` function. In Ethereum, constructors are handled in a very different way compared to normal functions: they are executed during the deployment of the contract to initialize the state variables, and the code of the constructor is never deployed to the blockchain. In ZeppelinOS we rely on proxy contracts that will forward function calls to the contracts with the implementation. A proxy has no access to the constructor to initialize state variables, so instead we use an `initialize` function with the `isInitializer` modifier provided by the `Migratable` contract of `zos-lib`, which comes from the inheritance chain of `Ownable`. The modifier receives the name of the contract and a `migrationId` that starts in 0.
 
 We need to install the `openzeppelin-zos` dependency and to compile the contract:
 
@@ -123,7 +123,7 @@ TODO: test this and comment about the resulting logs. On the published zos, the 
 
 ## Upgrading a contract
 
-The rules for our basil lights will now be set in stone, enforced by the immutability of the Ethereum blockchain. This sounded great... until we found an embarrasing bug: we are never updating `highestDonation`! The donations would not grow as we expect because the stakes will never be higher than 10 wei. Luckily we caught this before going to mainnet, but are we sure that our contract is bullet proof and something like this will never happen again? The same feature that makes Ethereum secure is now making us feel insecure about our programming abilities and scared of finding a security vulnerability too late.
+The rules for our basil lights will now be set in stone, enforced by the immutability of the Ethereum blockchain. This sounded great... until we found an embarrassing bug: we are never updating `highestDonation`! The donations would not grow as we expect because the stakes will never be higher than 10 wei. Luckily we caught this before going to mainnet, but are we sure that our contract is bullet proof and something like this will never happen again? The same feature that makes Ethereum secure is now making us feel insecure about our programming abilities and scared of finding a security vulnerability too late.
 
 Fear not, ZeppelinOS allows us to keep the transparency and immutability of a deployed version of a contract, and also to opt-in for a contract in which the owner can upgrade the implementation. This is done through a proxy that forwards the calls to the latest implementation of the contract. To create a proxy for Basil, run:
 

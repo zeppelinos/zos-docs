@@ -4,6 +4,7 @@
     "next": "Next",
     "previous": "Previous",
     "tagline": "zeppelin_os rocks",
+    "advanced": "Advanced topics",
     "application_management_AppDirectory": "AppDirectory",
     "application_management_BaseAppManager": "BaseAppManager",
     "application_management_PackagedAppManager": "PackagedAppManager",

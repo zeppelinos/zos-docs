@@ -68,7 +68,9 @@ After these simple steps, your upgradeable application is now on-chain!
 
 If, at a later stage, you want to upgrade your smart contracts' code in order to fix a bug or add a new feature, you can do it seamlessly using ZeppelinOS. 
 
-First, make the desired changes to your contracts, recompile them, and push them to the network:
+Note that while ZeppelinOS supports arbitrary changes in functionality, you will need to preserve all variables that appear in prior versions of your contracts, declaring any new variables below the already existing ones. You can find details on this in the [Advanced topics](advanced.md) page. 
+
+Once you've made the desired changes to your contracts, recompile them and push them to the network:
 
     npx truffle compile
     zos push --network <network>

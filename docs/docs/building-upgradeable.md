@@ -23,7 +23,9 @@ A simple contract would look like this:
       }
     }
 
-Compile it with:
+You might have noted that our sample contract has an `initialize` function instead of the standard contstructor. This is a requirement of ZeppelinOS's upgradeabiltiy system, you can learn more about this in our [Advanced topics](advanced.md) section. 
+
+You can now compile the contract with:
 
     npx truffle compile
 

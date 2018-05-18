@@ -249,3 +249,7 @@ This command will output the token's new proxy address. Lets use it to set it in
 export TOKEN_ADDRESS=<address>
 echo "BasilERC721.at(\"$BASIL_ADDRESS\").setToken(\"$TOKEN_ADDRESS\", {from: \"$OWNER\"})" | truffle console --network development
 ```
+
+That's it! Now you know how to use ZeppelinOS to develop upgradeable apps. Have a look at the scripts `deploy/deploy_with_cli_v1.sh` and `deploy/deploy_with_cli_v2.sh` to review what we've gone over in the guide.
+
+Stay tuned for more advanced turorials!

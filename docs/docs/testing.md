@@ -33,7 +33,7 @@ To set up the full application in a test file, first import `TestApp` from `zos`
 import { TestApp } from 'zos';
 ```
 
-And invoke it in the test suite setup, optionally including the path to your `zos.json` file, and a set of options to be used when deploying the contracts (such as `from`, `gas`, and `gasPrice`):
+Then invoke it in the test suite setup, optionally including the path to your `zos.json` file, and a set of options to be used when deploying the contracts (such as `from`, `gas`, and `gasPrice`):
 ```js
 beforeEach(async function () {
   this.app = await TestApp('zos.json', { from: owner })
@@ -70,7 +70,7 @@ contract('Sample', function ([_, owner]) {
     result.should.eq('A sample')
   })
 
-  it('should create a proxy from stdlib', async function () {
+  it('should create a proxy for the stdlib', async function () {
     const proxy = await this.app.createProxy(StandardToken);
     const result = await proxy.totalSupply();
     result.toNumber().should.eq(0);

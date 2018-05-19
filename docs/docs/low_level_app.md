@@ -114,7 +114,7 @@ contract DonationsV1 is DonationsV0 {
 
 Notice that by doing this, our contract will interact directly with the on-chain ZeppelinOS standard library, so there is no need to deploy nor maintain the `MintableERC721Token` contract ourselves, as we rely on the ZeppelinOS network.
 
-### 5. Upgrade the new version
+### 5. Upgrade to the new version
 
 To upgrade our app, we need to create a new version and reference the ZeppelinOS standard library release
 

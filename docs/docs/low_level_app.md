@@ -156,4 +156,4 @@ Finally, we set it to our upgradeable contract
 await donationsV1.setToken(token.address)
 ```
 
-That's it! We have upgraded our ZeppelinOS app behavior while preserving its original balance and storage. This new version is also using the on-chain ZeppelinOS standard library containing an implementation of a mintable ERC721 token.
+That's it! We have upgraded our ZeppelinOS app behavior while preserving its original balance and storage. This new version is also using a proxy contract to the the on-chain ZeppelinOS standard library implementation of a mintable ERC721 token.

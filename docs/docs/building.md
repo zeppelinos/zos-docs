@@ -9,11 +9,7 @@ After installing `zos` and setting up our ZeppelinOS project as described in the
 Let's start by installing the [ZeppelinOS lib](https://github.com/zeppelinos/zos-lib):
 
 ```sh
-<<<<<<< HEAD
 npm install zos-lib
-=======
-npm install zos-lib --save
->>>>>>> 143fc7d4404de85ddf407576e40f28c05c8cfbf0
 ```
 
 Next, we will create a file named `MyContract.sol` in the `contracts/` folder of our app with the following Solidity code:
@@ -30,15 +26,9 @@ contract MyContract is Migratable {
 }
 ```
 
-<<<<<<< HEAD
 Notice that our sample contract has an `initialize` function instead of the standard constructor. This is a requirement of [ZeppelinOS's upgradeability system](advanced.md#initializers-vs-constructors).
 
 Let's now compile the contract:
-=======
-Notice that our sample contract has an `initialize` function: this works as a constructor for our upgradeable contract. This is a requirement of the [ZeppelinOS's upgradeability system](advanced.md#initializers-vs-constructors).
-
-Now let's compile the contract:
->>>>>>> 143fc7d4404de85ddf407576e40f28c05c8cfbf0
 
 ```sh
 npx truffle compile

@@ -83,6 +83,6 @@ Finally, let's upgrade the already deployed contract:
 zos upgrade MyContract --network development
 ```
 
-_Voilà_! We have deployed and upgraded an application using ZeppelinOS! The address of the upgraded contract is the same as before, but the code has been updated to the new version.
+_Voilà!_ We have deployed and upgraded an application using ZeppelinOS. The address of the upgraded contract is the same as before, but the code has been updated to the new version.
 
 In order to use the ZeppelinOS standard libraries in an upgradeable app, please follow our [next guide](using.md).

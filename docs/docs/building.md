@@ -49,15 +49,15 @@ zos add MyContract
 We can now push our application to the desired network by running:
 
 ```sh
-zos push --network <network>
+zos push --network development
 ```
 
-This  will create a `zos.<network>.json` file with all the information specific to the chosen network. You can read more about this file in the [advanced topics](advanced.md#format-of-zosjson-and-zos-network-json-files) section.
+This  will create a `zos.development.json` file with all the information specific to the chosen network. You can read more about this file in the [advanced topics](advanced.md#format-of-zosjson-and-zos-network-json-files) section.
 
 To create an upgradeable version of our contract, we need to run:
 
 ```sh
-zos create MyContract --init initialize --args 42 --network <network>
+zos create MyContract --init initialize --args 42 --network development
 ```
 
 The `create` command takes an optional `--init` flag to call the initialization function after creating the contract, while the `--args` flag allows us to pass arguments to it. This way, we are initializing our contract with `42` as the value of the `x` state variable.
@@ -74,13 +74,13 @@ If, at a later stage, we want to upgrade our smart contract's code in order to f
 Once we have made the desired changes to our contracts, we need to push them to the network:
 
 ```sh
-zos push --network <network>
+zos push --network development
 ```
 
 Finally, let's upgrade the already deployed contract:
 
 ```sh
-zos upgrade MyContract --network <network>
+zos upgrade MyContract --network development
 ```
 
 _Voilà_! We have deployed and upgraded an application using ZeppelinOS! The address of the upgraded contract is the same as before, but the code has been updated to the new version.

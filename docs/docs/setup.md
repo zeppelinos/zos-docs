@@ -1,6 +1,6 @@
 ---
 id: setup
-title: Install and set up
+title: Installation and setup
 ---
 
 The following steps will get us started using ZeppelinOS.
@@ -15,13 +15,13 @@ npm install --global zos
 
 ## Setting up our application
 
-`zos` integrates with [Truffle](http://truffleframework.com/), so we need to install it:
+`zos` integrates with [Truffle](http://truffleframework.com/), install it with:
 
 ```sh
 npm install --global truffle
 ```
 
-Next we set up the truffle application:
+Next we set up the truffle project:
 
 ```sh
 mkdir myapp
@@ -38,7 +38,4 @@ zos init myapp
 
 This will create a `zos.json` file, which will contain all the information about our application. For more information about this file, please see the [advanced topics](advanced.md#format-of-zosjson-and-zos-network-json-files) section. 
 
-Now we are ready to start [developing our upgradable application](building.md).
-
-
-
+We are now ready to start [developing our upgradable application](building.md).

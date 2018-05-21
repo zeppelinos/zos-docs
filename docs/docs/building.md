@@ -67,7 +67,7 @@ After these simple steps, our upgradeable application is now on-chain!
 
 ## Upgrading our contract
 
-If, at a later stage, we want to upgrade our smart contract code in order to fix a bug or add a new feature, we can do it seamlessly using ZeppelinOS. 
+If, at a later stage, we want to upgrade our smart contract's code in order to fix a bug or add a new feature, we can do it seamlessly using ZeppelinOS.
 
 > **Note**: while ZeppelinOS supports arbitrary changes in functionality, you will need to preserve all variables that appear in prior versions of your contracts, declaring any new variables below the already existing ones. You can find details on this in the [advanced topics](advanced.md) page. 
 

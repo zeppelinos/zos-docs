@@ -39,7 +39,7 @@ Note that the `add` command of the ZeppelinOS CLI also compiles the contracts, b
 
 ## Initial deployment
 
-The `zos init` command already sets up a [Truffle configuration file]((http://truffleframework.com/docs/getting_started/project#alternative-migrating-with-ganache), so you can start a local development network simply by: 
+The `zos init` command already sets up a [Truffle configuration file](http://truffleframework.com/docs/getting_started/project#alternative-migrating-with-ganache), so you can start a local development network simply by: 
 
 ```sh
 npx truffle develop

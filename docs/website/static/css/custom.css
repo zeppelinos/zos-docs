@@ -61,9 +61,9 @@ header > a > h3 {
 }
 
 .logo {
-  margin: auto 10px;
+  margin: auto -66px;
   width: 225px;
-  height: 30px!important;
+  height: 22px!important;
 }
 
 .navigationWrapper {

@@ -13,11 +13,9 @@
 <li>Source code: <a href="https://github.com/zeppelinos/basil">zeppelinos/basil</a></li>
 <li>Dapp: <a href="https://basil.zeppelin.solutions">basil.zeppelin.solutions</a></li>
 </ul>
-<p>First we will need to <a href="https://nodejs.org/en/download/package-manager/">install Node.js following the instructions from their website</a>. Then, let's set up a directory for our project and bootstrap it with the Truffle development environment:</p>
+<p>First we will need to <a href="https://nodejs.org/en/download/package-manager/">install Node.js following the instructions from their website</a>. Then, let's set up a directory for our project and initialize the npm package:</p>
 <pre><code class="hljs css sh">mkdir basil
 <span class="hljs-built_in">cd</span> basil
-npm install --global truffle
-truffle init
 npm init --yes
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="the-sample-contract"></a><a href="#the-sample-contract" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The sample contract</h2>
@@ -69,7 +67,7 @@ contract Basil <span class="hljs-keyword">is</span> Ownable {
 <p>The contract is super simple. If somebody wants to set the light color, they have to make a donation. If the donation is higher than the previous one, it is accepted, the light color changes and an event is emitted. Of course, a withdraw method allows the Zeppelin team to collect all donations, which are safely put away in the plant's own education fund.</p>
 <p>We need to install the <code>openzeppelin-zos</code> dependency and to compile the contract:</p>
 <pre><code class="hljs css sh">npm install openzeppelin-zos
-truffle compile
+npx truffle compile
 </code></pre>
 <p>NOTE: If you're familiar with the <code>openzeppelin-solidty</code> library, not that we're not using it here. We're using <code>openzeppelin-zos</code> library, which is the OpenZeppelin version that is compatible with ZeppelinOS.</p>
 <h2><a class="anchor" aria-hidden="true" name="using-zeppelinos"></a><a href="#using-zeppelinos" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using ZeppelinOS</h2>
@@ -102,17 +100,17 @@ new contract you add to your project.</p>
 <pre><code class="hljs css sh"><span class="hljs-built_in">export</span> OWNER=&lt;address&gt;
 </code></pre>
 <p>Then, to deploy our app:</p>
-<pre><code class="hljs css sh">zos push --from <span class="hljs-variable">$OWNER</span> --network development
+<pre><code class="hljs css sh">zos push --from <span class="hljs-variable">$OWNER</span> --network <span class="hljs-built_in">local</span>
 </code></pre>
 <p>The first time you run this command for a specific network, a new
 <code>zos.&lt;network&gt;.json</code> will be created. This file will reflect the status
 of your project in that specific network, including contract deployed addresses, versions, contract proxies, etc.</p>
 <h2><a class="anchor" aria-hidden="true" name="proxies"></a><a href="#proxies" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Proxies</h2>
-<p>Notice how the file <code>zos.development.json</code> lists a series of &quot;contracts&quot; and &quot;proxies&quot;. The first represent implementations for a specific contract name, while the second represent the actual proxies that people will interact with in the blockchain.</p>
+<p>Notice how the file <code>zos.local.json</code> lists a series of &quot;contracts&quot; and &quot;proxies&quot;. The first represent implementations for a specific contract name, while the second represent the actual proxies that people will interact with in the blockchain.</p>
 <p>A proxy is a wrapper for an implementation, that allows it to be updated, while mainting it's state. We need to create a proxy for Basil.</p>
-<pre><code class="hljs css sh">zos create Basil --from <span class="hljs-variable">$OWNER</span> --network development --init --args <span class="hljs-variable">$OWNER</span>
+<pre><code class="hljs css sh">zos create Basil --from <span class="hljs-variable">$OWNER</span> --network <span class="hljs-built_in">local</span> --init --args <span class="hljs-variable">$OWNER</span>
 </code></pre>
-<p>Take a look at <code>zos.development.json</code> again. You will see that we now have a proxy for Basil. This is the address to use in a Dapp.</p>
+<p>Take a look at <code>zos.local.json</code> again. You will see that we now have a proxy for Basil. This is the address to use in a Dapp.</p>
 <h2><a class="anchor" aria-hidden="true" name="upgrading-the-contract"></a><a href="#upgrading-the-contract" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upgrading the contract</h2>
 <p>If we ever found a bug in Basil, we would need to upgrade our zos package, provide a new implementation for Basil with a fix and tell our proxy to upgrade to the new implementation. This would preserve all the previous donation history, while seamlessly patching the bug.</p>
 <p>Another common thing that happens when developing smart contracts for Ethereum is that new standards appear, all the new kids implement them in their contracts, and a very cool synergy between contracts starts to happen. The people who have immutable contracts already deployed will miss all the fun. This has just happened to us: it would be very nice to encourage donations to Basil by emitting a unique ERC721 token in exchange. Well, let's upgrade the contract with ZeppelinOS to do just that.</p>
@@ -158,28 +156,28 @@ contract BasilERC721 <span class="hljs-keyword">is</span> Basil {
 <p>Let's add this version to our ZeppelinOS application and push to the network again:</p>
 <pre><code class="hljs css sh">truffle compile
 zos add BasilERC721:Basil
-zos push --from <span class="hljs-variable">$OWNER</span> --network development
+zos push --from <span class="hljs-variable">$OWNER</span> --network <span class="hljs-built_in">local</span>
 </code></pre>
 <p>This will print the address of the deployed Basil contract. Let's export this value to use it later:</p>
 <pre><code class="hljs css sh"><span class="hljs-built_in">export</span> BASIL_ADDRESS=&lt;address&gt;
 </code></pre>
 <p>Now, to upgrade our proxy:</p>
-<pre><code class="hljs css sh">zos upgrade Basil --from <span class="hljs-variable">$OWNER</span> --network development
+<pre><code class="hljs css sh">zos upgrade Basil --from <span class="hljs-variable">$OWNER</span> --network <span class="hljs-built_in">local</span>
 </code></pre>
 <p>By now, Basil's proxy will use the new implementation, but it will revert on every donation because it's token is not set. We'll do that next.</p>
 <h2><a class="anchor" aria-hidden="true" name="connecting-to-openzeppelin-s-standard-library"></a><a href="#connecting-to-openzeppelin-s-standard-library" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connecting to OpenZeppelin's standard library</h2>
 <p>So far, we've used ZeppelinOS to seamlessly upgrade our app's contracts. We will now use it to create a proxy for a pre-deployed ERC721 token implementation.</p>
 <p>The first thing we need to do, is tell our app to link to the <code>openzeppelin-zos</code> standard library release:</p>
 <pre><code class="hljs css sh">zos link openzeppelin-zos
-zos push --from <span class="hljs-variable">$OWNER</span> --deploy-stdlib --network development
+zos push --from <span class="hljs-variable">$OWNER</span> --deploy-stdlib --network <span class="hljs-built_in">local</span>
 </code></pre>
 <p>Notice the <code>--deploy-stdlib</code> option we've used. What this does is inject a version of the standard lib in our development network. Since we're working on a local blockchain, ZeppelinOS's contracts don't exist. This handy option solves that problem for us quite conveniently ^^</p>
 <p>Now, to create a proxy for the token:</p>
-<pre><code class="hljs css sh">zos create MintableERC721Token --from <span class="hljs-variable">$OWNER</span> --init --args \<span class="hljs-string">"<span class="hljs-variable">$BASIL_ADDRESS</span>\",\"BasilToken\",\"BSL\" --network development
+<pre><code class="hljs css sh">zos create MintableERC721Token --from <span class="hljs-variable">$OWNER</span> --init --args \<span class="hljs-string">"<span class="hljs-variable">$BASIL_ADDRESS</span>\",\"BasilToken\",\"BSL\" --network local
 </span></code></pre>
 <p>This command will output the token's new proxy address. Lets use it to set it in our new BasilERC721 version:</p>
 <pre><code class="hljs css sh"><span class="hljs-built_in">export</span> TOKEN_ADDRESS=&lt;address&gt;
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"BasilERC721.at(\"<span class="hljs-variable">$BASIL_ADDRESS</span>\").setToken(\"<span class="hljs-variable">$TOKEN_ADDRESS</span>\", {from: \"<span class="hljs-variable">$OWNER</span>\"})"</span> | truffle console --network development
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"BasilERC721.at(\"<span class="hljs-variable">$BASIL_ADDRESS</span>\").setToken(\"<span class="hljs-variable">$TOKEN_ADDRESS</span>\", {from: \"<span class="hljs-variable">$OWNER</span>\"})"</span> | truffle console --network <span class="hljs-built_in">local</span>
 </code></pre>
 <p>That's it! Now you know how to use ZeppelinOS to develop upgradeable apps. Have a look at the scripts <code>deploy/deploy_with_cli_v1.sh</code> and <code>deploy/deploy_with_cli_v2.sh</code> to review what we've gone over in the guide.</p>
 <p>Stay tuned for more advanced turorials!</p>

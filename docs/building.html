@@ -20,25 +20,20 @@ contract MyContract <span class="hljs-keyword">is</span> Migratable {
 }
 </code></pre>
 <p>Notice that our sample contract has an <code>initialize</code> function instead of the standard constructor. This is a requirement of <a href="/docs/advanced.html#initializers-vs-constructors">ZeppelinOS's upgradeability system</a>.</p>
-<p>Let's now compile the contract:</p>
-<pre><code class="hljs css sh">npx truffle compile
-</code></pre>
-<blockquote>
-<p><strong>Note</strong>: bear in mind that the <code>push</code> command of the ZeppelinOS CLI also compiles the contracts, but we are compiling them explicitly here for clarity. If you want to prevent <code>zos push</code> from doing so, use the --skip-compile flag.</p>
-</blockquote>
-<h2><a class="anchor" aria-hidden="true" name="initial-deployment"></a><a href="#initial-deployment" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Initial deployment</h2>
-<p>To deploy our app, we need to register the first version of our contract:</p>
+<p>Before deploying our app, we need to register the first version of our contract:</p>
 <pre><code class="hljs css sh">zos add MyContract
 </code></pre>
-<blockquote>
-<p><strong>Note</strong>: If you are working in a local development network like <a href="http://truffleframework.com/ganache/">Ganache</a>, you will need to <a href="http://truffleframework.com/docs/getting_started/project#alternative-migrating-with-ganache">configure</a> your <code>truffle.js</code> file before running the <code>push</code> command.</p>
-</blockquote>
-<p>We can now push our application to a development network by running:</p>
-<pre><code class="hljs css sh">zos push --network development
+<p>Note that the <code>add</code> command of the ZeppelinOS CLI also compiles the contracts, but you can always compile them manually using <code>npx truffle compile</code>.</p>
+<h2><a class="anchor" aria-hidden="true" name="initial-deployment"></a><a href="#initial-deployment" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Initial deployment</h2>
+<p>The <code>zos init</code> command already sets up a <a href="http://truffleframework.com/docs/getting_started/project#alternative-migrating-with-ganache">Truffle configuration file</a>, so you can start a local development network simply by:</p>
+<pre><code class="hljs css sh">npx truffle develop
 </code></pre>
-<p>This will create a <code>zos.development.json</code> file with all the information specific to this network. You can read more about this file in the <a href="/docs/advanced.html#format-of-zosjson-and-zos-network-json-files">advanced topics</a> section. If you want to work with a different network, simply substitute the <code>development</code> parameter for <code>ropsten</code>, <code>rinkeby</code> or <code>mainnet</code>.</p>
+<p>We can now push our application to this network by running:</p>
+<pre><code class="hljs css sh">zos push --network <span class="hljs-built_in">local</span>
+</code></pre>
+<p>This will create a <code>zos.local.json</code> file with all the information specific to this network. You can read more about this file in the <a href="/docs/advanced.html#format-of-zosjson-and-zos-network-json-files">advanced topics</a> section. If you want to work with a different network, simply substitute the <code>local</code> parameter for <code>ropsten</code>, <code>rinkeby</code> or <code>mainnet</code>.</p>
 <p>To create an upgradeable version of our contract, we need to run:</p>
-<pre><code class="hljs css sh">zos create MyContract --init initialize --args 42 --network development
+<pre><code class="hljs css sh">zos create MyContract --init initialize --args 42 --network <span class="hljs-built_in">local</span>
 </code></pre>
 <p>The <code>create</code> command takes an optional <code>--init</code> flag to call the initialization function after creating the contract, while the <code>--args</code> flag allows us to pass arguments to it. This way, we are initializing our contract with <code>42</code> as the value of the <code>x</code> state variable.</p>
 <blockquote>
@@ -51,10 +46,10 @@ contract MyContract <span class="hljs-keyword">is</span> Migratable {
 <p><strong>Note</strong>: while ZeppelinOS supports arbitrary changes in functionality, you will need to preserve all variables that appear in prior versions of your contracts, declaring any new variables below the already existing ones. You can find details on this in the <a href="/docs/advanced.html">advanced topics</a> page.</p>
 </blockquote>
 <p>Once we have made the desired changes to our contracts, we need to push them to the network:</p>
-<pre><code class="hljs css sh">zos push --network development
+<pre><code class="hljs css sh">zos push --network <span class="hljs-built_in">local</span>
 </code></pre>
 <p>Finally, let's upgrade the already deployed contract:</p>
-<pre><code class="hljs css sh">zos upgrade MyContract --network development
+<pre><code class="hljs css sh">zos upgrade MyContract --network <span class="hljs-built_in">local</span>
 </code></pre>
 <p><em>Voilà!</em> We have deployed and upgraded an application using ZeppelinOS. The address of the upgraded contract is the same as before, but the code has been updated to the new version.</p>
 <p>In order to use the ZeppelinOS standard libraries in an upgradeable app, please follow our <a href="/docs/using.html">next guide</a>.</p>

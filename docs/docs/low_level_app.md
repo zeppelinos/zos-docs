@@ -15,12 +15,12 @@ Most real-world applications require more than a single smart contract. In this 
 Imagine we want to build a simple donation application where we give donors some sort of recognition, and we want for it to be upgradable. First, we install the ZeppelinOS library:
 
 ```sh
-npm install zos-lib --save
+npm install zos-lib
 ```
 
 ### 2. Create the app
 
-Next, we need the [App contract](https://github.com/zeppelinos/zos-lib/tree/master/contracts/application) of the [`ZeppelinOS Library`](https://github.com/zeppelinos/zos-lib). 
+Next, we need the App contract of the [`ZeppelinOS Library`](https://github.com/zeppelinos/zos-lib).
 This contract will live in the blockchain and manage the different versions of our smart contracts.
 
 ```js
@@ -78,10 +78,10 @@ Remember that the proxy is the contract that will receive the calls and hold the
 
 Now let's suppose we want to give some sort of retribution to the donors, so we mint new [ERC721](http://erc721.org/) cryptocollectibles for each donation. 
 
-For this, we link the [ZeppelinOS standard library](https://www.npmjs.com/package/openzeppelin-zos) to our application by running:
+In order to do this, we link the [ZeppelinOS standard library](stdlib.md) to our application by running:
 
 ```sh
-npm install openzeppelin-zos --save
+npm install openzeppelin-zos
 ```
 
 Done! Now we can easily mint non-fungible tokens from our smart contract:
@@ -112,34 +112,34 @@ contract DonationsV1 is DonationsV0 {
 }
 ```
 
-Notice that by doing this, our contract will interact directly with the on-chain ZeppelinOS standard library, so there is no need to deploy nor maintain the `MintableERC721Token` contract ourselves, as we rely on the ZeppelinOS network.
+Notice that by doing this, our contract will interact directly with the on-chain ZeppelinOS standard library, so there is no need to deploy nor maintain the `MintableERC721Token` contract ourselves.
 
 ### 5. Upgrade to the new version
 
 To upgrade our app, we need to create a new version and reference the ZeppelinOS standard library release
 
 ```js
-const stdlibAddress = "0xA739d10Cc20211B973dEE09DB8F0D75736E2D817" // ropsten release
+const stdlibAddress = "0x3bd95b5a003481b801010bcde4f7e0a32a925deb" // mainnet release
 const newVersion = '0.0.2'
 await app.newVersion(newVersion, await getStdLib(stlibAddress))
 ```
 
-Next, we register the new implementation of our donations contract
+Next, we register the new implementation of our donations contract:
 
 ```js
 const DonationsV1 = Contracts.getFromLocal('DonationsV1')
 await app.setImplementation(DonationsV1, contractName)
 ```
 
-And upgrade the proxy
+And upgrade the proxy:
 
 ```js
 await app.upgradeProxy(donationsV0.address, null, contractName)
-// We wrap the same old proxy address with the new interface
+// We wrap the previous proxy address with the new interface
 donationsV1 = DonationsV1.at(donationsV0.address)
 ```
 
-Then we create a proxy to the standard library version of the ERC721 contract, declaring our `donationV1` proxy address as the owner
+Then we create a proxy to the standard library version of the ERC721 contract, declaring our `donationV1` proxy address as the owner:
 
 ```js
 const token = await app.createProxy(
@@ -150,10 +150,10 @@ const token = await app.createProxy(
 )
 ```
 
-Finally, we set it to our upgradeable contract
+Finally, we set it as the token of our upgradeable contract
 
 ```js
 await donationsV1.setToken(token.address)
 ```
 
-That's it! We have upgraded our ZeppelinOS app behavior while preserving its original balance and storage. This new version is also using a proxy contract to the the on-chain ZeppelinOS standard library implementation of a mintable ERC721 token.
+That's it! We have upgraded our ZeppelinOS app behavior while preserving its original balance and storage. This new version is also using a proxy contract of the the on-chain ZeppelinOS standard library implementation of a mintable ERC721 token.

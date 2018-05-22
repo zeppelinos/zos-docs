@@ -92,6 +92,16 @@ nav.toc .toggleNav .navGroup h3 {
   font-size: 12px !important;
 }
 
+nav.toc .toggleNav .navGroup.navGroupActive h3 {
+    background: linear-gradient(282deg, #63a5f7, #64cdea);
+    color: #fff;
+    padding: 10px;
+}
+
+h1 {
+  color: #62acf5;
+}
+
 footer.nav-footer {
   background: white;
 }

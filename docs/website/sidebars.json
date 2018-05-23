@@ -3,7 +3,7 @@
     "OVERVIEW": [
       "start"
     ],
-    "GETTING STARTED": [
+    "GUIDES": [
       "setup",
       "building",
       "using",
@@ -14,7 +14,7 @@
       "basil",
       "crafty"
     ],
-    "LIBRARY": [
+    "ZOS-LIB": [
       "libstart",
       "low_level_contract",
       "low_level_app"

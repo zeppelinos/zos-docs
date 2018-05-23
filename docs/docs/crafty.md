@@ -156,7 +156,7 @@ contract CraftableToken is MintableToken, ExtendedERC20 {
 `initialize`'s arguments can be passed in JSON to `create`, so arrays are not an issue:
 
 ```sh
-zos create CraftableToken --init --args "0x0cbd7..., Crafty Token, CRFT, https://path.to.metadata, [0xd03ea..., 0x28a87...], [2, 4]" --network ropsten
+zos create CraftableToken --init --args "0x0cbd7..., \"Crafty Token\", \"CRFT\", \"https://path.to.metadata\", [0xd03ea..., 0x28a87...], [2, 4]" --network ropsten
 > 0xaca94...
 ```
 

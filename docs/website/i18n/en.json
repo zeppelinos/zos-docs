@@ -14,7 +14,6 @@
     "application_versioning_ImplementationProvider": "ImplementationProvider",
     "application_versioning_Package": "Package",
     "application_versioning_Release": "Release",
-    "lifecycle_Migrations": "Migrations",
     "migrations_Initializable": "Initializable",
     "migrations_Migratable": "Migratable",
     "upgradeability_AdminUpgradeabilityProxy": "AdminUpgradeabilityProxy",

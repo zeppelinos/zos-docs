@@ -56,7 +56,7 @@ Here you will find a
 You can use other test networks like ropsten to further test your contracts
 before pushing them to mainnet. But remember that now your contracts are
 upgradeable! Even if you find a bug after deploying them to mainnet, you will
-be able to fix them without losing the contract state and in a way that's
+be able to fix it without losing the contract state and in a way that's
 transparent for your users.
 
 ## The proxy system

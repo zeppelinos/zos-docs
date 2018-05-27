@@ -103,7 +103,7 @@ Next, let's add the implementation of our Basil contract:
 zos add Basil
 ```
 
-To have your `zos.json` file always up-to-date, run `zos add` for every
+To have your `zos.json` file always up-to-date, run the `zos add` command for every
 new contract you add to your project.
 
 By now, the json files looks like this:
@@ -118,7 +118,7 @@ By now, the json files looks like this:
 }
 ```
 
-OpenZeppelin will use this file to track your project's contracts on chain, making them upgradeable and dynamically linkable to pre-deployed libraries, as well see soon.
+OpenZeppelin will use this file to track your project's contracts on chain, making them upgradeable and dynamically linkable to pre-deployed libraries, as we'll see soon.
 
 ## Deploying our first version of Basil, locally
 
@@ -128,7 +128,7 @@ Let's start a local ethereum network:
 ganache-cli --deterministic
 ```
 
-This will print 10 accounts. Copy the address of the first one, and then back into the initial terminal, export it as the `OWNER` because it will be useful for us later:
+This will print 10 accounts. Copy the address of the first one and then go back to the terminal window that you used to launch the Ganache client.  Export the address you just copied to an environment variable named `OWNER`.  You will need easy access to that address as you complete this tutorial:
 
 ```sh
 export OWNER=<address>
@@ -148,7 +148,7 @@ of your project in that specific network, including contract logic and instance 
 
 Notice how the file `zos.local.json` lists a series of "contracts" and "proxies". The first are the logic contracts for a specific contract name, while the second are the actual contract instances that our users will interact with in the blockchain. 
 
-A proxy is a wrapper for a contract's logic, that allows it to be updated, while mainting its state. We need to create an upgradeable instance (proxy) for Basil.
+A proxy is a wrapper for a contract's logic, that allows it to be updated, while maintaining its state. We need to create an upgradeable instance (proxy) for Basil.
 
 ```sh
 zos create Basil --from $OWNER --network local --init --args $OWNER
@@ -239,7 +239,7 @@ zos link openzeppelin-zos
 zos push --from $OWNER --deploy-stdlib --network local
 ```
 
-Notice the `--deploy-stdlib` option we've used. What this does is inject a version of the standard lib in our development network. Since we're working on a local blockchain, ZeppelinOS's contracts don't exist. This handy option solves that problem for us quite conveniently ^^
+Notice the `--deploy-stdlib` option we've used. What this does is inject a version of the standard lib into our development network. Since we're working on a local blockchain, the smart contracts that make up the ZeppelinOS library don't exist there. This handy option solves that problem for us quite nicely.
 
 Now, to create a proxy for the token:
 

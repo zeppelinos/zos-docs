@@ -162,15 +162,15 @@ of your project in that specific network, including contract logic and instance 
 
 ## Contract logic and upgradeable instances
 
-Notice how the file `zos.local.json` lists a series of "contracts" and "proxies". The first are the logic contracts for a specific contract name, while the second are the actual contract instances that our users will interact with in the blockchain. 
+Notice how the file `zos.development.json` lists a series of "contracts" and "proxies". The first are the logic contracts for a specific contract name, while the second are the actual contract instances that our users will interact with in the blockchain. 
 
 A proxy is a wrapper for a contract's logic, that allows it to be updated, while maintaining its state. We need to create an upgradeable instance (proxy) for Basil.
 
 ```sh
-zos create Basil --from $OWNER --network local --init --args $OWNER
+zos create Basil --from $OWNER --network development --init --args $OWNER
 ```
 
-Take a look at `zos.local.json` again. You will see that we now have a proxy for Basil. This is the address to use in our app.
+Take a look at `zos.development.json` again. You will see that we now have a proxy for Basil. This is the address to use in our app.
 
 ## Upgrading the contract
 
@@ -227,7 +227,7 @@ Let's add this version to our ZeppelinOS application and push to the network aga
 ```sh
 truffle compile
 zos add BasilERC721:Basil
-zos push --from $OWNER --network local
+zos push --from $OWNER --network development
 ```
 
 This will print the address of the deployed Basil contract. Let's export this value to use it later:
@@ -239,7 +239,7 @@ export BASIL_ADDRESS=<address>
 Now, to upgrade our proxy:
 
 ```sh
-zos upgrade Basil --from $OWNER --network local
+zos upgrade Basil --from $OWNER --network development
 ```
 
 By now, Basil's proxy will use the new implementation, but it will revert on every donation because it's token is not set. We'll do that next.
@@ -252,7 +252,7 @@ The first thing we need to do, is tell our app to link to the `openzeppelin-zos`
 
 ```sh
 zos link openzeppelin-zos
-zos push --from $OWNER --deploy-stdlib --network local
+zos push --from $OWNER --deploy-stdlib --network development
 ```
 
 Notice the `--deploy-stdlib` option we've used. What this does is inject a version of the standard lib into our development network. Since we're working on a local blockchain, the smart contracts that make up the ZeppelinOS library don't exist there. This handy option solves that problem for us quite nicely.
@@ -260,14 +260,14 @@ Notice the `--deploy-stdlib` option we've used. What this does is inject a versi
 Now, to create a proxy for the token:
 
 ```sh
-zos create MintableERC721Token --from $OWNER --init --args \"$BASIL_ADDRESS\",\"BasilToken\",\"BSL\" --network local
+zos create MintableERC721Token --from $OWNER --init --args \"$BASIL_ADDRESS\",\"BasilToken\",\"BSL\" --network development
 ```
 
 This command will output the token's new proxy address. Lets use it to set it in our new BasilERC721 version:
 
 ```sh
 export TOKEN_ADDRESS=<address>
-echo "BasilERC721.at(\"$BASIL_ADDRESS\").setToken(\"$TOKEN_ADDRESS\", {from: \"$OWNER\"})" | npx truffle console --network local
+echo "BasilERC721.at(\"$BASIL_ADDRESS\").setToken(\"$TOKEN_ADDRESS\", {from: \"$OWNER\"})" | npx truffle console --network development
 ```
 
 That's it! Now you know how to use ZeppelinOS to develop upgradeable apps. Have a look at the scripts `deploy/deploy_with_cli_v1.sh` and `deploy/deploy_with_cli_v2.sh` to review what we've gone over in the guide.

@@ -91,7 +91,7 @@ Now, to get the niceties that ZeppelinOS provides, let's install the `zos` comma
 
 ```sh
 npm install zos
-zos init basil 0.0.1
+zos init Basil 0.0.1
 ```
 
 This will create a `zos.json` file where ZeppelinOS will keep track of

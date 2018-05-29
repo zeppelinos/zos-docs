@@ -134,10 +134,26 @@ This will print 10 accounts. Copy the address of the first one and then go back 
 export OWNER=<address>
 ```
 
-Then, to deploy our app:
+Before deploying, make sure your Truffle configuration file contains an entry for a network configuration named `development`.  Your Truffle configuratiom file is named `truffle.js`.  You should see an entry in the `networks` section of that file like the following:
+
+```
+module.exports = {
+  networks: {
+    development: {
+      host: "127.0.0.1",
+      port: 8545,
+      network_id: "*" // Match any network id
+    }
+  }
+};
+```
+
+If you don't, use your favorite editor to add an entry to the `networks` section like the one shown above.  If your `truffle.js` file is empty except for a couple of comment lines, just replace the entire contents of that file with that shown above.  Now Truffle knows where to find the Ganache client.
+
+Next, we deploy our app to Ganache:
 
 ```sh
-zos push --from $OWNER --network local
+zos push --from $OWNER --network development
 ```
 
 The first time you run this command for a specific network, a new

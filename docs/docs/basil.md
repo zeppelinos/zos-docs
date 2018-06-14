@@ -16,6 +16,8 @@ In this guide, we will build a simple dApp on top of ZeppelinOS. To see the end 
 * Source code: [zeppelinos/basil](https://github.com/zeppelinos/basil)
 * App: [basil.zeppelin.solutions](https://basil.zeppelin.solutions)
 
+> NOTE: You will see several Ethereum addresses output by the commands you execute as you follow along with this tutorial.  Do not be concerned if they don't match the addresses you see in this document.
+
 First we will need to [install Node.js following the instructions from their website](https://nodejs.org/en/download/package-manager/). Next we set up a directory for our project including a `contracts` sub-directory to hold our smart contract.   Then we initialize the npm package:
 
 ```sh

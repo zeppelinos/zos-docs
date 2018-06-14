@@ -210,7 +210,7 @@ zos create Basil --from $OWNER --network local --init --args $OWNER
 Copy the address this command outputs to the clipboard.  It should match the address in the line that is printed after the text `Basil proxy:`.  This is the address for the contract that is proxying our Basil contract.  We will need it later so export it to the environment with the following command:
 
 ```sh
-export BASIL_PROXY_ADDRESS=0x9431db860bb727f7695ea8af6a4dc1d2cf34344d
+export BASIL_PROXY_ADDRESS=<address>
 ```
 
 We now have an entry in the `proxies` list for our Basil contract.  A proxy entry contains the deployment address for a specific logic contract, the current version number of that contract, and its implementation address.  Notice that the implementation address field in the proxy entry matches the deployment address field for the Basil entry in the `contracts` list.  If contracts were mail, the implementation field could be considered the current "forwarding" address for the Basil logic contract.  When we upgrade the Basil contract later in this tutorial.  You can see this in the updated `zos.local.json` file, shown below:
@@ -346,10 +346,14 @@ Now we create a proxy for the token:
 zos create MintableERC721Token --from $OWNER --init --args \"$BASIL_PROXY_ADDRESS\",\"BasilToken\",\"BSL\" --network local
 ```
 
-This command will output the token's new proxy address.  It should match the address from the line that begins with the label `MintableERC721Token proxy`.   The command below conveniently fills in the needed values from the environment variables we set earlier, and then passes that command to a new Truffle console session, to be executed immediately:
+This command will output the token's new proxy address.  It should match the address from the line that begins with the label `MintableERC721Token proxy`.  Export the token address to the environment so we can use it later:
 
 ```sh
 export TOKEN_PROXY_ADDRESS=<address>
+```
+The command below conveniently fills in the needed values from the environment variables we set earlier, and then passes that command to a new Truffle console session, to be executed immediately.  This command sets the token address of the token we just created a proxy for into our BasilERC721 contract:
+
+```sh
 echo "BasilERC721.at(\"$BASIL_PROXY_ADDRESS\").setToken(\"$TOKEN_PROXY_ADDRESS\", {from: \"$OWNER\"})" | truffle console --network local
 ```
 You will see the result of the transaction in JSON format with some interesting details like how much gas was used, the block number, and other information.

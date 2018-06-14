@@ -346,7 +346,7 @@ Now we create a proxy for the token:
 zos create MintableERC721Token --from $OWNER --init --args \"$BASIL_PROXY_ADDRESS\",\"BasilToken\",\"BSL\" --network local
 ```
 
-This command will output the token's new proxy address.  It should match the address from the line that begins with the label `MintableERC721Token proxy`.  Export the token address to the environment so we can use it later:
+This command will output the token's new proxy address.  It should match the address from the line that begins with the label `MintableERC721Token proxy`.  Export the address to the environment so we can use it later:
 
 ```sh
 export TOKEN_PROXY_ADDRESS=<address>

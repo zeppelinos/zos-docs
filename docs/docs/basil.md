@@ -213,7 +213,7 @@ Copy the address this command outputs to the clipboard.  It should match the add
 export BASIL_PROXY_ADDRESS=0x9431db860bb727f7695ea8af6a4dc1d2cf34344d
 ```
 
-We now have an entry in the `proxies` list for our Basil contract.  A proxy entry contains the deployment address for a specific logic contract, the current version number of that contract, and its implementation address.  Notice that the implementation address field in the proxy entry matches the deployment address field for the Basil entry in the `contracts list.  If contracts were mail, the implementation field could be considered the current "forwarding" address for the Basil logic contract.  When we upgrade the Basil contract later in this tutorial.  You can see this in the updated `zos.local.json` file, shown below:
+We now have an entry in the `proxies` list for our Basil contract.  A proxy entry contains the deployment address for a specific logic contract, the current version number of that contract, and its implementation address.  Notice that the implementation address field in the proxy entry matches the deployment address field for the Basil entry in the `contracts` list.  If contracts were mail, the implementation field could be considered the current "forwarding" address for the Basil logic contract.  When we upgrade the Basil contract later in this tutorial.  You can see this in the updated `zos.local.json` file, shown below:
 
 ```json
 {

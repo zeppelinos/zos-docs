@@ -11,7 +11,7 @@ Here at the Zeppelin headquarters we have a basil plant. She is a good mascot, a
 However, after a few days we started having conflicts. Who gets the honor to set the light color for our friendly plant? What if they choose their favorite color instead of the one that's best for the plant? For how long do they get to keep their chosen color? We also found that somebody kept resetting the color back to an ugly lime green every morning. We are ok with anarchy, but we want transparency, so we decided to control the light bulb through a contract on the Ethereum blockchain.
 
 ## Creating an app with ZeppelinOS
-
+ 
 In this guide, we will build a simple dApp on top of ZeppelinOS. To see the end product, please visit:
 * Source code: [zeppelinos/basil](https://github.com/zeppelinos/basil)
 * App: [basil.zeppelin.solutions](https://basil.zeppelin.solutions)

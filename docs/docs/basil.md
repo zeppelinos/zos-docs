@@ -34,25 +34,6 @@ We install Truffle, a crucial tool set for creating Solidity contracts and deplo
 ```sh
 npm install -g truffle
 ```
-
-## Truffle configuration file
-
-Before we can do any contract deployments Truffle needs to know where to deploy our smart contracts.  Using your favorite editor, create a file named `truffle.js` and put the following content in it:
-
-```
-module.exports = {
-  networks: {
-    local: {
-      host: "127.0.0.1",
-      port: 8545,
-      network_id: "*" // Match any network id
-    }
-  }
-};
-```
-
-The `networks` section has entries for each destination network that we intend to use for smart contract deployments.  Currently we have a single entry in that section for a Ganache client running locally using the default port number `8545`.  Now Truffle knows where to find the Ganache client when we use `local` as the destination for a smart contract deployment.  
-
 ## Prerequisites
 
 We install the `ZOS` command line interface globally with the following command:

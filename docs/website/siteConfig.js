@@ -38,7 +38,7 @@ const siteConfig = {
   footerIcon: 'img/symbol-zeppelin.png',
   favicon: 'img/favicon.png',
   colors: {
-    primaryColor: '#5CB6E4',
+    primaryColor: '#62acf5',
     secondaryColor: 'white',
   },
   copyright: 'Copyright © 2018 zOS Global',

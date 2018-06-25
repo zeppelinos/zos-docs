@@ -38,7 +38,6 @@
 }
 
 header {
-  height: 60px !important;
   padding: 0px 20px;
   border-bottom: solid #ecf0f2 1px !important;
 }
@@ -61,8 +60,6 @@ header > a > h3 {
 }
 
 .logo {
-  margin: auto -66px;
-  width: 225px;
   height: 22px!important;
 }
 
@@ -98,15 +95,12 @@ nav.toc .toggleNav .navGroup.navGroupActive h3 {
     padding: 10px;
 }
 
-h1 {
+h1, h2, a {
   color: #62acf5;
 }
 
-.wrapper {
-    margin: 0px auto;
-    max-width: 1200px;
-    padding: 0;
-    margin-bottom: 40px;
+.container .wrapper h2 {
+  color: #62acf5;
 }
 
 footer.nav-footer {

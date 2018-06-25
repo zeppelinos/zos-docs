@@ -95,6 +95,10 @@ nav.toc .toggleNav .navGroup.navGroupActive h3 {
     padding: 10px;
 }
 
+nav.toc .toggleNav .navGroup.navGroupActive {
+  background: #f9f9f9;
+}
+
 h1, h2, a {
   color: #62acf5;
 }

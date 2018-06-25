@@ -13,6 +13,9 @@ const siteConfig = {
   organizationName: 'zeppelinos',
   projectName: 'zos-docs',
   initialDoc: 'start',
+  twitter: 'true',
+  twitterUsername: 'zeppelin_os',
+  twitterImage: 'static/img/twitterimg.png',
   headerLinks: [
     {
       doc: 'start',

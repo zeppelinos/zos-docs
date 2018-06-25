@@ -12,7 +12,7 @@
 <pre><code class="hljs css sh">zos add &lt;contract-name-1&gt; &lt;contract-name-2&gt; ... &lt;contract-name-n&gt;
 </code></pre>
 <p>Finally, we need to deploy the <code>Package</code>, the specific <code>Release</code> of the stdlib, and the individual library contracts. All of this is accomplished by doing:</p>
-<pre><code class="hljs css sh">zos push --lib --network=&lt;network&gt;
+<pre><code class="hljs css sh">zos push --network=&lt;network&gt;
 </code></pre>
 <p>This completes the deployment of the new stdlib release to the chosen network.</p>
 <p>Do this for every network you want to support in your stdlib release, and publish it on <code>npm</code> with the same name you used in the <code>zos init</code> command.</p>

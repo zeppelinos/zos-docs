@@ -29,7 +29,6 @@ Then, let's set up a directory for our project and initialize the npm package:
 ```sh
 mkdir basil
 cd basil
-truffle init
 npm init --yes
 ```
 

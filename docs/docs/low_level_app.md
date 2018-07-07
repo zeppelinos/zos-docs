@@ -34,7 +34,7 @@ await App.deploy(initialVersion)
 An initial version of the Solidity contract could look like:
 
 ```sol
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.24;
 
 import "openzeppelin-zos/contracts/ownership/Ownable.sol";
 import "openzeppelin-zos/contracts/math/SafeMath.sol";
@@ -87,7 +87,7 @@ npm install openzeppelin-zos
 Done! Now we can easily mint non-fungible tokens from our smart contract:
 
 ```sol
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.24;
 
 import "./DonationsV0.sol";
 import "openzeppelin-zos/contracts/token/ERC721/MintableERC721Token.sol";

@@ -4,21 +4,24 @@ title: Onboarding ERC20 tokens to ZeppelinOS
 sidebar_label: ERC20 opt-in onboarding
 ---
 
-This guide describes how a legacy ERC20 token can be migrated to an upgradeable ERC20 through ZeppelinOS. 
-
 ## Intro
-
+This guide covers the migration of a regular ERC20 token to an upgradeable version of itself. During this process, the 
+original contract (to be called "legacy") and the new contract, which will have the ability of being upgradeable, will coexist.
+ 
+The _new upgradable contract_ will have the same functionality provided by the _legacy_ contract, but it will be 
+*upgradable*. This means that we will be able to add new functionality, store new data, fix bugs or support new 
+standards, without any need to perform new migrations in the future.  
  
 ## Strategy
 
 This strategy is based on an optional migration of the token balances. This migration is performed and paid by the 
-token holders. The new token contract starts with no initial supply and no balances. The only way to "mint" the new 
-tokens is for users to "turn in" their old ones. This is done by first approving the amount they want to migrate and 
-then calling a function of the upgradeable token to carry out the migration. The old tokens are sent to a burn address, 
-and the holder receives an equal amount in the new contract.
+token holders. The new upgradeable token contract starts with no initial supply and no balances. The only way to "mint" 
+the new tokens is for users to "turn in" their old ones. This is done by first approving the amount they want to migrate, 
+and then calling a function of the upgradeable token to carry out the migration. The old tokens are sent to a burn 
+address, and the holder receives an equal amount in the new token contract.
 
 This proposal is based on one of the two strategies explored by the ZeppelinOS dev team. To read more about them please 
-visit our [labs repository](https://github.com/zeppelinos/labs)
+visit our [labs repository](https://github.com/zeppelinos/labs).
 
 ## Assumptions
 
@@ -26,22 +29,21 @@ This on-boarding plan considers the following assumptions:
 - There is an already deployed token contract that follows the ERC20 standard.
 - The legacy token contract is not frozen or paused, so token holders can trade it.
 
-## Onboarding plan
+## Onboarding plan demonstration
 
 The idea of this proposal is to use the command line tool of ZeppelinOS to deploy an upgradeable version of your token 
 contract. To do so, we will use a migration contract provided by the [OpenZeppelin standard library for ZeppelinOS](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/zos-release).
 
->**Caveat:** *The migration contract is not yet released in OpenZeppelin, but will be soon. In the meantime, this 
-repository includes such implementation to make things easier for the demonstration. You will see an `MigratableERC20` 
-contract inside the contracts folder.*
-
-## Onboarding plan demonstration
-
 To better describe this plan we will use a sample project you can follow and clone from [here](https://github.com/zeppelinos/erc20-opt-in-onboarding).
+
+>**Caveat:** *The migration contract is not yet released in the OpenZeppelin stdlib, but will be soon. In the meantime, 
+the sample repository we will use includes such implementation to make things easier for the demonstration. You will see 
+a [`MigratableERC20`](https://github.com/zeppelinos/erc20-opt-in-onboarding/blob/master/contracts/openzeppelin-zos/MigratableERC20.sol)
+contract inside the contracts folder.*
 
 We will now setup a local environment to simulate all the assumptions mentioned above. To do this, we will deploy a 
 sample legacy token contract and mint some balances. If you wish to work with your already deployed token, you can skip 
-the following lines and jump directly to the [step 1](erc20_onboarding.html#1-initialize-your-zeppelinos-project). 
+the following lines and jump directly to the [step 1](erc20_onboarding.html#1-initialize-your-migration-project-with-zeppelinos). 
 
 In the sample repository you will find a contract called [`MyLegacyToken`](https://github.com/zeppelinos/erc20-opt-in-onboarding/blob/master/contracts/MyLegacyToken.sol) 
 that we will use to simulate a real scenario locally. As you can see, this token will mint 100 tokens to the owner once 
@@ -136,7 +138,7 @@ token metadata.
 
 _Initializers are the way to define constructor functionality for upgradeable contracts in ZeppelinOS. The `isInitializer` 
 modifier will make sure your `initialize` method can only be called once in the whole lifetime of your contract. To 
-read more about this please go to the [following section](advanced.html#initializers-vs-constructors)_ 
+read more about this, please go to the [following section](advanced.html#initializers-vs-constructors)_ 
 
 Notice that all the contracts from `openzeppelin-zos` have been adapted for ZeppelinOS compatibility, and should be the 
 ones used when dealing with upgradeable contracts.
@@ -204,7 +206,7 @@ You should now see a new `zos.local.json` file with the following content:
 ```
 
 Now, let's create a new instance of the upgradeable token using ZeppelinOS. Run the following line, replacing 
-`LEGACY_TOKEN_ADDRESS` with the address of `MyLegacyToken`:
+`LEGACY_TOKEN_ADDRESS` with the address of the legacy token contract:
  
 ```sh
 zos create MyUpgradeableToken --args LEGACY_TOKEN_ADDRESS -n local
@@ -234,7 +236,7 @@ proxy you have just created:
 
 In order to migrate your balance, go back to the truffle develop console if you have deployed your legacy token locally 
 or open a new one against the network where your legacy token is deployed. Then, run the following commands, replacing 
-`UPGRADEABLE_TOKEN_ADDRESS` with the proxy address returned by `zos create` in the previous step:
+`UPGRADEABLE_TOKEN_ADDRESS` with the proxy address returned by `zos create` command of the previous step:
 
 ```sh
 truffle(develop)> upgradeableToken = MyUpgradeableToken.at('UPGRADEABLE_TOKEN_ADDRESS')
@@ -264,4 +266,3 @@ BigNumber { s: 1, e: 0, c: [ 100 ] }
 ```
 
 Wooohoo! Your legacy token has been migrated to an upgradeable token!
- 

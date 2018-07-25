@@ -70,14 +70,14 @@ contract MyContract is Migratable {
 <p>Once you have saved the changes in your contract files, simply push the new code to the network:</p>
 <pre><code class="hljs css sh">zos push --network <span class="hljs-built_in">local</span>
 </code></pre>
-<p>Finally, let's upgrade the already deployed contract with the new code:</p>
-<pre><code class="hljs css sh">zos upgrade MyContract --network <span class="hljs-built_in">local</span>
+<p>Finally, let's update the already deployed contract with the new code:</p>
+<pre><code class="hljs css sh">zos update MyContract --network <span class="hljs-built_in">local</span>
 </code></pre>
 <p>This command outputs the address of your upgradeable MyContract instance (in white).</p>
 <p><em>Voilà!</em> You have deployed and upgraded an application using ZeppelinOS. The address of the upgraded contract is the same as before, but the code has been updated to the new version.</p>
 <p>To try the upgraded feature we just added, run:</p>
 <pre><code class="hljs css sh">npx truffle console --network=<span class="hljs-built_in">local</span>
-truffle(<span class="hljs-built_in">local</span>)&gt; myContract = MyContract.at(&lt;your-instance-address&gt;)
+truffle(<span class="hljs-built_in">local</span>)&gt; myContract = MyContract.at(&lt;your-proxy-address&gt;)
 truffle(<span class="hljs-built_in">local</span>)&gt; myContract.increment()
 truffle(<span class="hljs-built_in">local</span>)&gt; myContract.x()
 43

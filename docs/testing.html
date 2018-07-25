@@ -13,7 +13,7 @@
             nav.classList.toggle('docsSliderActive');
           };
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Testing upgradeable applications</h1></header><article><div><span><p>When working with ZeppelinOS, you can test your contracts as you usually do, or you can have ZeppelinOS automatically set up your entire application in your testing environment. This allows you to replicate the same set of contracts that manage your application for each test you run.</p>
-<p>The <code>zos</code> package provides a <code>TestApp()</code> function to retrieve your application structure from the <code>zos.json</code> file and deploy everything to the current test network. All contracts you have registered via <code>zos add</code>, plus all the contracts provided by the stdlib you have linked, will be available. The returned <a href="https://github.com/zeppelinos/zos-lib/blob/master/src/app/App.js"><code>App</code></a> object provides convenient methods for creating upgradeagble instances of your contracts, which you can use for testing.</p>
+<p>The <code>zos</code> package provides a <code>TestApp()</code> function to retrieve your application structure from the <code>zos.json</code> file and deploy everything to the current test network. All contracts you have registered via <code>zos add</code>, plus all the contracts provided by the stdlib you have linked, will be available. The returned <a href="https://github.com/zeppelinos/zos-lib/blob/master/src/app/App.js"><code>App</code></a> object provides convenient methods for creating upgradeable instances of your contracts, which you can use for testing.</p>
 <blockquote>
 <p><strong>Important:</strong> for <code>TestApp</code> to work correctly in your testing environment, you need to set the <code>NODE_ENV</code> environment variable to <code>test</code> when running your tests. For instance, if you are using truffle, run <code>NODE_ENV=test truffle test</code>.</p>
 </blockquote>
@@ -34,9 +34,9 @@
 <p>To set up the full application in a test file, first import <code>TestApp</code> from <code>zos</code>:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">import</span> { TestApp } <span class="hljs-keyword">from</span> <span class="hljs-string">'zos'</span>;
 </code></pre>
-<p>Then invoke it in the test suite setup, optionally including the path to your <code>zos.json</code> file, and a set of options to be used when deploying the contracts (such as <code>from</code>, <code>gas</code>, and <code>gasPrice</code>):</p>
+<p>Then invoke it in the test suite setup, optionally including a set of options to be used when deploying the contracts (such as <code>from</code>, <code>gas</code>, and <code>gasPrice</code>):</p>
 <pre><code class="hljs css js">beforeEach(<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">this</span>.app = <span class="hljs-keyword">await</span> TestApp(<span class="hljs-string">'zos.json'</span>, { <span class="hljs-attr">from</span>: owner })
+  <span class="hljs-keyword">this</span>.app = <span class="hljs-keyword">await</span> TestApp({ <span class="hljs-attr">from</span>: owner })
 });
 </code></pre>
 <p>In a test, you can generate an instance for your contracts via the <code>createProxy</code> function of the app:</p>
@@ -55,7 +55,7 @@ it(<span class="hljs-string">'should create a proxy'</span>, <span class="hljs-k
 contract(<span class="hljs-string">'Sample'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">[_, owner]</span>) </span>{
 
   beforeEach(<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">this</span>.app = <span class="hljs-keyword">await</span> TestApp(<span class="hljs-string">'zos.json'</span>, { <span class="hljs-attr">from</span>: owner })
+    <span class="hljs-keyword">this</span>.app = <span class="hljs-keyword">await</span> TestApp({ <span class="hljs-attr">from</span>: owner })
   });
 
   it(<span class="hljs-string">'should create a proxy'</span>, <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{

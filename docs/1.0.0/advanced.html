@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Advanced topics · ZeppelinOS</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Advanced topics · ZeppelinOS"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.zeppelinos.org/index.html"/><meta property="og:description" content="We expand on several advanced topics for the more intrepid users of ZeppelinOS."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-102575245-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700,400italic,700italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.svg" alt="ZeppelinOS"/><h2 class="headerTitleWithLogo">ZeppelinOS</h2></a><a href="/versions.html"><h3>1.0.0</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/1.0.0/start.html" target="_self">Guides</a></li><li class=""><a href="/docs/1.0.0/apis.html" target="_self">Reference</a></li><li class=""><a href="https://blog.zeppelinos.org" target="_self">Blog</a></li><li class=""><a href="https://github.com/zeppelinos" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>FURTHER REFERENCE</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>OVERVIEW</h3><ul><li class="navListItem"><a class="navItem" href="/docs/1.0.0/start.html">ZeppelinOS</a></li></ul></div><div class="navGroup navGroupActive"><h3>GUIDES</h3><ul><li class="navListItem"><a class="navItem" href="/docs/1.0.0/setup.html">Installation and setup</a></li><li class="navListItem"><a class="navItem" href="/docs/1.0.0/building.html">Building an upgradeable app</a></li><li class="navListItem"><a class="navItem" href="/docs/1.0.0/using.html">Using the stdlib</a></li><li class="navListItem"><a class="navItem" href="/docs/1.0.0/developing.html">Developing stdlibs</a></li><li class="navListItem"><a class="navItem" href="/docs/1.0.0/testing.html">Testing</a></li></ul></div><div class="navGroup navGroupActive"><h3>DEMOS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/1.0.0/basil.html">Basil</a></li><li class="navListItem"><a class="navItem" href="/docs/1.0.0/crafty.html">Crafty</a></li></ul></div><div class="navGroup navGroupActive"><h3>ONBOARDING LEGACY CONTRACTS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/1.0.0/erc20_onboarding.html">ERC20 opt-in onboarding</a></li></ul></div><div class="navGroup navGroupActive"><h3>ZOS-LIB</h3><ul><li class="navListItem"><a class="navItem" href="/docs/1.0.0/libstart.html">zos-lib quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/1.0.0/low_level_contract.html">Low level upgradeable contract</a></li><li class="navListItem"><a class="navItem" href="/docs/1.0.0/low_level_app.html">Low level upgradable app</a></li></ul></div><div class="navGroup navGroupActive"><h3>FURTHER REFERENCE</h3><ul><li class="navListItem"><a class="navItem" href="/docs/1.0.0/stdlib.html">OpenZeppelin stdlib</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/1.0.0/advanced.html">Advanced topics</a></li><li class="navListItem"><a class="navItem" href="/docs/1.0.0/whitepaper.html">Whitepaper</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Advanced topics</h1></header><article><div><span><p>We expand on several advanced topics for the more intrepid users of ZeppelinOS.</p>
+<h2><a class="anchor" aria-hidden="true" id="deploying-to-mainnet"></a><a href="#deploying-to-mainnet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploying to mainnet</h2>
+<p>The <a href="/docs/1.0.0/building.html">Building upgradeable applications</a> guide explains how to
+deploy an application to a local network, which is very good for testing.
+Once you are happy with your initial contracts, you can deploy them to mainnet
+using the <code>--network</code> flag.</p>
+<p>This flag takes the network details from the Truffle configuration file. You
+can use Infura to connect to mainnet, with a <code>truffle-config.js</code> like this one:</p>
+<pre><code class="hljs"><span class="hljs-meta">'use strict'</span>;
+
+<span class="hljs-keyword">var</span> HDWalletProvider = <span class="hljs-built_in">require</span>(<span class="hljs-string">"truffle-hdwallet-provider"</span>);
+
+<span class="hljs-keyword">var</span> mnemonic = <span class="hljs-string">"orange apple banana ... "</span>;
+
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-attr">networks</span>: {
+    <span class="hljs-attr">mainnet</span>: {
+      <span class="hljs-attr">provider</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HDWalletProvider(mnemonic, <span class="hljs-string">"https://mainnet.infura.io/&lt;INFURA_Access_Token&gt;"</span>)
+      },
+      <span class="hljs-attr">network_id</span>: <span class="hljs-number">1</span>
+    }
+  }
+};
+</code></pre>
+<p>Make sure to replace the <code>mnemonic</code> with the one you used to generate your
+accounts, and change <code>&lt;INFURA_Access_Token&gt;</code> to your token.</p>
+<p>Install the <code>truffle-hdwallet-provider</code> module with:</p>
+<pre><code class="hljs">npm <span class="hljs-keyword">install</span> truffle-hdwallet-provider
+</code></pre>
+<p>And now you can run <code>zos</code> commands in mainnet. For example:</p>
+<pre><code class="hljs">zos push <span class="hljs-comment">--network mainnet</span>
+</code></pre>
+<p>This will use your first account generated from the mnemonic. If you want to
+specify a different account, use the <code>--from</code> flag.</p>
+<p>Here you will find a
+<a href="http://truffleframework.com/tutorials/using-infura-custom-provider">guide with more details about configuring Truffle to use Infura</a>.
+You can use other test networks like ropsten to further test your contracts
+before pushing them to mainnet. But remember that now your contracts are
+upgradeable! Even if you find a bug after deploying them to mainnet, you will
+be able to fix it without losing the contract state and in a way that's
+transparent for your users.</p>
+<h2><a class="anchor" aria-hidden="true" id="the-proxy-system"></a><a href="#the-proxy-system" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The proxy system</h2>
+<p>The upgradeability system in ZeppelinOS is based on a proxy system: for each deployed contract implementation (the <em>logic contract</em>), another, user-facing contract is deployed as well (the <em>proxy</em>). The proxy will be the one in charge of the contract's storage, but will forward all function calls to the backing logic contract. The only exception to this are calls made by the owner of the proxy for administrative purposes, which will be handled by the proxy itself.</p>
+<p>The way the proxy forwards calls to the logic contract relies on <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-7.md"><code>delegatecall</code></a>, the mechanism the EVM provides to execute foreign code on local storage. This is normally used for libraries such as <a href="https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol"><code>SafeMath</code></a>, which provide useful functionality but have no storage. ZeppelinOS, however, exploits this mechanism to provide upgradeability: a user only interacts with the proxy, and, when a new logic contract is available, the proxy owner simply points it to the upgraded contract. All of this is achieved in a way that is transparent for the user, as the proxy address is always the same.</p>
+<p>If you want to find out more about different possible proxy patterns, be sure to check <a href="https://blog.zeppelinos.org/proxy-patterns/">this post</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="preserving-the-storage-structure"></a><a href="#preserving-the-storage-structure" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preserving the storage structure</h2>
+<p>As mentioned in the <a href="/docs/1.0.0/building.html">Building upgradeable applications</a> guide, when upgrading your contracts, you need to make sure that all variables declared in prior versions are kept in the code. New variables must be declared below the previously existing ones, as such:</p>
+<pre><code class="hljs css sol"><span class="hljs-attribute">contract</span> MyContract_v1 {
+  <span class="hljs-attribute">uint256</span> public x;
+}
+
+<span class="hljs-attribute">contract</span> MyContract_v2 {
+  <span class="hljs-attribute">uint256</span> public x;
+  <span class="hljs-attribute">uint256</span> public y;
+}
+</code></pre>
+<p>Note that this must be so <em>even if you no longer use the variables</em>. There is no restriction (apart from gas limits) on including new variables in the upgraded versions of your contracts, or on removing or adding functions.</p>
+<p>This restriction is due to how <a href="https://solidity.readthedocs.io/en/v0.4.21/miscellaneous.html#layout-of-state-variables-in-storage">Solidity uses the storage space</a>. In short, the variables are allocated storage space in the order they appear (for the whole variable or some pointer to the actual storage slot, in the case of dynamically sized variables). When we upgrade a contract, its storage contents are preserved. This entails that if we remove variables, the new ones will be assigned storage space that is already occupied by the old variables.</p>
+<h2><a class="anchor" aria-hidden="true" id="initializers-vs-constructors"></a><a href="#initializers-vs-constructors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Initializers vs. constructors</h2>
+<p>As we saw in the <a href="/docs/1.0.0/building.html">Building upgradeable applications</a> guide, we did not include a constructor in our contracts, but used instead an <code>initialize</code> function. The reason for this is that constructors do not work as regular functions: they are invoked once upon a contract's creation, but their code is never stored in the blockchain. This means that they cannot be called from the contract's proxy as we call other functions. Thus, if we want to initialize variables in the <em>proxy's storage</em>, we need to include a regular function for doing so.</p>
+<p>The ZeppelinOS CLI provides a way for calling this function and passing it the necessary arguments when creating the proxy:</p>
+<pre><code class="hljs">zos create MyContract --init <span class="hljs-symbol">&lt;initializingFunction&gt;</span> --<span class="hljs-keyword">args</span> <span class="hljs-symbol">&lt;arguments&gt;</span> --network <span class="hljs-symbol">&lt;network&gt;</span>
+</code></pre>
+<p>where <code>&lt;initializingFunction&gt;</code> is the name of the initializing function (marked with an <code>isInitializer</code> modifier in the code), and <code>&lt;arguments&gt;</code> is a comma-separated list of arguments to the function.</p>
+<h2><a class="anchor" aria-hidden="true" id="format-of-zosjson-and-zos-network-json-files"></a><a href="#format-of-zosjson-and-zos-network-json-files" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Format of <code>zos.json</code> and <code>zos.&lt;network&gt;.json</code> files</h2>
+<p>ZeppelinOS's CLI generates <code>json</code> files where it stores the configuration of your project.</p>
+<h3><a class="anchor" aria-hidden="true" id="zosjson"></a><a href="#zosjson" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>zos.json</code></h3>
+<p>The first file stores the general configuration and is created by the <code>zos init</code> command. It has the following structure:</p>
+<pre><code class="hljs css json">{
+  "name": &lt;projectName&gt;
+  "version": &lt;version&gt;
+  "contracts": {
+    &lt;contract-1-alias&gt;: &lt;contract-1-name&gt;,
+    &lt;contract-2-alias&gt;: &lt;contract-2-name&gt;,
+    ...
+    &lt;contract-N-alias&gt;: &lt;contract-N-name&gt;
+  },
+  "stdlib": {
+    "name": &lt;stdlibName&gt;
+  }
+}
+</code></pre>
+<p>Here, <code>&lt;projectName&gt;</code> is the name of the project, and <code>&lt;version&gt;</code> is the current version name or number. Once you start adding your contracts via <code>zos add</code>, they will be recorded under the <code>&quot;contracts&quot;</code> field, with the contract aliases as the keys (which default to the contract names), and the contract names as the values. Finally, if you link an <code>stdlib</code> with <code>zos link</code>, this will be reflected in the <code>&quot;stdlib&quot;</code> field, where <code>&lt;stdlibName&gt;</code> is the name of the linked <code>stdlib</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="zos-network-json"></a><a href="#zos-network-json" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>zos.&lt;network&gt;.json</code></h3>
+<p>ZeppelinOS will also generate a file for each of the networks you work on (<code>local</code>, <code>ropsten</code>, <code>live</code>, ... These should be configured <a href="http://truffleframework.com/docs/advanced/configuration#networks">in your <code>truffle.js</code> file</a>, but note that <code>zos init</code> already configures the <code>local</code> network, which can be run by <code>npx truffle develop</code>). These files share the same structure:</p>
+<pre><code class="hljs css json">{
+  "contracts": {
+    &lt;contract-1-name&gt;: {
+      "address": &lt;contract-1-address&gt;,
+      "bytecodeHash": &lt;contract-1-hash&gt;
+    },
+    &lt;contract-2-name&gt;: {
+      "address": &lt;contract-2-address&gt;,
+      "bytecodeHash": &lt;contract-2-hash&gt;
+    },
+    ...
+    &lt;contract-N-name&gt;: {
+      "address": &lt;contract-N-address&gt;,
+      "bytecodeHash": &lt;contract-N-hash&gt;
+    }
+  },
+  "proxies": {
+    &lt;contract-1-name&gt;: [
+        {
+          "address": &lt;proxy-1-address&gt;,
+          "version": &lt;proxy-1-version&gt;,
+          "implementation": &lt;implementation-1-address&gt;
+        }
+      ],
+      &lt;contract-2-name&gt;: [
+        {
+          "address": &lt;proxy-2-address&gt;,
+          "version": &lt;proxy-2-version&gt;,
+          "implementation": &lt;implementation-2-address&gt;
+        }
+      ],
+      ...
+      &lt;contract-N-name&gt;: [
+        {
+          "address": &lt;proxy-N-address&gt;,
+          "version": &lt;proxy-N-version&gt;,
+          "implementation": &lt;implementation-N-address&gt;
+        }
+      ]
+  },
+  "app": {
+    "address": &lt;app-address&gt;
+  },
+  "version": &lt;app-version&gt;,
+  "package": {
+    "address": &lt;package-address&gt;
+  },
+  "provider": {
+    "address": &lt;provider-address&gt;
+  },
+  "stdlib": {
+    "address": &lt;stdlib-address&gt;,
+    ["customDeploy": &lt;custom-deploy&gt;]
+    "name": &lt;stdlib-name&gt;
+  }
+}
+</code></pre>
+<p>The most important thing to see here are the proxies and contracts' addresses, <code>&lt;proxy-i-address&gt;</code> and <code>&lt;contract-i-address&gt;</code> respectively. What will happen is that each time you upgrade your contracts, <code>&lt;contract-i-address&gt;</code> will change, reflecting the underlying logic contract change. The proxy addresses, however, will stay the same, so you can interact seamlessly with the same addresses as if no change had taken place. Note that <code>&lt;implementation-i-address&gt;</code> will normally point to the current contract address <code>&lt;contract-i-address&gt;</code>. Finally, <code>&lt;contract-i-hash&gt;</code> stores a SHA256 hash of the contract bytecode.</p>
+<p>The other thing to notice in these files are the version numbers (or names!). The <code>&lt;appVersion&gt;</code> keeps track of the latest app version, and matches <code>&lt;version&gt;</code> from <code>zos.json</code>. The <code>&lt;proxy-i-version&gt;</code>s, on the other hand, keep track of which version of the contracts the proxies are pointing to. Say you deploy a contract in your app version 1.0, and then bump the version to 1.1 and push some upgraded code for that same contract. This will be reflected in the <code>&lt;contract-i-address&gt;</code>, but not yet in the proxy, which will display 1.0 in <code>&lt;proxy-i-version&gt;</code> and the old logic contract address in <code>&lt;implementation-i-address&gt;</code>. Once you run <code>zos update</code> to your contract, <code>&lt;proxy-i-version&gt;</code> will show the new 1.1 version, and <code>&lt;implementation-i-address&gt;</code> will point to the new <code>&lt;contract-i-address&gt;</code>.</p>
+<p>Finally, the <code>stdlib</code> field stores information about a linked standard library. Its address is stored in <code>&lt;stdlib-address&gt;</code>, and its name in <code>&lt;stdlib-name&gt;</code>, matching that in <code>zos.json</code>. The <code>custom-deploy</code> field will be present only when a version of the stdlib is deployed using the <code>--deploy-stdlib</code> flag of the <code>push</code> command, in which case <code>&lt;custom-deploy&gt;</code> will be <code>true</code>. The remaining addresses, <code>&lt;app-address&gt;</code>, <code>&lt;package-address&gt;</code>, and <code>&lt;provider-address&gt;</code> store the addresses of the <code>App</code>, the <code>Package</code>, and the current <code>ImplementationProvider</code> respectively.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="stdlib.html">← OpenZeppelin stdlib</a><a class="docs-next button" href="whitepaper.html">Whitepaper →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="ZeppelinOS" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/start.html">Guides</a><a href="/docs/apis.html">Reference</a></div><div><h5>More</h5><a href="https://zeppelinos.org">Main Site</a><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">GitHub</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="ZeppelinOS" width="170" height="45"/></a><section class="copyright">Copyright © 2017-present zOS Global</section></footer></div></body></html>

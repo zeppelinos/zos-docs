@@ -37,7 +37,7 @@ npm init --yes
 Next, let's take a look at the `Basil` contract we will use to control the light bulb:
 
 ```sol
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.24;
 
 import "openzeppelin-zos/contracts/ownership/Ownable.sol";
 
@@ -67,17 +67,17 @@ contract Basil is Ownable {
     g = _g;
     b = _b;
     highestDonation = msg.value;
-    NewDonation(
+    emit NewDonation(
       msg.sender, msg.value,
       r, g, b);
   }
 
   function withdraw(address wallet) public onlyOwner {
-    require(this.balance > 0);
+    require(address(this).balance > 0);
     require(wallet != address(0));
-    uint256 value = this.balance;
+    uint256 value = address(this).balance;
     wallet.transfer(value);
-    Withdrawal(wallet, value);
+    emit Withdrawal(wallet, value);
   }
 }
 ```
@@ -117,7 +117,7 @@ By now, the json files looks like this:
 }
 ```
 
-OpenZeppelin will use this file to track your project's contracts on chain, making them upgradeable and dynamically linkable to pre-deployed libraries, as well see soon.
+OpenZeppelin will use this file to track your project's contracts on chain, making them upgradeable and dynamically linkable to pre-deployed libraries, as we'll see soon.
 
 ## Deploying our first version of Basil, locally
 
@@ -164,7 +164,7 @@ Another common thing that happens when developing smart contracts for Ethereum i
 We could modify `contracts/Basil.sol`. But now let's try something else. Let's make a new contract in `contracts/BasilERC721.sol`, that inherits from our initial version of Basil:
 
 ```sol
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.24;
 
 import "./Basil.sol";
 import "openzeppelin-zos/contracts/token/ERC721/MintableERC721Token.sol";

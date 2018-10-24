@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>The ZeppelinOS Upgrades Pattern · ZeppelinOS</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="The ZeppelinOS Upgrades Pattern · ZeppelinOS"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.zeppelinos.org/index.html"/><meta property="og:description" content="This article describes the &quot;unstructured storage&quot; proxy pattern, the fundamental building block of ZeppelinOS&#x27;s upgrades."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-102575245-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700,400italic,700italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.svg" alt="ZeppelinOS"/><h2 class="headerTitleWithLogo">ZeppelinOS</h2></a><a href="/versions.html"><h3>next</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/next/deploying.html" target="_self">Quickstart</a></li><li class=""><a href="/docs/next/apis.html" target="_self">Reference</a></li><li class=""><a href="https://blog.zeppelinos.org" target="_self">Blog</a></li><li class=""><a href="https://github.com/zeppelinos" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>ADVANCED TOPICS</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>OVERVIEW</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/start.html">ZeppelinOS</a></li><li class="navListItem"><a class="navItem" href="/docs/next/new_2.html">What&#x27;s new in ZeppelinOS 2.0</a></li></ul></div><div class="navGroup navGroupActive"><h3>QUICKSTART</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/deploying.html">Deploying your first project</a></li><li class="navListItem"><a class="navItem" href="/docs/next/upgrading.html">Upgrading your project</a></li><li class="navListItem"><a class="navItem" href="/docs/next/linking.html">Linking to EVM packages</a></li><li class="navListItem"><a class="navItem" href="/docs/next/publishing.html">Publishing an EVM package</a></li></ul></div><div class="navGroup navGroupActive"><h3>GUIDES</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/writing_contracts.html">Writing upgradeable contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/next/testing.html">Testing</a></li><li class="navListItem"><a class="navItem" href="/docs/next/erc20_onboarding.html">Onboarding legacy contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/next/upgradeability_governance.html">Upgradeability governance</a></li><li class="navListItem"><a class="navItem" href="/docs/next/zos_lib.html">Using the ZeppelinOS programmatic library</a></li></ul></div><div class="navGroup navGroupActive"><h3>ADVANCED TOPICS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/configuration.html">Configuration Files</a></li><li class="navListItem"><a class="navItem" href="/docs/next/architecture.html">Contracts Architecture</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/next/pattern.html">The ZeppelinOS Upgrades Pattern</a></li><li class="navListItem"><a class="navItem" href="/docs/next/whitepaper.html">Whitepaper</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>The ZeppelinOS Upgrades Pattern</h1></header><article><div><span><p>This article describes the &quot;unstructured storage&quot; proxy pattern, the fundamental building block of ZeppelinOS's upgrades.</p>
+<p>Note: For a more in depth read, please see <a href="https://blog.zeppelinos.org/proxy-patterns/">blog.zeppelinos.org/proxy-patterns</a>, which discusses the need for proxies, goes into more technical detail on the subject, elaborates on other possible proxy patterns that were considered for ZeppelinOS, and more.</p>
+<h2><a class="anchor" aria-hidden="true" id="why-upgrade-a-contract"></a><a href="#why-upgrade-a-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why upgrade a contract?</h2>
+<p>By design, smart contracts are immutable. On the other hand, software quality heavily depends on the ability to upgrade and patch source code in order to produce iterative releases. Even though blockchain based software profits significantly from the technology's immutability, still a certain degree of mutability is needed for bug fixing and potential product improvements. ZeppelinOS solves this apparent contradiction by providing an easy to use, simple, robust, and opt-in upgrade mechanism for smart contracts that can be controlled by any type of governance, be it a multi-sig wallet, a simple address or a complex DAO.</p>
+<h2><a class="anchor" aria-hidden="true" id="upgrading-via-the-proxy-pattern"></a><a href="#upgrading-via-the-proxy-pattern" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upgrading via the proxy pattern</h2>
+<p>The basic idea behind using a proxy for upgrades. The first contract is a simple wrapper or &quot;proxy&quot; which users interact with directly and is in charge of forwarding transactions to and from the second contract, which contains the logic. The key concept to understand is that the logic contract can be replaced while the proxy, or the access point is never changed. Both contracts are still immutable in the sense that their code cannot be changed, but the logic contract can simply be swapped by another contract. The wrapper can thus point to a different logic implementation and in doing so, the software is &quot;upgraded&quot;.</p>
+<pre><code class="hljs">User ---- tx ---&gt;<span class="hljs-built_in"> Proxy </span>----------&gt; Implementation_v0
+                     |
+                      ------------&gt; Implementation_v1
+                     |
+                      ------------&gt; Implementation_v2
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="proxy-forwarding"></a><a href="#proxy-forwarding" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Proxy forwarding</h2>
+<p>The most immediate problem that proxies need to solve is how the proxy exposes the entire interface of the logic contract without requiring a one to one mapping of the entire logic contract's interface. That would be difficult to maintain, prone to errors, and would make the interface itself not upgradeable. Hence, a dynamic forwarding mechanism is required. The basics of such mechanism are presented in the code below:</p>
+<pre><code class="hljs css solidity">assembly {
+  <span class="hljs-keyword">let</span> <span class="hljs-keyword">ptr</span> := mload(<span class="hljs-number">0</span>x40)
+  calldatacopy(<span class="hljs-keyword">ptr</span>, <span class="hljs-number">0</span>, calldatasize) // (<span class="hljs-number">1</span>) <span class="hljs-keyword">copy</span> incoming <span class="hljs-keyword">call</span> data
+  <span class="hljs-keyword">let</span> result := delegatecall(gas, _impl, <span class="hljs-keyword">ptr</span>, calldatasize, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) // (<span class="hljs-number">2</span>) forward <span class="hljs-keyword">call</span> <span class="hljs-keyword">to</span> logic contract
+  <span class="hljs-keyword">let</span> size := returndatasize
+  returndatacopy(<span class="hljs-keyword">ptr</span>, <span class="hljs-number">0</span>, size) // (<span class="hljs-number">3</span>) retrieve <span class="hljs-keyword">return</span> data
+
+  switch result
+  case <span class="hljs-number">0</span> { revert(<span class="hljs-keyword">ptr</span>, size) }
+  default { <span class="hljs-keyword">return</span>(<span class="hljs-keyword">ptr</span>, size) } // (<span class="hljs-number">4</span>) forward <span class="hljs-keyword">return</span> data back <span class="hljs-keyword">to</span> caller
+}
+</code></pre>
+<p>This code can be put in the <a href="https://solidity.readthedocs.io/en/v0.4.21/contracts.html#fallback-function">fallback function</a> of a proxy, and will forward any call to any function with any set of parameters to the logic contract without it needing to know anything in particular of the logic contract's interface. In essence, (1) the <code>calldata</code> is copied to memory, (2) the call is forwarded to the logic contract, (3) the return data from the call to the logic contract is retrieved, and (4) the returned data is forwarded back to the caller. The technique needs to be implemented using Yul because <a href="https://solidity.readthedocs.io/en/v0.4.21/introduction-to-smart-contracts.html#delegatecall-callcode-and-libraries">Solidity's <code>delegatecall</code></a> returns a boolean instead of the callee's return data.</p>
+<p>A very important thing to note is that the code makes use of the EVM's <code>delegatecall</code> opcode which executes the callee's code in the context of the caller's state. That is, the logic contract controls the proxy's state and the logic contract's state is meaningless. Thus, the proxy doesn't only forward transactions to and from the logic contract, but also represents the pair's state. The state is in the proxy and the logic is in the particular implementation that the proxy points to.</p>
+<h2><a class="anchor" aria-hidden="true" id="unstructured-storage-proxies"></a><a href="#unstructured-storage-proxies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unstructured storage proxies</h2>
+<p>A problem that quickly comes up when using proxies has to do with the way in which variables are stored in the proxy contract. Suppose that the proxy stores the logic contract's address in it's only variable <code>address public _implementation;</code>. Now, suppose that the logic contract is a basic token whose first variable is <code>address public _owner</code>. Both variables are 32 byte in size, and as far as the EVM knows, occupy the first slot of the resulting execution flow of a proxied call. When the logic contract writes to <code>_owner</code>, it does so in the scope of the proxy's state, and thus really writes to <code>_implementation</code>. This problem can be referred to as a &quot;storage collision&quot;.</p>
+<table>
+<thead>
+<tr><th>Proxy</th><th>Implementation</th></tr>
+</thead>
+<tbody>
+<tr><td>address _implementation</td><td>address _owner</td><td>&lt;=== Storage collision!</td></tr>
+<tr><td>...</td><td>mapping _balances</td></tr>
+<tr><td></td><td>uint256 _supply</td></tr>
+<tr><td></td><td>...</td></tr>
+</tbody>
+</table>
+<p>There are many ways to overcome this problem, and the &quot;unstructured storage&quot; approach which ZeppelinOS implements works as follows. Instead of storing the <code>_implementation</code> address at the proxy's first storage slot, it chooses a pseudo random slot instead. This slot is sufficiently random, that the probability of a logic contract declaring a variable at the same slot is negligible. The same principle of randomizing slot positions in the proxy's storage is used in any other variables the proxy may have, such as an admin address (that is allowed to update the value of <code>_implementation</code>), etc.</p>
+<table>
+<thead>
+<tr><th>Proxy</th><th>Implementation</th></tr>
+</thead>
+<tbody>
+<tr><td>...</td><td>address _owner</td></tr>
+<tr><td>...</td><td>mapping _balances</td></tr>
+<tr><td>...</td><td>uint256 _supply</td></tr>
+<tr><td>...</td><td>...</td></tr>
+<tr><td>...</td><td></td></tr>
+<tr><td>...</td><td></td></tr>
+<tr><td>...</td><td></td></tr>
+<tr><td>...</td><td></td></tr>
+<tr><td>address _implementation</td><td></td><td>&lt;=== Randomized slot.</td></tr>
+<tr><td>...</td><td></td></tr>
+<tr><td>...</td><td></td></tr>
+</tbody>
+</table>
+<p>An example of how the randomized storage is achieved:</p>
+<pre><code class="hljs">bytes32 <span class="hljs-keyword">private</span> <span class="hljs-keyword">constant</span> implementationPosition = keccak256(<span class="hljs-string">"org.zeppelinos.proxy.implementation"</span>);
+</code></pre>
+<p>As a result, a logic contract doesn't need to care about overwriting any of the proxy's variables. Other proxy implementations that face this problem usually imply having the proxy know about the logic contract's storage structure and adapt to it, or instead having the logic contract know about the proxy's storage structure and adapt to it. This is why this approach is called &quot;unstructured storage&quot;; neither of the contracts needs to care about the structure of the other.</p>
+<h2><a class="anchor" aria-hidden="true" id="storage-collisions-between-implementation-versions"></a><a href="#storage-collisions-between-implementation-versions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Storage collisions between implementation versions</h2>
+<p>As discussed, the unstructured approach avoids storage collisions between the logic contract and the proxy. However, storage collisions between different versions of the logic contract can occur. In this case, imagine that the first implementation of the logic contract stores <code>address public _owner</code> at the first storage slot and an upgraded logic contract stores <code>address public _lastContributor</code> at the same first slot. When the updated logic contract attempts to write to the <code>_lastContributor</code> variable, it will be using the same storage position where the previous value for <code>_owner</code> was being stored, and overwrite it!</p>
+<h4><a class="anchor" aria-hidden="true" id="incorrect-storage-preservation"></a><a href="#incorrect-storage-preservation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Incorrect storage preservation:</h4>
+<table>
+<thead>
+<tr><th>Implementation_v0</th><th>Implementation_v1</th></tr>
+</thead>
+<tbody>
+<tr><td>address _owner</td><td>address _lastContributor</td><td>&lt;=== Storage collision!</td></tr>
+<tr><td>mapping _balances</td><td>address _owner</td></tr>
+<tr><td>uint256 _supply</td><td>mapping _balances</td></tr>
+<tr><td>...</td><td>uint256 _supply</td></tr>
+<tr><td></td><td>...</td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" id="correct-storage-preservation"></a><a href="#correct-storage-preservation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Correct storage preservation:</h4>
+<table>
+<thead>
+<tr><th>Implementation_v0</th><th>Implementation_v1</th></tr>
+</thead>
+<tbody>
+<tr><td>address _owner</td><td>address _owner</td></tr>
+<tr><td>mapping _balances</td><td>mapping _balances</td></tr>
+<tr><td>uint256 _supply</td><td>uint256 _supply</td></tr>
+<tr><td>...</td><td>address _lastContributor</td><td>&lt;=== Storage extension.</td></tr>
+<tr><td></td><td>...</td></tr>
+</tbody>
+</table>
+<p>The unstructured storage proxy mechanism doesn't safeguard against this situation. It is up to the user to have new versions of a logic contract extend previous versions, or otherwise guarantee that the storage hierarchy is always appended to but not modified. ZeppelinOS' CLI does however| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 | detect such collisions, and warns the developer appropriate.</p>
+<h2><a class="anchor" aria-hidden="true" id="the-constructor-caveat"></a><a href="#the-constructor-caveat" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The constructor caveat</h2>
+<p>In Solidity, code that is inside a constructure or part of a global variable declaration is not part of a deployed contract's runtime bytecode. This code is executed only once, when the contract instance is deployed. As a consequence of this, the code within a logic contract's constructor will never be executed in the context of the proxy's state. To rephrase, proxies are completely oblivious to the existance of constructors. It's simply as if they weren't there for the proxy.</p>
+<p>The problem is easily solved though. Logic contracts should move the code within the constructor to a regular 'initializer' function, and have this function be called whenever the proxy links to this logic contract. Special care needs to be taken with this initializer function so that it can only be called once, which is one of the properties of constructors in general programming.</p>
+<p>This is why when the ZeppelinOS CLI creates a proxy, it allows you to indicate an initializer function:</p>
+<pre><code class="hljs css bash">npx zos create MyLogicContract --init initialize --args arg1,arg2,arg3
+</code></pre>
+<p>With this command, ZeppelinOS creates a proxy that wraps around <code>MyLogicContract</code>, uses <code>MyLogicContract</code> as the logic contract, and calls the logic contract's <code>initialize</code> function.</p>
+<p>To ensure that the <code>initialize</code> function can only be called once, a simple modifier is used. ZeppelinOS provides this functionality via a contract that can be extended:</p>
+<pre><code class="hljs css solidity">
+<span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "zos-lib/contracts/Initializable.sol";</span>
+
+contract MyContract <span class="hljs-keyword">is</span> Initializable {
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span><span class="hljs-params">(address arg1, uint256 arg2, bytes arg3)</span> <span class="hljs-title">initializer</span> <span class="hljs-title">public</span> <span class="hljs-title">payable</span> </span>{
+    <span class="hljs-comment">// "constructor" code...</span>
+  }
+
+}
+
+</code></pre>
+<p>Notice how the contract extends <code>Initializable</code> and implements the <code>initializer</code> provided by it.</p>
+<h2><a class="anchor" aria-hidden="true" id="summary"></a><a href="#summary" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Summary</h2>
+<p>Any developer using ZeppelinOS should be familiar with proxies in the ways that are described in this article. In the end, the concept is very simple, and ZeppelinOS is designed to encapsulate all the proxy mechanics in a way that the amount of things you need to keep in mind when developing upgradeable applications are reduced to an absolute minimum. It all comes down to a 3 item list:</p>
+<ul>
+<li>Have a basic understanding of what a proxy is</li>
+<li>Always extend storage instead of modifying it</li>
+<li>Make sure your contracts use initializer functions instead of constructors</li>
+</ul>
+<p>Furthermore, ZeppelinOS will let you know when something goes wrong with one of the items in this list. So, seat back, enjoy, code, and let ZeppelinOS take care of the rest.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="architecture.html">← Contracts Architecture</a><a class="docs-next button" href="whitepaper.html">Whitepaper →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="ZeppelinOS" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/start.html">Guides</a><a href="/docs/apis.html">Reference</a></div><div><h5>More</h5><a href="https://zeppelinos.org">Main Site</a><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">GitHub</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="ZeppelinOS" width="170" height="45"/></a><section class="copyright">Copyright © 2017-present ZeppelinOS Global</section><section class="report-bugs"><a href="https://github.com/zeppelinos/zos/issues/new?labels=kind:documentation">Report a bug on this site</a></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '8d0b5afbba49947d9efb5659d1b08df7',
+                indexName: 'zeppelinos',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {}
+              });
+            </script></body></html>

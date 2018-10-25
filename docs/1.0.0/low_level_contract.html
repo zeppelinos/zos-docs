@@ -18,7 +18,7 @@
 <blockquote>
 <p><strong>Note</strong>: for a fully working project with this example, see the <a href="https://github.com/zeppelinos/zos-lib/tree/master/examples/simple"><code>examples/simple</code></a> folder of the <code>zos-lib</code> repository.</p>
 </blockquote>
-<p>To develop an upgradeable smart contract, we need to create a simple <a href="https://blog.zeppelinos.org/proxy-patterns/">upgradeability proxy</a>. This is a <a href="advanced.md#the-proxy-system">special contract</a> that will hold the storage of our upgradeable contract and redirect function calls to a <code>logic</code> contract, which we can update.</p>
+<p>To develop an upgradeable smart contract, we need to create a simple <a href="https://blog.zeppelinos.org/proxy-patterns/">upgradeability proxy</a>. This is a <a href="proxies.md">special contract</a> that will hold the storage of our upgradeable contract and redirect function calls to a <code>logic</code> contract, which we can update.</p>
 <p>Let's walk through the following example to see how it works:</p>
 <h3><a class="anchor" aria-hidden="true" id="write-the-first-version-of-the-contract-s-logic"></a><a href="#write-the-first-version-of-the-contract-s-logic" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Write the first version of the contract's logic</h3>
 <p>Let's start by creating the <code>MyContract.sol</code> file:</p>
@@ -32,7 +32,7 @@ contract MyContract is Initializable {
   }
 }
 </code></pre>
-<p>Notice the <code>initialize</code> function. Most contracts require some sort of initialization function, but upgradeable contracts can't use constructors because the proxy won't be able to call them. This is why we need to use the <a href="advanced.md#initializers-vs-constructors">initializable pattern</a> provided by <code>zos-lib</code>.</p>
+<p>Notice the <code>initialize</code> function. Most contracts require some sort of initialization function, but upgradeable contracts can't use constructors because the proxy won't be able to call them. This is why we need to use the <a href="proxies.md#the-constructor-caveat">initializable pattern</a> provided by <code>zos-lib</code>.</p>
 <h3><a class="anchor" aria-hidden="true" id="deploy-it"></a><a href="#deploy-it" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploy it</h3>
 <p>Next, we deploy it to the blockchain:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">const</span> myContract_v0 = <span class="hljs-keyword">await</span> MyContract.new()
@@ -66,7 +66,7 @@ contract MyContract is Initializable {
 }
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: when we update our logic contract's code, we can't change the proxy's <a href="advanced.md#preserving-the-storage-structure">storage layout</a>. This means we can't remove any previously existing state variables. We can, however, remove functions we don't want to use anymore.</p>
+<p><strong>Note</strong>: when we update our logic contract's code, we can't change the proxy's <a href="proxies.md#unstructured-storage-proxies">storage layout</a>. This means we can't remove any previously existing state variables. We can, however, remove functions we don't want to use anymore.</p>
 </blockquote>
 <h3><a class="anchor" aria-hidden="true" id="upgrade-it"></a><a href="#upgrade-it" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upgrade it</h3>
 <p>Next, we will deploy our new logic and upgrade our proxy to use the new version:</p>

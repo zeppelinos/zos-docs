@@ -22,7 +22,7 @@ contract MyContract is Migratable {
   }
 }
 </code></pre>
-<p>Notice that your sample contract has an <code>initialize</code> function instead of the standard constructor. This is a requirement of <a href="advanced.md#initializers-vs-constructors">the ZeppelinOS upgradeability system</a>.</p>
+<p>Notice that your sample contract has an <code>initialize</code> function instead of the standard constructor. This is a requirement of <a href="proxies.md#the-constructor-caveat">ZeppelinOS initializer functions</a>.</p>
 <p>Before deploying your upgradeable app to the network, you need to add your contract:</p>
 <pre><code class="hljs css sh">zos add MyContract
 </code></pre>

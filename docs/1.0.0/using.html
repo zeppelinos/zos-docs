@@ -13,10 +13,10 @@
             nav.classList.toggle('docsSliderActive');
           };
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Using the stdlib in your app</h1></header><article><div><span><p>Besides allowing you to build upgradeable applications, ZeppelinOS provides on-chain standard libraries that you can use in your app.</p>
-<p>To use an stdlib in your contracts, you will need to set up a <code>zos</code> project as described in the <a href="setup.md">Setup</a> guide. Then, you need to run the <code>link</code> command with the name of the npm package of the stdlib you want to use. For example:</p>
+<p>To use an stdlib in your contracts, you will need to set up a <code>zos</code> project as described in the <a href="setup.html">Setup</a> guide. Then, you need to run the <code>link</code> command with the name of the npm package of the stdlib you want to use. For example:</p>
 <pre><code class="hljs css sh">zos link openzeppelin-zos
 </code></pre>
-<p><code>openzeppelin-zos</code> is <a href="stdlib.md">a ZeppelinOS standard library provided by the OpenZeppelin community</a>, in which you can find many useful contracts. You can now include contracts from the stdlib in your app:</p>
+<p><code>openzeppelin-zos</code> is <a href="stdlib.html">a ZeppelinOS standard library provided by the OpenZeppelin community</a>, in which you can find many useful contracts. You can now include contracts from the stdlib in your app:</p>
 <pre><code class="hljs css sol"><span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "openzeppelin-zos/contracts/token/ERC721/MintableERC721Token.sol";</span>
 
 contract MyContract {
@@ -47,7 +47,7 @@ contract MyContract {
 truffle(<span class="hljs-built_in">local</span>)&gt; MyContract.at(&lt;myContractAddress&gt;).setToken(&lt;tokenAddress&gt;)
 </code></pre>
 <p>Remember that the addresses of both your contract and the token can be found in the <code>zos.local.json</code> network configuration file.</p>
-<p>This completes the setup and deployment of an upgradable application that uses an stdlib provided by ZeppelinOS. If you would like to contribute your own stdlib to ZeppelinOS, please see the <a href="developing.md">Developing a new standard library</a> guide.</p>
+<p>This completes the setup and deployment of an upgradable application that uses an stdlib provided by ZeppelinOS. If you would like to contribute your own stdlib to ZeppelinOS, please see the <a href="developing.html">Developing a new standard library</a> guide.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="building.html">← Previous</a><a class="docs-next button" href="developing.html">Next →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="ZeppelinOS" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/start.html">Guides</a><a href="/docs/apis.html">Reference</a></div><div><h5>More</h5><a href="https://zeppelinos.org">Main Site</a><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">GitHub</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="ZeppelinOS" width="170" height="45"/></a><section class="copyright">Copyright © 2017-present ZeppelinOS Global</section><section class="report-bugs"><a href="https://github.com/zeppelinos/zos/issues/new?labels=kind:documentation">Report a bug on this site</a></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
               var search = docsearch({
                 

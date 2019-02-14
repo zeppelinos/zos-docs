@@ -116,13 +116,17 @@ global.web3 = web3;
 <span class="hljs-keyword">const</span> MyContractV1 = Contracts.getFromLocal(<span class="hljs-string">'MyContractV1'</span>);
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+
   <span class="hljs-comment">// Instantiate a project.</span>
-  <span class="hljs-keyword">const</span> project = <span class="hljs-keyword">new</span> SimpleProject(<span class="hljs-string">'MyProject'</span>, { <span class="hljs-attr">from</span>: web3.eth.accounts[<span class="hljs-number">0</span>] });
+  <span class="hljs-keyword">const</span> initializerAddress = web3.eth.accounts[<span class="hljs-number">0</span>];
+  <span class="hljs-keyword">const</span> project = <span class="hljs-keyword">new</span> SimpleProject(<span class="hljs-string">'MyProject'</span>, { <span class="hljs-attr">from</span>: initializerAddress });
+
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Creating an upgradeable instance of V0...'</span>);
   <span class="hljs-keyword">const</span> proxy = <span class="hljs-keyword">await</span> project.createProxy(MyContractV0, { <span class="hljs-attr">initArgs</span>: [<span class="hljs-number">42</span>] })
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Contract\'s storage value: '</span> + (<span class="hljs-keyword">await</span> proxy.value()).toString() + <span class="hljs-string">'\n'</span>);
+
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Upgrading to v1...'</span>);
-  <span class="hljs-keyword">await</span> project.upgradeProxy(proxy, MyContractV1, { <span class="hljs-attr">initMethod</span>: <span class="hljs-string">'add'</span>, <span class="hljs-attr">initArgs</span>: [<span class="hljs-number">1</span>], <span class="hljs-attr">initFrom</span>: initializerAddress })
+  <span class="hljs-keyword">const</span> instance = <span class="hljs-keyword">await</span> project.upgradeProxy(proxy, MyContractV1, { <span class="hljs-attr">initMethod</span>: <span class="hljs-string">'add'</span>, <span class="hljs-attr">initArgs</span>: [<span class="hljs-number">1</span>], <span class="hljs-attr">initFrom</span>: initializerAddress })
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Contract\'s storage new value: '</span> + (<span class="hljs-keyword">await</span> instance.value()).toString() + <span class="hljs-string">'\n'</span>);
 }
 

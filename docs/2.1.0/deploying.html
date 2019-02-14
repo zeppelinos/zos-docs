@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Deploying your first project · ZeppelinOS</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Deploying your first project · ZeppelinOS"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.zeppelinos.org/index.html"/><meta property="og:description" content="The following steps will get you started using ZeppelinOS."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-102575245-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700,400italic,700italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.svg" alt="ZeppelinOS"/></a><a href="/versions.html"><h3>2.1.0</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/2.1.0/start.html" target="_self">Quickstart</a></li><li class=""><a href="/docs/2.1.0/apis.html" target="_self">Reference</a></li><li class=""><a href="https://blog.zeppelinos.org" target="_self">Blog</a></li><li class=""><a href="https://forum.zeppelin.solutions" target="_self">Forum</a></li><li class=""><a href="https://github.com/zeppelinos" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>QUICKSTART</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>OVERVIEW</h3><ul><li class="navListItem"><a class="navItem" href="/docs/2.1.0/start.html">ZeppelinOS</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/new_2.html">What&#x27;s new in ZeppelinOS 2.0</a></li></ul></div><div class="navGroup navGroupActive"><h3>QUICKSTART</h3><ul><li class="navListItem"><a class="navItem" href="/docs/2.1.0/zepkit.html">ZepKit</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/2.1.0/deploying.html">Deploying your first project</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/upgrading.html">Upgrading your project</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/linking.html">Linking to EVM packages</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/publishing.html">Publishing an EVM package</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/vouching.html">Vouching for EVM packages</a></li></ul></div><div class="navGroup navGroupActive"><h3>GUIDES</h3><ul><li class="navListItem"><a class="navItem" href="/docs/2.1.0/writing_contracts.html">Writing upgradeable contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/testing.html">Testing upgradeable projects</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/erc20_onboarding.html">Onboarding ERC20 tokens</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/upgrades_governance.html">Upgrades governance</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/zos_lib.html">Using the ZeppelinOS programmatic library</a></li></ul></div><div class="navGroup navGroupActive"><h3>ADVANCED TOPICS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/2.1.0/faq.html">Frequently asked questions</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/configuration.html">Configuration Files</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/architecture.html">Contracts Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/pattern.html">ZeppelinOS Upgrades Pattern</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/token_mechanics.html">ZEP Token Mechanics</a></li><li class="navListItem"><a class="navItem" href="/docs/2.1.0/whitepaper.html">Whitepaper</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Deploying your first project</h1></header><article><div><span><p>The following steps will get you started using ZeppelinOS.</p>
+<h2><a class="anchor" aria-hidden="true" id="install-node-and-npm"></a><a href="#install-node-and-npm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install Node and NPM</h2>
+<p>First, let's install <a href="http://nodejs.org/">Node.js</a> and
+<a href="https://npmjs.com/">npm</a>. On their
+respective websites you will find specific instructions for your machine.</p>
+<h2><a class="anchor" aria-hidden="true" id="setting-up-your-project"></a><a href="#setting-up-your-project" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setting up your project</h2>
+<p>We'll need to create a directory for our project and access it:</p>
+<pre><code class="hljs css console">mkdir my-project
+cd my-project
+</code></pre>
+<p>Use <code>npm</code> to create a <code>package.json</code> file:</p>
+<pre><code class="hljs css console">npm init
+</code></pre>
+<p>This command will ask you for details about the project. For this very basic
+guide you can just press enter to accept the default values of each field.</p>
+<p>Then, install ZeppelinOS in your project folder by running:</p>
+<pre><code class="hljs css console">npm install zos
+</code></pre>
+<p>Run <code>npx zos --help</code> to get a list of all the ZeppelinOS commands available. At any time
+during these guides, when we introduce a new command, run
+<code>npx zos &lt;command-name&gt; --help</code> to get more information about that command and
+its arguments.</p>
+<p>Now, we can initialize the ZeppelinOS project:</p>
+<pre><code class="hljs css console">npx zos init my-project
+</code></pre>
+<p>This command will create a <code>zos.json</code> file, which contains all the information
+about the project related to ZeppelinOS. For details about this file format see the
+<a href="/docs/2.1.0/configuration.html#zosjson">configuration files</a> page.</p>
+<p>The command will also initialize <a href="https://truffleframework.com/">Truffle</a>, so
+by now, inside the <code>my-project</code> directory you should have a <code>package.json</code> file
+(created by <code>npm</code>), two empty directories named <code>contracts</code> and <code>migrations</code>,
+a <code>truffle-config.js</code> file (created by the <code>zos</code> CLI for Truffle), and a
+<code>zos.json</code> file (created by <code>zos</code> for ZeppelinOS).</p>
+<p>Next, we need to install Truffle. To do so, run the following command:</p>
+<pre><code class="hljs css console">npm install truffle@4.1.15 --save
+</code></pre>
+<blockquote>
+<p>Note: We are specifically installing Truffle 4.1.15, as ZeppelinOS 2.1 only supports Truffle 5 for command-line usage (not programmatic usage). Full support for Truffle 5 and Web3 1.0 will be released in ZeppelinOS 2.2._</p>
+</blockquote>
+<p>That's it! Our project is now fully set up for using ZeppelinOS.</p>
+<h2><a class="anchor" aria-hidden="true" id="adding-a-contract"></a><a href="#adding-a-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adding a contract</h2>
+<p>Let's create a very simple contract as an example to be added to the project.
+Name it <code>MyContract.sol</code>, and put it in the <code>contracts</code> folder with the
+following Solidity code:</p>
+<pre><code class="hljs css solidity"><span class="hljs-keyword">pragma</span> solidity ^<span class="hljs-number">0.4</span>.24;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">"zos-lib/contracts/Initializable.sol"</span>;
+
+contract MyContract <span class="hljs-keyword">is</span> Initializable {
+
+  uint256 <span class="hljs-keyword">public</span> x;
+  <span class="hljs-built_in">string</span> <span class="hljs-keyword">public</span> s;
+
+  <span class="hljs-built_in">function</span> initialize(uint256 _x, <span class="hljs-built_in">string</span> memory _s) initializer <span class="hljs-keyword">public</span> {
+    x = _x;
+    s = _s;
+  }
+}
+</code></pre>
+<p>Notice that our sample contract has an <code>initialize</code> function instead of the
+standard Solidity constructor. This is the way to define constructor
+functionality for upgradeable contracts in ZeppelinOS, which we'll see in
+more detail in the next guide.</p>
+<p>But before we get there, we still need a couple of steps. This contract
+imports another contract from the <code>zos-lib</code> package, so we have to install it:</p>
+<pre><code class="hljs css console">npm install zos-lib
+</code></pre>
+<p><code>zos-lib</code> is the ZeppelinOS library, which includes contracts to help with the
+development of ZeppelinOS compatible smart contracts. In this case, we are importing
+<code>Initializable.sol</code> in order to use the <code>initializer</code> modifier, which will
+prevent the <code>initialize</code> function from be called more than once.</p>
+<p>Now we can add the contract to the project:</p>
+<pre><code class="hljs css console">npx zos add MyContract
+</code></pre>
+<p>This command will first compile <code>MyContract</code>, and then it will add it to the
+project registering it in the <code>zos.json</code> configuration file.</p>
+<blockquote>
+<p><strong>Note</strong>: The current version of ZeppelinOS relies on Truffle to compile contracts and
+determine the Solidity compiler version to use. If you want to use a different version, please specify it
+in the Truffle configuration file.
+More info:
+<a href="https://github.com/trufflesuite/truffle/releases/tag/v5.0.0-beta.0#specify-a-solcjs-version">https://github.com/trufflesuite/truffle/releases/tag/v5.0.0-beta.0#specify-a-solcjs-version</a></p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="deploying-your-project"></a><a href="#deploying-your-project" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploying your project</h2>
+<p>And just like that, we are now ready to make the initial deployment of the
+project. We are just missing a blockchain network where it will be deployed.
+For this example, let's use <a href="https://truffleframework.com/docs/ganache/quickstart">ganache</a>,
+a personal blockchain for Ethereum development that you can use to develop
+your contracts. To install it run:</p>
+<pre><code class="hljs css console">npm install -g ganache-cli
+</code></pre>
+<p>To start working with it, open a separate terminal and run:</p>
+<pre><code class="hljs css console">ganache-cli --port 9545 --deterministic
+</code></pre>
+<p>Once we have done that, let's go back to the original terminal and
+run the following command:</p>
+<pre><code class="hljs css console">npx zos session --network local --from 0x1df62f291b2e969fb0849d99d9ce41e2f137006e --expires 3600
+</code></pre>
+<p>The <code>session</code> command starts a session to work with a desired network.
+In this case, we are telling it to work with the <code>local</code> network with the
+<code>--network</code> option, and also setting a default sender address for the
+transactions we will run with the <code>--from</code> option. Additionally, the
+<code>expires</code> flag allows us to indicate the session expiration time in seconds.</p>
+<blockquote>
+<p>Note that we are using a specific address for the <code>--from</code> option which
+is different to the default address that <code>ganache-cli</code> would use.
+This is because we need to use different addresses in order to create
+upgradeable contracts and to query them. You can read more about it in the
+<a href="/docs/2.1.0/pattern.html">ZeppelinOS upgrades pattern section</a>.</p>
+</blockquote>
+<p>Now that everything has been setup, we are ready to deploy the project.
+To do so simply run:</p>
+<pre><code class="hljs css console">npx zos push
+</code></pre>
+<p>This command deploys <code>MyContract</code> to the specified network and prints its
+address. If your project added other
+contracts (using the <code>add</code> command) they would be deployed as well.</p>
+<p>The <code>push</code> command also creates a <code>zos.dev-&lt;network_id&gt;.json</code> file with all the
+information about your project in this specific network, including the addresses of the
+deployed contract implementations in <code>contracts[&quot;MyContract&quot;].address</code>.
+You can read more about this file format in the
+<a href="/docs/2.1.0/configuration.html#zos-network-json">configuration files</a> section.</p>
+<p>If a previous <code>zos.dev-&lt;network_id&gt;.json</code> was already created, the <code>push</code>
+command will just update said file with your last changes. For example, if you
+change the source of <code>MyContract</code> and call <code>zos push</code> again,
+ZeppelinOS will deploy a new version of <code>MyContract</code>
+and replace the entry in the json file's <code>contracts[&quot;MyContract&quot;].address</code>.</p>
+<p>An important thing
+to understand is that the contracts deployed by the <code>push</code> command are logic contracts and are not intended to be used directly, rather to be used by
+upgradeable instances, as we will see later in the
+<a href="https://docs.zeppelinos.org/docs/upgrading.html">Upgrading your project</a> section.</p>
+<p>You can follow the same steps to deploy your project to mainnet or other test
+networks by just replacing <code>local</code> with the network name from your
+<code>truffle-config.js</code> file. This is further explained in the
+<a href="mainnet">Deploying to mainnet</a> guide.</p>
+<p>But for now, let's continue exploring all the features that ZeppelinOS has to offer! The initial
+version of our project exists in the blockchain. Next, we will learn how to
+upgrade it.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="zepkit.html">← ZepKit</a><a class="docs-next button" href="upgrading.html">Upgrading your project →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="ZeppelinOS" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/start.html">Guides</a><a href="/docs/apis.html">Reference</a></div><div><h5>Community</h5><a href="https://forum.zeppelin.solutions/" target="_blank">Forum</a><a href="https://t.me/zeppelinos/" target="_blank">Telegram chat</a></div><div><h5>More</h5><a href="https://zeppelinos.org">Main Site</a><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">GitHub</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="ZeppelinOS" width="170" height="45"/></a><section class="copyright">Copyright © 2017-present ZeppelinOS Global</section><section class="report-bugs"><a href="https://github.com/zeppelinos/zos/issues/new?labels=kind:documentation">Report a bug on this site</a></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '8d0b5afbba49947d9efb5659d1b08df7',
+                indexName: 'zeppelinos',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {}
+              });
+            </script></body></html>

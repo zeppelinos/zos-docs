@@ -136,14 +136,14 @@ contract MyContract <span class="hljs-keyword">is</span> Initializable {
 <pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> TOKEN=$(zos create TokenContract)</span>
 <span class="hljs-meta">$</span><span class="bash"> zos create MyContract --init --args <span class="hljs-variable">$TOKEN</span></span>
 </code></pre>
-<p>An advanced alternative, if you need to create upgradeable contracts on the fly, is to keep an instance of your ZeppelinOS <code>App</code> in your contracts. The <a href="/docs/application_BaseApp.html"><code>App</code></a> is a contract that acts as the entrypoint for your ZeppelinOS project, which has references to your logic implementations, and can create new contract instances:</p>
+<p>An advanced alternative, if you need to create upgradeable contracts on the fly, is to keep an instance of your ZeppelinOS <code>App</code> in your contracts. The <a href="/docs/application_App.html"><code>App</code></a> is a contract that acts as the entrypoint for your ZeppelinOS project, which has references to your logic implementations, and can create new contract instances:</p>
 <pre><code class="hljs css solidity"><span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "zos-lib/contracts/Initializable.sol";</span>
-<span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "zos-lib/contracts/application/BaseApp.sol";</span>
+<span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "zos-lib/contracts/application/App.sol";</span>
 
 contract MyContract <span class="hljs-keyword">is</span> Initializable {
-  BaseApp <span class="hljs-keyword">private</span> app;
+  App <span class="hljs-keyword">private</span> app;
 
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span><span class="hljs-params">(BaseApp _app)</span> <span class="hljs-title">initializer</span> <span class="hljs-title">public</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span><span class="hljs-params">(App _app)</span> <span class="hljs-title">initializer</span> <span class="hljs-title">public</span> </span>{
     app = _app;
   }
 

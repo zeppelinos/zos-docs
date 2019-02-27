@@ -133,6 +133,11 @@ and replace the entry in the json file's <code>contracts[&quot;MyContract&quot;]
 to understand is that the contracts deployed by the <code>push</code> command are logic contracts and are not intended to be used directly, rather to be used by
 upgradeable instances, as we will see later in the
 <a href="https://docs.zeppelinos.org/docs/upgrading.html">Upgrading your project</a> section.</p>
+<p>For example, you wouldn't interact with the &quot;MyContract&quot; that we just deployed. This contract is only intended for defining the behavior or logic of the contract. You can find the address of this logic contract in the <code>zos.dev-&lt;network_id&gt;.json</code> file, under <code>contracts.MyContract.address</code>.</p>
+<p>So what <em>do</em> you interact with? As we'll see in depth in the next guide, what you do is create an upgradeable instance for the logic contract, and interact with this instance instead.</p>
+<pre><code class="hljs css console">npx zos create MyContract --init initialize --args 42,hitchhiker
+</code></pre>
+<p>Once you create an upgradeable instance of MyContract, you always interact with the same instance, even if you decide to upgrade it and define a new logic contract for it. Executing the command above will return the address of the upgradeable contract instance, but you can also find it in the <code>zos.dev-&lt;network_id&gt;.json</code> file, under <code>proxies.my-project.MyContract</code>. You will always interact with this address, and you should never interact with the address of the logic contract.</p>
 <p>You can follow the same steps to deploy your project to mainnet or other test
 networks by just replacing <code>local</code> with the network name from your
 <code>truffle-config.js</code> file. This is further explained in the

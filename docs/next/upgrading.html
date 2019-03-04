@@ -158,7 +158,7 @@ with it to initialize the new variable. A good name for the
 new function could be something like <code>initializeT</code> or <code>initializeVersion2</code>. This function would simply
 set the initial value of <code>t</code> and check that it has not yet been initialized. It should be called with <code>zos update MyContract --init initializeT --args 99</code>.</p>
 <pre><code class="hljs"><span class="hljs-function">function <span class="hljs-title">initializeT</span><span class="hljs-params">(uint256 <span class="hljs-keyword">_t</span>)</span> <span class="hljs-keyword">public</span> </span>{
-  require(<span class="hljs-keyword">_t</span> == <span class="hljs-number">0</span>);
+  require(t == <span class="hljs-number">0</span>);
   t = <span class="hljs-keyword">_t</span>;
 }
 </code></pre>
@@ -181,7 +181,7 @@ contract MyContract is Initializable {
   }
 
   <span class="hljs-function">function <span class="hljs-title">initializeT</span><span class="hljs-params">(uint256 <span class="hljs-keyword">_t</span>)</span> <span class="hljs-keyword">public</span> </span>{
-    require(<span class="hljs-keyword">_t</span> == <span class="hljs-number">0</span>);
+    require(t == <span class="hljs-number">0</span>);
     t = <span class="hljs-keyword">_t</span>;
   }
 

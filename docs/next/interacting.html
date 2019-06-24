@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Interacting with your contracts · ZeppelinOS</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Interacting with your contracts · ZeppelinOS"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.zeppelinos.org/index.html"/><meta property="og:description" content="This tutorial [build on the previous one](first) where we created a new ZeppelinOS project, and created (and upgraded!) a simple `Counter` contract in a local development network. We will now see how to interact with this contract from javascript code using [web3.js](https://web3js.readthedocs.io/en/1.0/). We will build a small script that will increase the counter and report back the updated value."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-102575245-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700,400italic,700italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.svg" alt="ZeppelinOS"/></a><a href="/versions.html"><h3>next</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/next/start.html" target="_self">Quickstart</a></li><li class=""><a href="/docs/next/apis.html" target="_self">Reference</a></li><li class=""><a href="https://blog.zeppelinos.org" target="_self">Blog</a></li><li class=""><a href="https://forum.zeppelin.solutions" target="_self">Forum</a></li><li class=""><a href="https://github.com/zeppelinos" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>QUICKSTART</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>OVERVIEW</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/start.html">ZeppelinOS</a></li><li class="navListItem"><a class="navItem" href="/docs/next/new_2.4.html">What&#x27;s new in ZeppelinOS 2.4</a></li></ul></div><div class="navGroup navGroupActive"><h3>QUICKSTART</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/first.html">Your first project</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/next/interacting.html">Interacting with your contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/next/linking.html">Linking OpenZeppelin contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/next/zepkit.html">ZepKit</a></li></ul></div><div class="navGroup navGroupActive"><h3>GUIDES</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/writing_contracts.html">Writing upgradeable contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/next/publishing.html">Publishing an EVM package</a></li><li class="navListItem"><a class="navItem" href="/docs/next/testing.html">Testing upgradeable projects</a></li><li class="navListItem"><a class="navItem" href="/docs/next/erc20_onboarding.html">Onboarding ERC20 tokens</a></li><li class="navListItem"><a class="navItem" href="/docs/next/upgrades_governance.html">Upgrades governance</a></li><li class="navListItem"><a class="navItem" href="/docs/next/zos_lib.html">Using the ZeppelinOS programmatic library</a></li></ul></div><div class="navGroup navGroupActive"><h3>ADVANCED TOPICS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/faq.html">Frequently asked questions</a></li><li class="navListItem"><a class="navItem" href="/docs/next/configuration.html">Configuration Files</a></li><li class="navListItem"><a class="navItem" href="/docs/next/architecture.html">Contracts Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/next/pattern.html">ZeppelinOS Upgrades Pattern</a></li><li class="navListItem"><a class="navItem" href="/docs/next/whitepaper.html">Whitepaper</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Interacting with your contracts</h1></header><article><div><span><p>This tutorial <a href="first">build on the previous one</a> where we created a new ZeppelinOS project, and created (and upgraded!) a simple <code>Counter</code> contract in a local development network. We will now see how to interact with this contract from javascript code using <a href="https://web3js.readthedocs.io/en/1.0/">web3.js</a>. We will build a small script that will increase the counter and report back the updated value.</p>
+<p>The full code for this tutorial can be found in the <a href="https://github.com/zeppelinos/zos/blob/v2.4.0/examples/first-project/src/index.js"><code>first-project</code> example</a> in the ZeppelinOS github repository.</p>
+<h2><a class="anchor" aria-hidden="true" id="setup"></a><a href="#setup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup</h2>
+<p>We will be using <a href="https://web3js.readthedocs.io/en/1.0/">web3.js</a> to interact with the blockchain from our code, which is the same library that ZeppelinOS uses under the hood. In the <code>my-project</code> project folder we created earlier, run the following to install it:</p>
+<pre><code class="hljs css console">npm install web3@1.0.0-beta.37
+</code></pre>
+<blockquote>
+<p>Note: We are using beta.37 version at the moment, due to incompatibility issues with later versions, but expect to see these guides updated to 1.0.0 stable soon. Also, if you run into any issues installing <code>web3</code>, make sure you are using node 10 and not 12.</p>
+</blockquote>
+<p>Keep in mind that there are many other javascript libraries available, and you can use whichever you like the most. Once a contract is deployed, you can interact with it through any library!</p>
+<h2><a class="anchor" aria-hidden="true" id="connecting-to-the-network"></a><a href="#connecting-to-the-network" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connecting to the network</h2>
+<p>Our first step will be to open a connection to the network. We will connect to the local development network we started on the previous tutorial.</p>
+<blockquote>
+<p>Caution: By default, <code>ganache-cli</code> deletes all data when you stop it. If you stopped the ganache process from the previous tutorial, you will need to start a new one with <code>ganache-cli --deterministic</code>, and run <code>zos create Counter</code> again.</p>
+</blockquote>
+<p>Let's begin coding in a new <code>src/index.js</code> file, where we will be writing our javascript script. We will start with some boilerplate for writing async code, and setting up a new <code>web3</code> object.</p>
+<!-- Code: We should provide a function to automatically parse `networks.js` and get the web3 instance preconfigured -->
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> Web3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'web3'</span>);
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Set up web3 object, connected to the local development network</span>
+  <span class="hljs-keyword">const</span> web3 = <span class="hljs-keyword">new</span> Web3(<span class="hljs-string">'http://localhost:8545'</span>);
+}
+
+main();
+</code></pre>
+<p>Here, we are initializing a new <code>web3</code> instance connecting to the local development network, that is running on localhost port 8545. We can test if the connection works by asking something to the local node, such as the list of enabled accounts:</p>
+<pre><code class="hljs css js"><span class="hljs-comment">// Set up web3 object, connected to the local development network</span>
+<span class="hljs-keyword">const</span> web3 = <span class="hljs-keyword">new</span> Web3(<span class="hljs-string">'http://localhost:8545'</span>);
+
+<span class="hljs-comment">// Retrieve accounts from the local node</span>
+<span class="hljs-keyword">const</span> accounts = <span class="hljs-keyword">await</span> web3.eth.getAccounts();
+<span class="hljs-built_in">console</span>.log(accounts);
+</code></pre>
+<blockquote>
+<p>Note: We will not be repeating the boilerplate code on every snippet, but make sure to always code <em>inside</em> the <code>main</code> function we defined above!</p>
+</blockquote>
+<p>Run the code above using <code>node</code>, and check that you are getting a list of available accounts in response. These should match the ones you saw when first starting the <code>ganache-cli</code> process.</p>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> node src/index.js </span>
+[ '0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1',
+  '0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0',
+  '0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b',
+  '0xE11BA2b4D45Eaed5996Cd0823791E0C93114882d',
+  '0xd03ea8624C8C5987235048901fB614fDcA89b117',
+  '0x95cED938F7991cd0dFcb48F0a06a40FA1aF46EBC',
+  '0x3E5e9111Ae8eB78Fe1CC3bb8915d5D461F3Ef9A9',
+  '0x28a8746e75304c0780E011BEd21C72cD78cd535E',
+  '0xACa94ef8bD5ffEE41947b4585a84BdA5a3d3DA6E',
+  '0x1dF62f291b2E969fB0849d99D9Ce41e2F137006e' ]
+</code></pre>
+<p>Great! We have our first code snippet getting data out of a blockchain. Let's start working with our contract now.</p>
+<h2><a class="anchor" aria-hidden="true" id="getting-a-contract-instance"></a><a href="#getting-a-contract-instance" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting a contract instance</h2>
+<p>In order to interact with our deployed <code>Counter</code> contract, we will create a new <a href="https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html">web3 contract instance</a>. This is a javascript object that represents our contract in the blockchain.</p>
+<p>To create this web3 contract, we need two things:</p>
+<ul>
+<li>The address where it is deployed</li>
+<li>The ABI of the contract, which is the definition of the contract's public functions</li>
+</ul>
+<!-- Code: We should provide both a command and a js function to easily retrieve the address from the network.json file. Same for the ABI, and for building a web3 contract altogether. -->
+<p>The address was returned by the ZeppelinOS CLI when we deployed the contract. As for the ABI, we can retrieve it from the compiled artifact in the <code>build/contracts</code> folder as shown below.</p>
+<pre><code class="hljs css js"><span class="hljs-comment">// Set up web3 object, connected to the local development network</span>
+<span class="hljs-keyword">const</span> web3 = <span class="hljs-keyword">new</span> Web3(<span class="hljs-string">'http://localhost:8545'</span>);
+
+<span class="hljs-comment">// Set up a web3 contract, representing our deployed Counter instance</span>
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">'0xCfEB869F69431e42cdB54A4F4f105C19C080A601'</span>;
+<span class="hljs-keyword">const</span> abi = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../build/contracts/Counter.json'</span>).abi;
+<span class="hljs-keyword">const</span> counter = <span class="hljs-keyword">new</span> web3.eth.Contract(abi, address);
+</code></pre>
+<blockquote>
+<p>Note: Make sure to replace the <code>address</code> with the one you got when deploying the contract, which may be different to the one shown here.</p>
+</blockquote>
+<p>We can now use this javascript object to interact with our contract. Let's see how!</p>
+<h2><a class="anchor" aria-hidden="true" id="calling-the-contract"></a><a href="#calling-the-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Calling the contract</h2>
+<p>Let's start by displaying the current value of the <code>Counter</code> contract. We will need to <a href="https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#methods-mymethod-call">call</a> into the <code>value()</code> public method of the contract, and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await">await</a> the response:</p>
+<pre><code class="hljs css js"><span class="hljs-comment">// Call the value() function of the deployed Counter contract</span>
+<span class="hljs-keyword">const</span> value = <span class="hljs-keyword">await</span> counter.methods.value().call();
+<span class="hljs-built_in">console</span>.log(value);
+</code></pre>
+<p>Make sure everything is running smoothly by running the script again and checking the printed value:</p>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> node src/index.js</span>
+11
+</code></pre>
+<blockquote>
+<p>Note: If you restarted ganache between the <a href="first">previous tutorial</a> and this one, the returned value will be zero, since all state will have been cleared.</p>
+</blockquote>
+<p>Cool! We can now actually interact with the contract by sending a transaction to it.</p>
+<h2><a class="anchor" aria-hidden="true" id="sending-a-transaction"></a><a href="#sending-a-transaction" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sending a transaction</h2>
+<p>We will now <a href="https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#methods-mymethod-send">send a transaction</a> to <code>increase</code> the value of our Counter. Sending a transaction is not as straightforward as making a call: we need to specify who the sender will be, the gas limit, and the gas price we are going to use. To keep this example simple, we will use a hardcoded value for both gas and gas price, and send the transaction from the first available account on the node.</p>
+<blockquote>
+<p>Note: In a real-world application, you may want to <a href="https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#methods-mymethod-estimategas">estimate the gas</a> of your transactions, and check a <a href="https://ethgasstation.info/">gas price oracle</a> to know the optimal values to use on every transaction.</p>
+</blockquote>
+<p>Let's increase our <code>Counter</code> value by 20 every time our snippet is run, and then use the code we had written before to display the updated value:</p>
+<pre><code class="hljs css js"><span class="hljs-comment">// Retrieve accounts from the local node, we will use the first one to send the transaction</span>
+<span class="hljs-keyword">const</span> accounts = <span class="hljs-keyword">await</span> web3.eth.getAccounts();
+
+<span class="hljs-comment">// Send a transaction to increase() the Counter contract</span>
+<span class="hljs-keyword">await</span> counter.methods.increase(<span class="hljs-number">20</span>)
+  .send({ <span class="hljs-attr">from</span>: accounts[<span class="hljs-number">0</span>], <span class="hljs-attr">gas</span>: <span class="hljs-number">50000</span>, <span class="hljs-attr">gasPrice</span>: <span class="hljs-number">1e6</span> });
+
+<span class="hljs-comment">// Call the value() function of the deployed Counter contract</span>
+<span class="hljs-keyword">const</span> value = <span class="hljs-keyword">await</span> counter.methods.value().call();
+<span class="hljs-built_in">console</span>.log(value);
+</code></pre>
+<p>We can now run the snippet, and check that the counter's value is increased every time we call it!</p>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> node src/index.js</span>
+31
+<span class="hljs-meta">$</span><span class="bash"> node src/index.js</span>
+51
+<span class="hljs-meta">$</span><span class="bash"> node src/index.js</span>
+71
+</code></pre>
+<p>You can also try interacting with the contract using <code>zos send-tx</code> and <code>zos call</code> as we did on the previous tutorial, and verify that it is the same instance we are working with from two different interfaces.</p>
+<p>The snippet from this tutorial, while simple, is the basis for interacting with your smart contracts from your javascript applications. Remember you can use other libraries other than <code>web3.js</code> - or even other languages other than javascript! ZeppelinOS will take care of managing your contracts on the blockchain.</p>
+<p>In the next tutorial, we will go into a more interesting smart contract application. We will work with more complex logic, connect with <code>@openzeppelin/contracts</code> to create a token, and connect different contracts between themselves.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="first.html">← Your first project</a><a class="docs-next button" href="linking.html">Linking OpenZeppelin contracts →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="ZeppelinOS" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/start.html">Guides</a><a href="/docs/apis.html">Reference</a></div><div><h5>Community</h5><a href="https://forum.zeppelin.solutions/" target="_blank">Forum</a><a href="https://t.me/zeppelinos/" target="_blank">Telegram chat</a></div><div><h5>More</h5><a href="https://zeppelinos.org">Main Site</a><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">GitHub</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="ZeppelinOS" width="170" height="45"/></a><section class="copyright">Copyright © 2017-present ZeppelinOS Global</section><section class="report-bugs"><a href="https://github.com/zeppelinos/zos/issues/new?labels=kind:documentation">Report a bug on this site</a></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '8d0b5afbba49947d9efb5659d1b08df7',
+                indexName: 'zeppelinos',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {}
+              });
+            </script></body></html>

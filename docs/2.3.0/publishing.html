@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Publishing an EVM package · ZeppelinOS</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Publishing an EVM package · ZeppelinOS"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.zeppelinos.org/index.html"/><meta property="og:description" content="On the previous guides we have explored how to initialize a ZeppelinOS project,"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-102575245-1', 'auto');
+              ga('send', 'pageview');
+            </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700,400italic,700italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.svg" alt="ZeppelinOS"/></a><a href="/versions.html"><h3>2.3.0</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/2.3.0/start.html" target="_self">Quickstart</a></li><li class=""><a href="/docs/2.3.0/apis.html" target="_self">Reference</a></li><li class=""><a href="https://blog.zeppelinos.org" target="_self">Blog</a></li><li class=""><a href="https://forum.zeppelin.solutions" target="_self">Forum</a></li><li class=""><a href="https://github.com/zeppelinos" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>QUICKSTART</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>OVERVIEW</h3><ul><li class="navListItem"><a class="navItem" href="/docs/2.3.0/start.html">ZeppelinOS</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/new_2.3.html">What&#x27;s new in ZeppelinOS 2.3</a></li></ul></div><div class="navGroup navGroupActive"><h3>QUICKSTART</h3><ul><li class="navListItem"><a class="navItem" href="/docs/2.3.0/zepkit.html">ZepKit</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/deploying.html">Deploying your first project</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/upgrading.html">Upgrading your project</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/linking.html">Linking OpenZeppelin contracts</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/2.3.0/publishing.html">Publishing an EVM package</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/vouching.html">Vouching for EVM packages</a></li></ul></div><div class="navGroup navGroupActive"><h3>GUIDES</h3><ul><li class="navListItem"><a class="navItem" href="/docs/2.3.0/writing_contracts.html">Writing upgradeable contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/testing.html">Testing upgradeable projects</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/erc20_onboarding.html">Onboarding ERC20 tokens</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/upgrades_governance.html">Upgrades governance</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/zos_lib.html">Using the ZeppelinOS programmatic library</a></li></ul></div><div class="navGroup navGroupActive"><h3>ADVANCED TOPICS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/2.3.0/faq.html">Frequently asked questions</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/configuration.html">Configuration Files</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/architecture.html">Contracts Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/pattern.html">ZeppelinOS Upgrades Pattern</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/token_mechanics.html">ZEP Token Mechanics</a></li><li class="navListItem"><a class="navItem" href="/docs/2.3.0/whitepaper.html">Whitepaper</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Publishing an EVM package</h1></header><article><div><span><p>On the previous guides we have explored how to initialize a ZeppelinOS project,
+how to add contracts to it, how to upgrade those contracts and how to link to
+existing EVM packages. At this point we have a simple project that uses various
+ZeppelinOS functionalities. On this guide we will instead add new
+functionalities to the platform, nicely wrapped as an EVM package ready for
+others to use.</p>
+<p>Let's first remember some of the things we've learned so far.</p>
+<p>In the directory of our project, we initialize it:</p>
+<pre><code class="hljs css console">mkdir &lt;project-name&gt;
+cd &lt;project-name&gt;
+npm init
+npx zos init &lt;project-name&gt;
+</code></pre>
+<p>Then, we can add to our project all the contracts that we have in the
+<code>contracts</code> directory:</p>
+<pre><code class="hljs css console">npx zos add &lt;contract-name-1&gt; &lt;contract-name-2&gt; ... &lt;contract-name-n&gt;
+</code></pre>
+<p>Next, we push the project to the network:</p>
+<pre><code class="hljs css console">npx zos push --network &lt;network&gt;
+</code></pre>
+<p>Note that for the EVM package to be used by others, you need to use a real
+network instead of your local development one. We have a guide about
+<a href="mainnet">Deploying to mainnet</a> which can be useful.</p>
+<p>All known commands so far. Here comes what's new. If you want to share your
+package in ZeppelinOS, do it by running the <code>publish</code> command:</p>
+<pre><code class="hljs css console">npx zos publish --network &lt;network&gt;
+</code></pre>
+<p>It's that simple! Now you are the developer of an EVM package that lives in
+the blockchain ready to help building the next revolution. But this is only
+half of the story, because for the package to be discovered and linked by
+other projects, you will also need to publish it to
+<a href="https://www.npmjs.com">npm</a>.</p>
+<p>If you haven't published a package before, you will need to
+<a href="https://www.npmjs.com/signup">sign up for an npm account</a>.</p>
+<p>The npm package should include all the source and compiled contracts and the
+ZeppelinOS configuration files, so add the following top-level field to the
+<code>package.json</code> file:</p>
+<pre><code class="hljs css json">{
+  ...,
+  "files": [
+    "build",
+    "contracts",
+    "test",
+    "zos.json",
+    "zos.*.json"
+  ]
+}
+</code></pre>
+<p>Remember that the <code>zos</code> configuration files are where ZeppelinOS keeps track of
+your contracts, the addresses of the instances you have created, and in this
+case the address of the EVM package you will have published. This is how ZeppelinOS
+solves the link of foreign projects that depend on yours.</p>
+<p>Make sure to check that the rest of the fields describe your package
+accurately. It could be a good idea to remove the <code>main</code> field, if present,
+because it doesn't make sense for EVM packages. Also, if you have a
+<code>zos.dev-&lt;network_id&gt;.json</code> file, you can remove it now because it is specific for your
+local test environment. You can also add this file pattern to your <code>.gitignore</code> file.</p>
+<p>With that, we should be ready. Log in to npm with:</p>
+<pre><code class="hljs css console">npm login
+</code></pre>
+<p>And finally, publish to npm:</p>
+<pre><code class="hljs css console">npm publish
+</code></pre>
+<p>Now we are done for real. Other developers will be able to link to your
+package by using:</p>
+<pre><code class="hljs css console">npx zos link &lt;your-project-name&gt;
+</code></pre>
+<p>Spread the word! Tell others to reuse your work, and to help you improving it
+with more crazy ideas of how a decentralized society should be. Now, to
+finish this quick exploration of the ZeppelinOS features we will see how you
+can vouch to back the quality of your EVM packages.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="linking.html">← Linking OpenZeppelin contracts</a><a class="docs-next button" href="vouching.html">Next →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="ZeppelinOS" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/start.html">Guides</a><a href="/docs/apis.html">Reference</a></div><div><h5>Community</h5><a href="https://forum.zeppelin.solutions/" target="_blank">Forum</a><a href="https://t.me/zeppelinos/" target="_blank">Telegram chat</a></div><div><h5>More</h5><a href="https://zeppelinos.org">Main Site</a><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">GitHub</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="ZeppelinOS" width="170" height="45"/></a><section class="copyright">Copyright © 2017-present ZeppelinOS Global</section><section class="report-bugs"><a href="https://github.com/zeppelinos/zos/issues/new?labels=kind:documentation">Report a bug on this site</a></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '8d0b5afbba49947d9efb5659d1b08df7',
+                indexName: 'zeppelinos',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {}
+              });
+            </script></body></html>

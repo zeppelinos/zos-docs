@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Linking to EVM packages · ZeppelinOS</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Linking to EVM packages · ZeppelinOS"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.zeppelinos.org/index.html"/><meta property="og:description" content="ZeppelinOS allows us to link packages that have been already deployed"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Linking OpenZeppelin contracts · ZeppelinOS</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Linking OpenZeppelin contracts · ZeppelinOS"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.zeppelinos.org/index.html"/><meta property="og:description" content="In the [first](first) tutorial, we learned how to set up a new ZeppelinOS project, deploy a simple contract, and upgrade it. Now, we will build a more interesting project with multiple contracts, leveraging the [OpenZeppelin contracts package](https://github.com/OpenZeppelin/openzeppelin-eth). We will learn about **linking EVM packages**, and **writing upgradeable contracts**."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -6,103 +6,225 @@
 
               ga('create', 'UA-102575245-1', 'auto');
               ga('send', 'pageview');
-            </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700,400italic,700italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.svg" alt="ZeppelinOS"/></a><a href="/versions.html"><h3>next</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/next/start.html" target="_self">Quickstart</a></li><li class=""><a href="/docs/next/apis.html" target="_self">Reference</a></li><li class=""><a href="https://blog.zeppelinos.org" target="_self">Blog</a></li><li class=""><a href="https://forum.zeppelin.solutions" target="_self">Forum</a></li><li class=""><a href="https://github.com/zeppelinos" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>QUICKSTART</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>OVERVIEW</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/start.html">ZeppelinOS</a></li><li class="navListItem"><a class="navItem" href="/docs/next/new_2.3.html">What&#x27;s new in ZeppelinOS 2.3</a></li></ul></div><div class="navGroup navGroupActive"><h3>QUICKSTART</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/zepkit.html">ZepKit</a></li><li class="navListItem"><a class="navItem" href="/docs/next/deploying.html">Deploying your first project</a></li><li class="navListItem"><a class="navItem" href="/docs/next/upgrading.html">Upgrading your project</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/next/linking.html">Linking to EVM packages</a></li><li class="navListItem"><a class="navItem" href="/docs/next/publishing.html">Publishing an EVM package</a></li><li class="navListItem"><a class="navItem" href="/docs/next/vouching.html">Vouching for EVM packages</a></li></ul></div><div class="navGroup navGroupActive"><h3>GUIDES</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/writing_contracts.html">Writing upgradeable contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/next/testing.html">Testing upgradeable projects</a></li><li class="navListItem"><a class="navItem" href="/docs/next/erc20_onboarding.html">Onboarding ERC20 tokens</a></li><li class="navListItem"><a class="navItem" href="/docs/next/upgrades_governance.html">Upgrades governance</a></li><li class="navListItem"><a class="navItem" href="/docs/next/zos_lib.html">Using the ZeppelinOS programmatic library</a></li></ul></div><div class="navGroup navGroupActive"><h3>ADVANCED TOPICS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/faq.html">Frequently asked questions</a></li><li class="navListItem"><a class="navItem" href="/docs/next/configuration.html">Configuration Files</a></li><li class="navListItem"><a class="navItem" href="/docs/next/architecture.html">Contracts Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/next/pattern.html">ZeppelinOS Upgrades Pattern</a></li><li class="navListItem"><a class="navItem" href="/docs/next/token_mechanics.html">ZEP Token Mechanics</a></li><li class="navListItem"><a class="navItem" href="/docs/next/whitepaper.html">Whitepaper</a></li></ul></div></div></section></div><script>
+            </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700,400italic,700italic"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.svg" alt="ZeppelinOS"/></a><a href="/versions.html"><h3>next</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/next/start.html" target="_self">Quickstart</a></li><li class=""><a href="/docs/next/apis.html" target="_self">Reference</a></li><li class=""><a href="https://blog.zeppelinos.org" target="_self">Blog</a></li><li class=""><a href="https://forum.zeppelin.solutions" target="_self">Forum</a></li><li class=""><a href="https://github.com/zeppelinos" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>QUICKSTART</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>OVERVIEW</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/start.html">ZeppelinOS</a></li><li class="navListItem"><a class="navItem" href="/docs/next/new_2.4.html">What&#x27;s new in ZeppelinOS 2.4</a></li></ul></div><div class="navGroup navGroupActive"><h3>QUICKSTART</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/first.html">Your first project</a></li><li class="navListItem"><a class="navItem" href="/docs/next/interacting.html">Interacting with your contracts</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/next/linking.html">Linking OpenZeppelin contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/next/zepkit.html">ZepKit</a></li></ul></div><div class="navGroup navGroupActive"><h3>GUIDES</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/writing_contracts.html">Writing upgradeable contracts</a></li><li class="navListItem"><a class="navItem" href="/docs/next/publishing.html">Publishing an EVM package</a></li><li class="navListItem"><a class="navItem" href="/docs/next/testing.html">Testing upgradeable projects</a></li><li class="navListItem"><a class="navItem" href="/docs/next/erc20_onboarding.html">Onboarding ERC20 tokens</a></li><li class="navListItem"><a class="navItem" href="/docs/next/upgrades_governance.html">Upgrades governance</a></li><li class="navListItem"><a class="navItem" href="/docs/next/zos_lib.html">Using the ZeppelinOS programmatic library</a></li></ul></div><div class="navGroup navGroupActive"><h3>ADVANCED TOPICS</h3><ul><li class="navListItem"><a class="navItem" href="/docs/next/faq.html">Frequently asked questions</a></li><li class="navListItem"><a class="navItem" href="/docs/next/configuration.html">Configuration Files</a></li><li class="navListItem"><a class="navItem" href="/docs/next/architecture.html">Contracts Architecture</a></li><li class="navListItem"><a class="navItem" href="/docs/next/pattern.html">ZeppelinOS Upgrades Pattern</a></li><li class="navListItem"><a class="navItem" href="/docs/next/whitepaper.html">Whitepaper</a></li></ul></div></div></section></div><script>
           var toggler = document.getElementById('navToggler');
           var nav = document.getElementById('docsNav');
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Linking to EVM packages</h1></header><article><div><span><p>ZeppelinOS allows us to link packages that have been already deployed
-to the blockchain, instead of wasting resources deploying them again every time
-we need them in a project. And of course, developers can upgrade their
-packages and we can update our links to point to the newest versions, so we are
-finally making an efficient use of all the developments in the community.</p>
-<p>To use EVM packages we need first to initialize a ZeppelinOS project. Luckily,
-we already have one after following the guide about
-<a href="/docs/next/deploying.html">Deploying your first project</a>.</p>
-<p>To continue with this exploration, let's write a new contract called
-<code>MyLinkedContract.sol</code> and place it in the <code>contracts</code> folder. Then,
-let's make it import a very common
-contract from the <a href="https://openzeppelin.org/">OpenZeppelin</a> EVM package:</p>
-<pre><code class="hljs css solidity">pragma solidity ^<span class="hljs-number">0</span>.<span class="hljs-number">5</span>.<span class="hljs-number">0</span><span class="hljs-comment">;</span>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Linking OpenZeppelin contracts</h1></header><article><div><span><p>In the <a href="first">first</a> tutorial, we learned how to set up a new ZeppelinOS project, deploy a simple contract, and upgrade it. Now, we will build a more interesting project with multiple contracts, leveraging the <a href="https://github.com/OpenZeppelin/openzeppelin-eth">OpenZeppelin contracts package</a>. We will learn about <strong>linking EVM packages</strong>, and <strong>writing upgradeable contracts</strong>.</p>
+<h2><a class="anchor" aria-hidden="true" id="what-we-will-build"></a><a href="#what-we-will-build" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What we will build</h2>
+<p>We will write a <code>TokenExchange</code> contract, that will allow any user to purchase an ERC20 token in exchange for ETH, at a fixed exchange rate. To do this, we will need not only a TokenExchange contract, but also an <a href="https://docs.openzeppelin.org/v2.3.0/tokens#erc20">ERC20 implementation</a>. Let's start by getting one, but before, make sure to initialize a new project as described <a href="first#setting-up-your-project">here</a>:</p>
+<pre><code class="hljs css console">npm install --global zos ganache-cli
+mkdir token-exchange &amp;&amp; cd token-exchange
+npm init -y
+zos init
+</code></pre>
+<blockquote>
+<p>Note: The full code for this project is available in our <a href="https://github.com/zeppelinos/zos/tree/v2.4.0/examples/linking-contracts">Github repo</a>.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="linking-the-contracts-evm-package"></a><a href="#linking-the-contracts-evm-package" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Linking the contracts EVM package</h2>
+<p>We will first get ourselves an ERC20 token. Instead of coding one from scratch, we will use the one provided by the <a href="https://github.com/OpenZeppelin/openzeppelin-eth">OpenZeppelin contracts EVM package</a>. An EVM package is a set of contracts set up to be easily included in a ZeppelinOS project, with the added bonus that the contracts' code <em>is already deployed in the Ethereum network</em>. This is a more secure code distribution mechanism, and also helps you save gas upon deployment.</p>
+<!-- TODO: Add guide on what is an EVM package behind the scenes, instead of linking to a blogpost -->
+<blockquote>
+<p>Note: Check out <a href="https://blog.zeppelinos.org/open-source-collaboration-in-the-blockchain-era-evm-packages/">this article</a>to learn more about EVM packages.</p>
+</blockquote>
+<p>To link the OpenZeppelin contracts EVM package into your project, simply run the following:</p>
+<pre><code class="hljs css console">zos link openzeppelin-eth@2.2.0
+</code></pre>
+<p>This command will download the EVM package (bundled as a regular npm package), and connect it to your ZeppelinOS project. We now have all of OpenZeppelin contracts at our disposal, so let's create an ERC20 token!</p>
+<blockquote>
+<p>Note: Make sure you install <code>openzeppelin-eth</code> and not <code>openzeppelin-solidity</code>. The latter is set up for general usage, while <code>openzeppelin-eth</code> is tailored for being used with ZeppelinOS. This means that its contracts are <a href="writing_contracts#use-upgradeable-packages">already set up to be upgradeable</a>.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="creating-an-erc20-token"></a><a href="#creating-an-erc20-token" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating an ERC20 token</h2>
+<p>Let's deploy an ERC20 token contract to our development network. Make sure to <a href="first#deploying-to-a-development-network">have a ganache instance running</a>, or start one by running:</p>
+<pre><code class="hljs css console">ganache-cli --deterministic
+</code></pre>
+<p>For setting up the token, we will be using the <a href="https://github.com/OpenZeppelin/openzeppelin-eth/blob/master/contracts/token/ERC20/StandaloneERC20.sol">StandaloneERC20 implementation</a> provided by the OpenZeppelin package. We will <em>initialize</em> the instance with the token metadata (name, symbol, and decimals), and mint a large initial supply for one of our accounts.</p>
+<!-- CODE: We need a command to retrieve the current accounts (#967) -->
+<blockquote>
+<p>Note: Your available accounts are shown by ganache when you start the process. If you ran it with the <code>--deterministic</code> flag as instructed, then your first and default account will be <code>0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1</code>.</p>
+</blockquote>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos create</span>
+? Pick a contract to instantiate: openzeppelin-eth/StandaloneERC20
+? Pick a network: development
+✓ Deploying openzeppelin-eth dependency to network
+? Do you want to call a function on the instance after creating it?: Yes
+? Select which function: * initialize(name: string, symbol: string, decimals: uint8, initialSupply: uint256, initialHolder: address, minters: address[], pausers: address[])
+? name (string): MyToken
+? symbol (string): MYT
+? decimals (uint8): 18
+? initialSupply (uint256): 100e18
+? initialHolder (address): 0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1
+? minters (address[]): 
+? pausers (address[]): 
+✓ Setting everything up to create contract instances
+✓ Instance created at 0x2612Af3A521c2df9EAF28422Ca335b04AdF3ac66
+</code></pre>
+<p>Let's break down what we did in the command above. We first chose to create an instance of the <code>StandaloneERC20</code> contract from the <code>openzeppelin-eth</code> package we had linked before, and to create it in the local <code>development</code> network. We are then instructing the CLI to <em>initialize</em> it with the initial values needed to set up our token. This requires us to choose the appropriate <code>initialize</code> function, and input all the required arguments. ZeppelinOS will then atomically create and initialize the new instance in a single transaction.</p>
+<p>We now have a working ERC20 token contract in our development network. We can check that the initial supply was properly allocated by using the <code>balance</code> command. Make sure to use the address where your ERC20 token instance was created.</p>
+<!-- CODE: We need a way to refer to our own contracts by name (and to the local accounts as well!) -->
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos balance --erc20 0x2612Af3A521c2df9EAF28422Ca335b04AdF3ac66</span>
+? Enter an address to query its balance: 0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1
+? Pick a network: development
+Balance: 100 MYT
+</code></pre>
+<p>Great! We can now write an exchange contract and connect it to this token when we deploy it.</p>
+<!-- We can split the following into a separate tutorial if this one becomes too long -->
+<h2><a class="anchor" aria-hidden="true" id="writing-the-exchange-contract"></a><a href="#writing-the-exchange-contract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Writing the exchange contract</h2>
+<p>In order to transfer an amount of tokens every time it receives ETH, our exchange contract will need to store the token contract address and the exchange rate in its state. We will set these two values during initialization, when we create the instance with <code>zos create</code>.</p>
+<p>In order to support contract upgrades, ZeppelinOS <a href="pattern#the-constructor-caveat">does not allow the usage of Solidity's <code>constructor</code>s</a>. Instead, we need to use <em>initializers</em>. An initializer is just a regular Solidity function, with an additional check to ensure that it can be called only once. To make coding initializers easy, ZeppelinOS provides a base <code>Initializable</code> contract, that includes an <code>initializer</code> modifier that takes care of this. You will first need to install the package that provides that contract:</p>
+<pre><code class="hljs css console">npm install zos-lib@2.4.0
+</code></pre>
+<p>Now, let's write our exchange contract in <code>contracts/TokenExchange.sol</code>, using an <em>initializer</em> to set its initial state:</p>
+<pre><code class="hljs css solidity">pragma solidity ^<span class="hljs-number">0.5</span><span class="hljs-number">.0</span>;
 
-import <span class="hljs-string">"openzeppelin-eth/contracts/token/ERC721/ERC721Mintable.sol"</span><span class="hljs-comment">;</span>
+<span class="hljs-comment">// Import base Initializable contract</span>
+<span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "zos-lib/contracts/Initializable.sol";</span>
 
-contract MyLinkedContract {
-  ERC721Mintable private _token<span class="hljs-comment">;</span>
+<span class="hljs-comment">// Import interface and library from OpenZeppelin contracts</span>
+<span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "openzeppelin-eth/contracts/token/ERC20/IERC20.sol";</span>
+<span class="hljs-meta"><span class="hljs-meta-keyword">import</span> "openzeppelin-eth/contracts/math/SafeMath.sol";</span>
 
-  function setToken(ERC721Mintable token) <span class="hljs-keyword">external </span>{
-    require(<span class="hljs-keyword">address(token) </span>!= <span class="hljs-keyword">address(0));
-</span>    _token = token<span class="hljs-comment">;</span>
+contract TokenExchange <span class="hljs-keyword">is</span> Initializable {
+  using SafeMath <span class="hljs-keyword">for</span> uint256;
+
+  <span class="hljs-comment">// Contract state: exchange rate and token</span>
+  uint256 <span class="hljs-keyword">public</span> rate;
+  IERC20 <span class="hljs-keyword">public</span> token;
+
+  <span class="hljs-comment">// Initializer function (replaces constructor)</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span><span class="hljs-params">(uint256 _rate, IERC20 _token)</span> <span class="hljs-title">public</span> <span class="hljs-title">initializer</span> </span>{
+    rate = _rate;
+    token = _token;
   }
+
+  <span class="hljs-comment">// Send tokens back to the sender using predefined exchange rate</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> <span class="hljs-title">external</span> <span class="hljs-title">payable</span> </span>{
+    uint256 tokens = msg.value.mul(rate);
+    token.transfer(msg.sender, tokens);
+  }
+} 
+</code></pre>
+<p>Note the usage of the <code>initializer</code> modifier in the <code>initialize</code> method. This guarantees that, after we have deployed our contract, no one can call into that function again to alter the token or the rate.</p>
+<p>Let's now create and initialize our new <code>TokenExchange</code> contract:</p>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos create</span>
+✓ Compiled contracts with solc 0.5.9 (commit.e560f70d)
+? Pick a contract to instantiate: TokenExchange
+? Pick a network: development
+✓ Contract TokenExchange deployed
+? Do you want to call a function on the instance after creating it?: Yes
+? Select which function: initialize(_rate: uint256, _token: address)
+? _rate (uint256): 10
+? _token (address): 0x2612Af3A521c2df9EAF28422Ca335b04AdF3ac66
+Instance created at 0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec
+</code></pre>
+<!-- CODE: We need to extend the zos transfer command to support erc20s -->
+<p>Our exchange is almost ready! We only need to fund it, so it can send tokens to purchasers. Let's do that using the <code>send-tx</code> command, to transfer the full token balance from our own account to the exchange contract. Make sure to replace the recipient of the transfer with the <code>TokenExchange</code> address you got from the previous command.</p>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos send-tx</span>
+? Pick a network: development
+? Choose an instance: StandaloneERC20 at 0x2612Af3A521c2df9EAF28422Ca335b04AdF3ac66
+? Select which function: transfer(to: address, value: uint256)
+? to (address): 0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec
+? value (uint256): 10e18
+Transaction successful: 0x5863c8a8e122fcda7c6234abc6e60fad3f5a8108a3f88e2d8a956b63dbc222c2
+Events emitted: 
+ - Transfer
+    from: 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1, 
+    to: 0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec, 
+    value: 10000000000000000000
+</code></pre>
+<p>All set! We can start playing with our brand new token exchange.</p>
+<h2><a class="anchor" aria-hidden="true" id="using-our-exchange"></a><a href="#using-our-exchange" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using our exchange</h2>
+<p>Now that we have initialized our exchange contract initialized, and seeded it with funds, we can test it out by purchasing tokens. Our exchange contract will send tokens back automatically when we send ETH to it, so let's test it by using the <code>zos transfer</code> command. This command allows us to send funds to any address; in this case, we will use it to send ETH to our <code>TokenExchange</code> instance:</p>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos transfer</span>
+? Pick a network: development
+? Choose the account to send transactions from: (1) 0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0
+? Enter the receiver account: 0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec
+? Enter an amount to transfer 0.1 ether
+✓ Funds sent. Transaction hash: 0xc85a8caa161110ba7f08134f4496a995968a5aff7ae60ad9b6ce1c824e13cacb
+</code></pre>
+<!-- Code: We need a method to easily go through the addresses of deployed contracts -->
+<blockquote>
+<p>Note: Make sure you replace the receiver account with the corresponding address where your <code>TokenExchange</code> was created.</p>
+</blockquote>
+<p>We can now use <code>zos balance</code> again, to check the token balance of the address that made the purchase. Since we sent 0.1 ETH, and we used a 1:10 exchange rate, we should see a balance of 1 MYT (MyToken).</p>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos balance --erc20 0x5f8e26fAcC23FA4cbd87b8d9Dbbd33D5047abDE1</span>
+? Enter an address to query its balance: 0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0
+? Pick a network: development
+Balance: 1 MYT
+</code></pre>
+<p>Success! We have our exchange up and running, gathering ETH in exchange for our tokens. But how can we collect the funds we earned...?</p>
+<h2><a class="anchor" aria-hidden="true" id="upgrading-the-exchange"></a><a href="#upgrading-the-exchange" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upgrading the exchange</h2>
+<p>We forgot to add a method to withdraw the funds from the token exchange contract! While this would typically mean that the funds are locked in there forever, we can upgrade the contract with ZeppelinOS to add a way to collect those funds.</p>
+<blockquote>
+<p>Note: While upgrading a contract is certainly useful in situations like this, where you need to fix a bug or add a missing feature, it could still be used to change the rules of the game. For instance, you could upgrade the token exchange contract to alter the rate at any time. Because of this, it is important to have a proper <a href="upgrades_governance">upgrades governance mechanism</a> in place.</p>
+</blockquote>
+<p>Let's modify the <code>TokenExchange</code> contract to add a <code>withdraw</code> method, only callable by an <code>owner</code>.</p>
+<pre><code class="hljs css solidity">contract TokenExchange <span class="hljs-keyword">is</span> Initializable {
+  uint256 <span class="hljs-keyword">public</span> rate;
+  IERC20 <span class="hljs-keyword">public</span> token;
+  address <span class="hljs-keyword">public</span> owner;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withdraw</span><span class="hljs-params">()</span> <span class="hljs-title">public</span> </span>{
+    require(msg.sender == owner);
+    msg.sender.transfer(address(<span class="hljs-keyword">this</span>).balance);
+  }
+
+  <span class="hljs-comment">// (existing functions not shown here for brevity)</span>
 }
 </code></pre>
-<p>One thing to notice is that instead of importing <code>openzeppelin-solidity</code> we are
-importing <code>openzeppelin-eth</code>. This is the name of the OpenZeppelin EVM package,
-the one we have to use if we want to reuse the package already deployed.
-For more information, see
-<a href="https://blog.zeppelin.solutions/getting-started-with-openzeppelin-eth-a-new-stable-and-upgradeable-evm-package-576fb37297d0#125e">this article which explains the difference between openzeppelin-solidity and openzeppelin-eth</a>.</p>
-<p>Now, let's link our project to the openzeppelin-eth package by running:</p>
-<pre><code class="hljs css console">npx zos link openzeppelin-eth
+<p>When modifying your contract, make sure to add the <code>owner</code> variable <strong>after</strong> the other variables (<a href="writing_contracts#modifying-your-contracts">here</a> you can see why this restriction). Don't worry if you forget about it, the CLI will check this for you when you try to upgrade.</p>
+<blockquote>
+<p>Note: If you are familiar with OpenZeppelin contracts, you may be wondering why we didn't simply extend from <code>Ownable</code> and used the <code>onlyOwner</code> modifier. The fact is ZeppelinOS does not support modifying the contracts you extend from (if they declare their own state variables). Again, the CLI will alert you if you attempt to do this. See <a href="writing_contracts#modifying-your-contracts">here</a> for more info.</p>
+</blockquote>
+<p>The only thing missing is actually <em>setting</em> the <code>owner</code> of the contract. To do this, we can add another function that we will call when upgrading, making sure it can only be called once:</p>
+<pre><code class="hljs css solidity">contract TokenExchange <span class="hljs-keyword">is</span> Initializable {
+  uint256 <span class="hljs-keyword">public</span> rate;
+  IERC20 <span class="hljs-keyword">public</span> token;
+  address <span class="hljs-keyword">public</span> owner;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">withdraw</span><span class="hljs-params">()</span> <span class="hljs-title">public</span> </span>{
+    require(msg.sender == owner);
+    msg.sender.transfer(address(<span class="hljs-keyword">this</span>).balance);
+  }
+
+  <span class="hljs-comment">// To be run during upgrade, ensuring it can never be called again</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setOwner</span><span class="hljs-params">(address _owner)</span> <span class="hljs-title">public</span> </span>{
+    require(owner == address(<span class="hljs-number">0</span>));
+    owner = _owner;
+  }
+
+  <span class="hljs-comment">// (existing functions not shown here for brevity)</span>
+}
 </code></pre>
-<p>This command will install the openzeppelin-eth contracts locally, which is
-needed to compile the contracts that import it; but it will also update the
-<code>zos.json</code> file with a reference to the linked package to make sure that when
-you deploy the project it will use the EVM package that already exists on the
-blockchain.</p>
-<p>The following commands will be familiar to you. Just as we did before, we have
-to add the contract to the project:</p>
-<pre><code class="hljs css console">npx zos add MyLinkedContract
+<p>We can now upgrade our token exchange contract to this new version. We will call <code>setOwner</code> during the upgrade process. ZeppelinOS will take care of making the upgrade and the call atomic, all in a single transaction.</p>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos upgrade</span>
+? Pick a network: development
+✓ Compiled contracts with solc 0.5.9 (commit.e560f70d)
+- New variable 'address owner' was added in contract TokenExchange in contracts/TokenExchange.sol:1 at the end of the contract.
+✓ Contract TokenExchange deployed
+? Which proxies would you like to upgrade?: Choose by name
+? Pick a contract to upgrade: TokenExchange
+? Do you want to call a function on the instance after upgrading it?: Yes
+? Select which function: setOwner(_owner: address)
+? _owner (address): 0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1
+✓ Instance upgraded at 0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec.
+</code></pre>
+<p>There! We can now call <code>withdraw</code> from our default address to extract all ETH sent to the exchange.</p>
+<pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos send-tx</span>
+? Pick a network: development
+? Pick an instance: TokenExchange at 0xD86C8F0327494034F60e25074420BcCF560D5610
+? Select which function: withdraw()
+✓ Transaction successful. Transaction hash: 0xc9fb0d3ada96ec4c67c1c8f1569f9cfaf0ff0f7b241e172b32a023b1763ab7ab
 </code></pre>
 <blockquote>
-<p>If any of the following commands fail with an <code>A network name must be provided to execute the requested action</code> error, it means our session has expired.
-In that case, renew it by running the command <code>npx zos session --network local --from 0x1df62f291b2e969fb0849d99d9ce41e2f137006e --expires 3600</code> again.</p>
+<p>Note: You can also upgrade contracts from an EVM package. Upon a new release of openzeppelin-eth, if you want to update your ERC20 to include the latest fixes, you can just <code>zos link</code> the new version and use <code>zos upgrade</code> to get your instance to the newest code.</p>
 </blockquote>
-<p>Now, let's push our changes to the blockchain:</p>
-<pre><code class="hljs css console">npx zos push --deploy-dependencies
-</code></pre>
-<p>There is one caveat here with the <code>--deploy-dependencies</code> flag. We mentioned
-that this feature is about reusing packages that were already deployed, and we
-do have already deployed versions of openzeppelin-eth and many other packages
-to mainnet, ropsten, rinkeby and kovan. However, on this guide we are not using
-any of those networks, instead we started a local development network with
-Truffle that is empty. So, <code>--deploy-dependencies</code> tells ZeppelinOS to deploy
-to the network the EVM packages we depend on. This has to be done only once,
-so if you are using one of the real networks mentioned above, or you are
-running the command again on the local network, this flag won't be needed.</p>
-<p>Repeating ourselves from before, let's make an upgradeable instance of the
-contract:</p>
-<pre><code class="hljs css console">npx zos create MyLinkedContract
-</code></pre>
-<p>We also need an instance of the <code>ERC721</code> token from the EVM package:</p>
-<pre><code class="hljs css console">npx zos create openzeppelin-eth/StandaloneERC721 --init initialize --args MyToken,TKN,[&lt;address&gt;],[&lt;address&gt;]
-</code></pre>
-<p><code>&lt;address&gt;</code> will be the minter and pauser of the token. For local development
-you can use one of the 10 addresses that <code>ganache-cli</code> created by default.</p>
-<p>Finally, we can start a new Truffle console to interact with our contract by running:</p>
-<pre><code class="hljs css console">npx truffle console --network local
-</code></pre>
-<p>Now, let's jump to that Truffle console and connect our two deployed upgradeable contracts:</p>
-<blockquote>
-<p><em>Make sure you replace &lt;my-linked-contract-address&gt; and &lt;my-erc721-address&gt;
-with the addresses of the upgradeable instances your created of <code>MyLinkedContract</code>
-and <code>StandaloneERC721</code> respectively. Both addresses were returned by the <code>create</code>
-commands we ran above.</em></p>
-</blockquote>
-<pre><code class="hljs css console"><span class="hljs-meta">truffle(local)&gt;</span><span class="bash"> myLinkedContract = await MyLinkedContract.at(<span class="hljs-string">'&lt;my-linked-contract-address&gt;'</span>)</span>
-<span class="hljs-meta">truffle(local)&gt;</span><span class="bash"> myLinkedContract.setToken(<span class="hljs-string">'&lt;my-erc721-address&gt;'</span>)</span>
-</code></pre>
-<p>Remember that the addresses of both your contract and the token, can also be
-found in the <code>zos.dev-&lt;network_id&gt;.json</code> configuration file.</p>
-<p>This is just the beginning of a better blockchain ecosystem, where developers
-share their knowledge and their cool ideas in EVM packages, and we all
-contribute by using and improving those packages. This soon will be a swarm of
-packages that implement crazy new ways for a society to work, and they will all
-be available for you to just link into your project and build on top of them.</p>
-<p>But so far we have only seen the side of the users of EVM packages. I'm sure
-you are now asking yourself how can you publish all the packages that you are
-developing. That's what we'll explore next.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="upgrading.html">← Upgrading your project</a><a class="docs-next button" href="publishing.html">Publishing an EVM package →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="ZeppelinOS" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/start.html">Guides</a><a href="/docs/apis.html">Reference</a></div><div><h5>Community</h5><a href="https://forum.zeppelin.solutions/" target="_blank">Forum</a><a href="https://t.me/zeppelinos/" target="_blank">Telegram chat</a></div><div><h5>More</h5><a href="https://zeppelinos.org">Main Site</a><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">GitHub</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="ZeppelinOS" width="170" height="45"/></a><section class="copyright">Copyright © 2017-present ZeppelinOS Global</section><section class="report-bugs"><a href="https://github.com/zeppelinos/zos/issues/new?labels=kind:documentation">Report a bug on this site</a></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<h2><a class="anchor" aria-hidden="true" id="wrapping-up"></a><a href="#wrapping-up" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Wrapping up</h2>
+<p>We have built a more complex setup in this tutorial, and learned several concepts along the way. We introduced <a href="https://blog.zeppelinos.org/open-source-collaboration-in-the-blockchain-era-evm-packages/">EVM packages</a> as dependencies for our projects, allowing us to spin up a new token with little effort. We also presented some <a href="writing_contracts">limitations</a> of the <a href="pattern">upgrades pattern</a> that ZeppelinOS uses, such as <a href="writing_contracts#initializers">initializer methods</a> as a replacement for constructors, or <a href="writing_contracts#modifying-your-contracts">preserving the storage layout</a> when modifying our source code. We also learned how to run a function as a migration when upgrading a contract.</p>
+<p>Feel free to explore the rest of the guides in the site to keep learning more, or start coding with ZeppelinOS right away!</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="interacting.html">← Interacting with your contracts</a><a class="docs-next button" href="zepkit.html">ZepKit →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="ZeppelinOS" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/start.html">Guides</a><a href="/docs/apis.html">Reference</a></div><div><h5>Community</h5><a href="https://forum.zeppelin.solutions/" target="_blank">Forum</a><a href="https://t.me/zeppelinos/" target="_blank">Telegram chat</a></div><div><h5>More</h5><a href="https://zeppelinos.org">Main Site</a><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">GitHub</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="ZeppelinOS" width="170" height="45"/></a><section class="copyright">Copyright © 2017-present ZeppelinOS Global</section><section class="report-bugs"><a href="https://github.com/zeppelinos/zos/issues/new?labels=kind:documentation">Report a bug on this site</a></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
               var search = docsearch({
                 
                 apiKey: '8d0b5afbba49947d9efb5659d1b08df7',

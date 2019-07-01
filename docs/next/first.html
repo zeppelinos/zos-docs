@@ -22,7 +22,7 @@
 <pre><code class="hljs css console">npm install --global zos
 </code></pre>
 <blockquote>
-<p>Note: We are installing the CLI <a href="https://docs.npmjs.com/downloading-and-installing-packages-globally">globally</a> in our workstation. Alternatively, you can install it <a href="https://docs.npmjs.com/downloading-and-installing-packages-locally">local</a> to each project by running <code>npm install --save-dev zos</code> in your project folder. This would require you to run every command by prefixing it with <code>npx</code>. Installing it locally allows you to have different <code>zos</code> versions in different projects, but requires you to reinstall every time you start a new project.</p>
+<p>Note: We are installing the CLI <a href="https://docs.npmjs.com/downloading-and-installing-packages-globally">globally</a> in our workstation. Alternatively, you can install it <a href="https://docs.npmjs.com/downloading-and-installing-packages-locally">locally</a> to each project by running <code>npm install --save-dev zos</code> in your project folder. This would require you to run every command by prefixing it with <code>npx</code>. Installing it locally allows you to have different <code>zos</code> versions in different projects, but it requires you to reinstall every time you start a new project.</p>
 </blockquote>
 <h2><a class="anchor" aria-hidden="true" id="setting-up-your-project"></a><a href="#setting-up-your-project" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setting up your project</h2>
 <p>We'll first create a node.js project in a new directory. Head over to a terminal and run:</p>
@@ -33,7 +33,7 @@ npm init -y
 <p>Let's now use the CLI to initialize a ZeppelinOS project:</p>
 <pre><code class="hljs css console">zos init
 </code></pre>
-<p>The CLI will prompt you to choose a project name and version, defaulting to the ones from the <code>package.json</code>, and then set up a few files and folders for running your ZeppelinOS project.</p>
+<p>The CLI will prompt you to choose a project name and version, defaulting to the ones from the <code>package.json</code>, and then it will set up a few files and folders for running your ZeppelinOS project.</p>
 <p>We are now ready to begin coding.</p>
 <blockquote>
 <p>Note: Should you get lost at any point during this tutorial, you can refer to the full code for this project in our <a href="https://github.com/zeppelinos/zos/tree/v2.4.0/examples/first-project"><code>Github repo</code></a>.</p>
@@ -50,18 +50,18 @@ contract Counter {
   }
 }
 </code></pre>
-<p>This contract will just keep a numeric <code>value</code>, that will be increased by one every time we send a transaction to the <code>increase()</code> function.</p>
-<p>You can run <code>zos compile</code> to compile the contract and check for any errors. After it compiled successfully, we can now deploy our contract.</p>
+<p>This contract will just keep a numeric <code>value</code> that will be increased by one every time we send a transaction to the <code>increase()</code> function.</p>
+<p>You can run <code>zos compile</code> to compile the contract and check for any errors. After it is compiled successfully, we can deploy our contract.</p>
 <blockquote>
-<p>Note: You don't have to worry if you forget to compile your contract. The CLI will automatically check if your contract changed when you run any command, and compile it if needed.</p>
+<p>Note: You don't have to worry if you forget to compile your contract. The CLI will automatically check if your contract changed when you run any command and compile it if needed.</p>
 </blockquote>
 <h2><a class="anchor" aria-hidden="true" id="deploying-to-a-development-network"></a><a href="#deploying-to-a-development-network" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploying to a development network</h2>
 <p>We will use <a href="https://truffleframework.com/ganache">ganache</a> as a <em>development network</em> to deploy our contract. If you don't have ganache installed, do so now by running <code>npm install -g ganache-cli</code>.</p>
-<p>Development networks are mini blockchains that run just on your computer, and are much faster than the actual Ethereum network. We will use one for coding and testing.</p>
+<p>Development networks are mini blockchains that run just on your computer and are much faster than the actual Ethereum network. We will use one for coding and testing.</p>
 <p>Open a separate terminal, and start a new ganache process:</p>
 <pre><code class="hljs css console">ganache-cli --deterministic
 </code></pre>
-<p>This will start a new development network, using a deterministic set of accounts, instead of random ones. We can now deploy our contract there, running <code>zos create</code>, and choosing to deploy the <code>Counter</code> contract to the <code>development</code> network.</p>
+<p>This will start a new development network using a deterministic set of accounts instead of random ones. We can now deploy our contract there, running <code>zos create</code>, and choosing to deploy the <code>Counter</code> contract to the <code>development</code> network.</p>
 <pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos create</span>
 ✓ Compiled contracts with solc 0.5.9 (commit.e560f70d)
 ? Pick a contract to instantiate: Counter
@@ -75,14 +75,14 @@ contract Counter {
 <blockquote>
 <p>Note: The addresses where your contracts are created, or the transaction identifiers you see, may differ from the ones listed here.</p>
 </blockquote>
-<p>Our counter contract is deployed to the local development network and ready to go! We can test it out by interacting with it from the terminal. Let's try incrementing the counter, by sending a transaction to call the <code>increase</code> function through <code>zos send-tx</code>.</p>
+<p>Our counter contract is deployed to the local development network and ready to go! We can test it out by interacting with it from the terminal. Let's try incrementing the counter by sending a transaction to call the <code>increase</code> function through <code>zos send-tx</code>.</p>
 <pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos send-tx</span>
 ? Pick a network: development
 ? Pick an instance: Counter at 0xCfEB869F69431e42cdB54A4F4f105C19C080A601
 ? Select which function: increase()
 ✓ Transaction successful. Transaction hash: 0x20bef6583ea32cc57fe179e34dd57a5494db3c403e441624e56a886898cb52bd
 </code></pre>
-<p>We can now use <code>zos call</code> to query the contract's public <code>value</code>, and check that it was indeed increased from zero to one.</p>
+<p>We can now use <code>zos call</code> to query the contract's public <code>value</code> and check that it was indeed increased from zero to one.</p>
 <pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos call</span>
 ? Pick a network: development
 ? Pick an instance: Counter at 0xCfEB869F69431e42cdB54A4F4f105C19C080A601
@@ -110,7 +110,7 @@ contract Counter {
 ? Which proxies would you like to upgrade?: All proxies
 Instance upgraded at 0xCfEB869F69431e42cdB54A4F4f105C19C080A601.
 </code></pre>
-<p>Done! Our <code>Counter</code> instance has been upgraded to the latest version, and neither its address nor its state have changed. Let's check it out by increasing the counter by ten, which should yield eleven, since we had already increased it by one:</p>
+<p>Done! Our <code>Counter</code> instance has been upgraded to the latest version, and neither its address nor its state has changed. Let's check it out by increasing the counter by ten, which should yield eleven, since we had already increased it by one:</p>
 <pre><code class="hljs css console"><span class="hljs-meta">$</span><span class="bash"> zos send-tx</span>
 ? Pick a network: development
 ? Pick an instance: Counter at 0xCfEB869F69431e42cdB54A4F4f105C19C080A601
@@ -125,7 +125,7 @@ $</span><span class="bash"> zos call</span>
 Returned "11"
 </code></pre>
 <blockquote>
-<p>Note: If you are curious about how ZeppelinOS achieves this feat, given that smart contracts are immutable, check out our <a href="pattern">upgrades pattern guide</a>. You will see that there are some changes that are not supported during upgrades. For instance, you cannot <a href="https://docs.zeppelinos.org/docs/writing_contracts.html#modifying-your-contracts">remove or change the type of a contract state variable</a>. Nevertheless, you can change, add, or remove all the functions you want.</p>
+<p>Note: If you are curious about how ZeppelinOS achieves this feat, given that smart contracts are immutable, check out our <a href="pattern">upgrades pattern guide</a>. You will see that there are some changes that are not supported during upgrades. For instance, you cannot <a href="https://docs.zeppelinos.org/docs/writing_contracts.html#modifying-your-contracts">remove or change the type of a contract state variable</a>. However, you can change, add, or remove all the functions you want.</p>
 </blockquote>
 <p>That's it! You now know how to start a simple ZeppelinOS project, create a contract, deploy it to a local network, and even upgrade it as you develop. Head over to the next tutorial to learn how to interact with your contract from your code.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="new_2.4.html">← What&#x27;s new in ZeppelinOS 2.4</a><a class="docs-next button" href="interacting.html">Interacting with your contracts →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/symbol-zeppelin.png" alt="ZeppelinOS" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/start.html">Guides</a><a href="/docs/apis.html">Reference</a></div><div><h5>Community</h5><a href="https://forum.zeppelin.solutions/" target="_blank">Forum</a><a href="https://t.me/zeppelinos/" target="_blank">Telegram chat</a></div><div><h5>More</h5><a href="https://zeppelinos.org">Main Site</a><a href="https://blog.zeppelinos.org">Blog</a><a href="https://github.com/zeppelinos">GitHub</a></div></section><a href="https://zeppelinos.org" target="_blank" class="fbOpenSource"><img src="/img/logo.svg" alt="ZeppelinOS" width="170" height="45"/></a><section class="copyright">Copyright © 2017-present ZeppelinOS Global</section><section class="report-bugs"><a href="https://github.com/zeppelinos/zos/issues/new?labels=kind:documentation">Report a bug on this site</a></section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>

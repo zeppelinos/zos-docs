@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/*"
+  to = "https://docs.openzeppelin.com/sdk"
+  status = 301
+  force = true

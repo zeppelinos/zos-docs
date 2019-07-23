@@ -1,0 +1,9 @@
+/docs/start       https://docs.openzeppelin.com/sdk/        301
+/docs/start.html  https://docs.openzeppelin.com/sdk/        301
+
+/docs/apis        https://docs.openzeppelin.com/sdk/        301
+/docs/apis.html   https://docs.openzeppelin.com/sdk/        301
+
+/docs/*           https://docs.openzeppelin.com/sdk/:splat  301
+
+/                 https://docs.openzeppelin.com/sdk/        301

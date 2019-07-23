@@ -1,5 +1,9 @@
 [[redirects]]
-  from = "/*"
-  to = "https://docs.openzeppelin.com/sdk"
+  from = "/docs/*"
+  to = "https://docs.openzeppelin.com/sdk/:splat"
   status = 301
-  force = true
+
+[[redirects]]
+  from = "/"
+  to = "https://docs.openzeppelin.com/sdk/"
+  status = 301

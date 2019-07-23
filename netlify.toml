@@ -4,6 +4,16 @@
   status = 301
 
 [[redirects]]
+  from = "/start"
+  to = "https://docs.openzeppelin.com/sdk/"
+  status = 301
+
+[[redirects]]
+  from = "/apis"
+  to = "https://docs.openzeppelin.com/sdk/"
+  status = 301
+
+[[redirects]]
   from = "/"
   to = "https://docs.openzeppelin.com/sdk/"
   status = 301

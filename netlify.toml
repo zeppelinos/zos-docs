@@ -1,10 +1,10 @@
 [[redirects]]
-  from = "/docs/start"
+  from = "/docs/start.html"
   to = "https://docs.openzeppelin.com/sdk/"
   status = 301
 
 [[redirects]]
-  from = "/docs/apis"
+  from = "/docs/apis.html"
   to = "https://docs.openzeppelin.com/sdk/"
   status = 301
 

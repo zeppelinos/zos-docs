@@ -7,3 +7,31 @@
 /docs/*           https://docs.openzeppelin.com/sdk/:splat  301
 
 /                 https://docs.openzeppelin.com/sdk/        301
+
+
+# Redirect underscores to dashes in the new site
+
+/docs/create_from_solidity            https://docs.openzeppelin.com/sdk/create-from-solidity      301
+/docs/create_from_solidity.html       https://docs.openzeppelin.com/sdk/create-from-solidity      301
+/docs/create_zepkit                   https://docs.openzeppelin.com/sdk/create-zepkit             301   
+/docs/create_zepkit.html              https://docs.openzeppelin.com/sdk/create-zepkit             301
+/docs/erc20_onboarding                https://docs.openzeppelin.com/sdk/erc20-onboarding          301   
+/docs/erc20_onboarding.html           https://docs.openzeppelin.com/sdk/erc20-onboarding          301
+/docs/guide_create2                   https://docs.openzeppelin.com/sdk/guide-create2             301   
+/docs/guide_create2.html              https://docs.openzeppelin.com/sdk/guide-create2             301
+/docs/new_2.2                         https://docs.openzeppelin.com/sdk/new-2.2                   301   
+/docs/new_2.2.html                    https://docs.openzeppelin.com/sdk/new-2.2                   301
+/docs/new_2.3                         https://docs.openzeppelin.com/sdk/new-2.3                   301   
+/docs/new_2.3.html                    https://docs.openzeppelin.com/sdk/new-2.3                   301
+/docs/new_2.4                         https://docs.openzeppelin.com/sdk/new-2.4                   301   
+/docs/new_2.4.html                    https://docs.openzeppelin.com/sdk/new-2.4                   301
+/docs/new_2                           https://docs.openzeppelin.com/sdk/new-2                     301   
+/docs/new_2.html                      https://docs.openzeppelin.com/sdk/new-2                     301
+/docs/start                           https://docs.openzeppelin.com/sdk/start                     301   
+/docs/start.html                      https://docs.openzeppelin.com/sdk/start                     301
+/docs/upgrades_governance             https://docs.openzeppelin.com/sdk/upgrades-governance       301   
+/docs/upgrades_governance.html        https://docs.openzeppelin.com/sdk/upgrades-governance       301
+/docs/writing_contracts               https://docs.openzeppelin.com/sdk/writing-contracts         301   
+/docs/writing_contracts.html          https://docs.openzeppelin.com/sdk/writing-contracts         301
+/docs/zos_lib                         https://docs.openzeppelin.com/sdk/zos-lib                   301   
+/docs/zos_lib.html                    https://docs.openzeppelin.com/sdk/zos-lib                   301

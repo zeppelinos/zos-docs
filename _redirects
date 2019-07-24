@@ -4,11 +4,6 @@
 /docs/apis        https://docs.openzeppelin.com/sdk/        301
 /docs/apis.html   https://docs.openzeppelin.com/sdk/        301
 
-/docs/*           https://docs.openzeppelin.com/sdk/:splat  301
-
-/                 https://docs.openzeppelin.com/sdk/        301
-
-
 # Redirect underscores to dashes in the new site
 
 /docs/create_from_solidity            https://docs.openzeppelin.com/sdk/create-from-solidity      301
@@ -35,3 +30,7 @@
 /docs/writing_contracts.html          https://docs.openzeppelin.com/sdk/writing-contracts         301
 /docs/zos_lib                         https://docs.openzeppelin.com/sdk/zos-lib                   301   
 /docs/zos_lib.html                    https://docs.openzeppelin.com/sdk/zos-lib                   301
+
+/docs/*           https://docs.openzeppelin.com/sdk/:splat  301
+
+/                 https://docs.openzeppelin.com/sdk/        301
